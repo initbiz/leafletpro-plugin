@@ -2,7 +2,7 @@
 /config/
 /modules/
 /storage/
-vendor/
+/vendor/
 .idea/
 .gitattributes
 .DS_Store

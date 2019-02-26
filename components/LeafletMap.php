@@ -4,6 +4,8 @@ use Cms\Classes\ComponentBase;
 
 class LeafletMap extends ComponentBase
 {
+    protected $pluginPropertySuffix = 'PluginEnabled';
+
     public function componentDetails()
     {
         return [
@@ -14,6 +16,58 @@ class LeafletMap extends ComponentBase
 
     public function defineProperties()
     {
-        return [];
+        return $this->getLeafletPluginsProperties();
+    }
+
+    public function onRun()
+    {
+        $leafletJs = [];
+        $leafletCss = [];
+
+        $leafletJs[] = 'assets/node_modules/leaflet/dist/leaflet.js';
+        $leafletCss[] = 'assets/node_modules/leaflet/dist/leaflet.css';
+
+        foreach ($this->getLeafletPlugins() as $pluginCode => $pluginDef) {
+            if ($this->property($pluginCode . $this->pluginPropertySuffix)) {
+                $leafletJs[] = $pluginDef['jsPath'];
+                $leafletCss[] = $pluginDef['cssPath'];
+            }
+        }
+
+        $this->addJs($leafletJs);
+
+        $this->addCss($leafletCss);
+    }
+
+    protected function getLeafletPluginsProperties()
+    {
+        $properties = [];
+
+        foreach ($this->getLeafletPlugins() as $pluginCode => $pluginDef) {
+            $property = [
+                'title'         => $pluginDef['title'],
+                'description'   => $pluginDef['description'],
+                'type'          => 'checkbox',
+                'default'       => 0,
+            ];
+
+            $properties[$pluginCode . $this->pluginPropertySuffix] = $property;
+        }
+
+        return $properties;
+    }
+
+    protected function getLeafletPlugins()
+    {
+        $plugins = [
+            'markercluster' => [
+                'title' => 'initbiz.leafletpro::lang.leafletmap_plugins.markercluster_name',
+                'description' => 'initbiz.leafletpro::lang.leafletmap_plugins.markercluster_desc',
+                'jsPath' => 'assets/node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js',
+                'cssPath' => 'assets/node_modules/leaflet.markercluster/dist/MarkerCluster.css',
+            ]
+        ];
+
+        return $plugins;
     }
 }
