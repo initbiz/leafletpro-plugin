@@ -23,12 +23,14 @@ class LeafletMap extends ComponentBase
     {
         $leafletJs = [];
         $leafletCss = [];
+        $activePlugins = [];
 
         $leafletJs[] = 'assets/node_modules/leaflet/dist/leaflet.js';
         $leafletCss[] = 'assets/node_modules/leaflet/dist/leaflet.css';
 
         foreach ($this->getLeafletPlugins() as $pluginCode => $pluginDef) {
             if ($this->property($pluginCode . $this->pluginPropertySuffix)) {
+                $activePlugins[] = $pluginCode;
                 $leafletJs[] = $pluginDef['jsPath'];
                 $leafletCss[] = $pluginDef['cssPath'];
             }
@@ -37,6 +39,8 @@ class LeafletMap extends ComponentBase
         $this->addJs($leafletJs);
 
         $this->addCss($leafletCss);
+
+        $this->page['activePlugins'] = $activePlugins;
     }
 
     protected function getLeafletPluginsProperties()

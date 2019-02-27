@@ -1,3 +1,3 @@
-<p>This is the default markup for component LeafletMap</p>
-
-<small>You can delete this file if you want</small>
+{% for plugin in activePlugins %}
+    {% partial __SELF__ ~ '::' ~ plugin %}
+{% endfor %}
