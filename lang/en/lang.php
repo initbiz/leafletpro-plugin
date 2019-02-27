@@ -20,4 +20,15 @@
         'leafletpro_markers' => 'Manage markers',
         'settings_access_general' => 'Manage Leaflet Pro settings',
     ],
+    'marker' => [
+        'name' => 'Name',
+        'thoroughfare' => 'Thoroughfare (address line)',
+        'long' => 'Longitude',
+        'lat' => 'Latitude',
+        'city' => 'City',
+        'country' => 'Country',
+        'is_published' => 'Published',
+        'description' => 'Description',
+        'refresh_long_lat_button' => 'Get long and lat params from address using Nominatim',
+    ],
 ];

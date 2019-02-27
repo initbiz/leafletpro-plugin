@@ -22,4 +22,8 @@ class Markers extends Controller
 
         BackendMenu::setContext('Initbiz.LeafletPro', 'leafletpro-main-menu', 'leafletpro-side-menu-markers');
     }
+
+    public function onLongLatRefresh()
+    {
+    }
 }

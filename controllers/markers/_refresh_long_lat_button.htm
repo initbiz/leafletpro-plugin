@@ -1,0 +1,13 @@
+<div class="input-group">
+    <span class="input-group-btn">
+        <button
+            type="button"
+            class="btn btn-primary"
+            id="<?= $field->getId() ?>-refresh-button"
+            data-request="onLongLatRefresh"
+            data-request-success="$('#<?= $field->getId() ?>').val(data['result']);"
+            >
+            <?= e(trans('initbiz.leafletpro::lang.marker.refresh_long_lat_button')) ?>
+        </button>
+    </span>
+</div>

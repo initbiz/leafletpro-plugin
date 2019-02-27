@@ -3,6 +3,44 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    is_published:
+        label: 'initbiz.leafletpro::lang.marker.is_published'
+        type: switch
+        span: left
+    name:
+        label: 'initbiz.leafletpro::lang.marker.name'
+        type: text
+        span: left
+        required: 1
+    refresh_long_lat_button:
+        label: ''
+        type: partial
+        span: right
+    thoroughfare:
+        label: 'initbiz.leafletpro::lang.marker.thoroughfare'
+        type: text
+        span: left
+    long:
+        label: 'initbiz.leafletpro::lang.marker.long'
+        type: text
+        span: right
+        required: 1
+    city:
+        label: 'initbiz.leafletpro::lang.marker.city'
+        type: text
+        span: left
+    lat:
+        label: 'initbiz.leafletpro::lang.marker.lat'
+        type: text
+        span: right
+        required: 1
+    country:
+        label: 'initbiz.leafletpro::lang.marker.country'
+        nameFrom: name
+        descriptionFrom: description
+        emptyOption: none
+        span: left
+        type: relation
+    description:
+        label: 'initbiz.leafletpro::lang.marker.description'
+        type: richeditor
