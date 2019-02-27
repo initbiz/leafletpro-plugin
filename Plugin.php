@@ -8,6 +8,8 @@ use System\Classes\PluginBase;
  */
 class Plugin extends PluginBase
 {
+    public $require = ['RainLab.Location'];
+    
     /**
      * Registers any front-end components implemented in this plugin.
      *

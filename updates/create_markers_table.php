@@ -12,6 +12,9 @@ class CreateMarkersTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
+            $table->string('thoroughfare')->nullable();
+            $table->string('city');->nullable()
+            $table->integer('country_id')->unsigned()->nullable();
             $table->boolean('is_published')->default(true);
             $table->text('description')->nullable();
             $table->string('long');

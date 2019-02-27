@@ -1,6 +1,7 @@
 <?php namespace Initbiz\LeafletPro\Models;
 
 use Model;
+use RainLab\Location\Models\Country;
 
 /**
  * Marker Model
@@ -27,7 +28,12 @@ class Marker extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'country' => [
+            Country::class,
+            'table' => 'rainlab_location_countries',
+        ]
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
