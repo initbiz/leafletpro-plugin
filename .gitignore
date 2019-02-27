@@ -30,3 +30,5 @@ php-errors.log
 sftp-config.json
 selenium.php
 nbproject
+/assets/node_modules/*
+!/assets/node_modules/*/dist
