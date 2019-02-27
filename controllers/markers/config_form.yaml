@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Marker
+
+# Model Form Field configuration
+form: $/initbiz/leafletpro/models/marker/fields.yaml
+
+# Model Class name
+modelClass: Initbiz\LeafletPro\Models\Marker
+
+# Default redirect location
+defaultRedirect: initbiz/leafletpro/markers
+
+# Create page
+create:
+    title: Create Marker
+    redirect: initbiz/leafletpro/markers/update/:id
+    redirectClose: initbiz/leafletpro/markers
+
+# Update page
+update:
+    title: Edit Marker
+    redirect: initbiz/leafletpro/markers
+    redirectClose: initbiz/leafletpro/markers
+
+# Preview page
+preview:
+    title: Preview Marker

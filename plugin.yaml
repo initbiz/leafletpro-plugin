@@ -3,3 +3,25 @@ plugin:
     description: 'initbiz.leafletpro::lang.plugin.description'
     author: Initbiz
     icon: oc-icon-map-marker
+navigation:
+    leafletpro-main-menu:
+        label: 'initbiz.leafletpro::lang.navigation.main'
+        url: initbiz/leafletpro/markers
+        icon: icon-leaf
+        permissions:
+            0: 'initbiz.leafletpro.access*'
+        order: '800'
+        sideMenu:
+            leafletpro-side-menu-markers:
+                label: 'initbiz.leafletpro::lang.navigation.markers'
+                url: initbiz/leafletpro/markers
+                icon: icon-map-marker
+                permissions:
+                    0: 'initbiz.leafletpro.access_markers'
+permissions:
+    initbiz.leafletpro.access_markers:
+        tab: 'initbiz.leafletpro::lang.permissions.leafletpro'
+        label: 'initbiz.leafletpro::lang.permissions.leafletpro_markers'
+    initbiz.leafletpro.settings_access_general:
+        tab: 'initbiz.leafletpro::lang.permissions.leafletpro'
+        label: 'initbiz.leafletpro::lang.permissions.settings_access_general'

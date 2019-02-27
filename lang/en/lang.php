@@ -11,4 +11,13 @@
         'markercluster_name' => 'Marker Cluster',
         'markercluster_desc' => 'Marker Clustering plugin for Leaflet',
     ],
+    'navigation' => [
+        'main' => 'Leaflet maps',
+        'markers' => 'Markers',
+    ],
+    'permissions' => [
+        'leafletpro' => 'Leaflet Pro',
+        'leafletpro_markers' => 'Manage markers',
+        'settings_access_general' => 'Manage Leaflet Pro settings',
+    ],
 ];
