@@ -22,6 +22,17 @@ permissions:
     initbiz.leafletpro.access_markers:
         tab: 'initbiz.leafletpro::lang.permissions.leafletpro'
         label: 'initbiz.leafletpro::lang.permissions.leafletpro_markers'
-    initbiz.leafletpro.settings_access_general:
+    initbiz.leafletpro.settings_access:
         tab: 'initbiz.leafletpro::lang.permissions.leafletpro'
-        label: 'initbiz.leafletpro::lang.permissions.settings_access_general'
+        label: 'initbiz.leafletpro::lang.permissions.settings_access'
+
+settings:
+    leafletpro:
+        label: 'initbiz.leafletpro::lang.settings.label'
+        description: 'initbiz.leafletpro::lang.settings.description'
+        category: initbiz.leafletpro::lang.settings.menu_category
+        icon: icon-leaf
+        class: 'Initbiz\LeafletPro\Models\Settings'
+        order: 200
+        permissions:
+            0: initbiz.leafletpro.settings_access

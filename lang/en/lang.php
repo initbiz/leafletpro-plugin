@@ -18,7 +18,7 @@
     'permissions' => [
         'leafletpro' => 'Leaflet Pro',
         'leafletpro_markers' => 'Manage markers',
-        'settings_access_general' => 'Manage Leaflet Pro settings',
+        'settings_access' => 'Manage Leaflet Pro settings',
     ],
     'marker' => [
         'name' => 'Name',
@@ -34,5 +34,13 @@
     ],
     'address_resolver' => [
         'thoroughfare_required' => '',
+    ],
+    'settings' => [
+        'menu_category' => 'Leaflet Maps',
+        'label' => 'LeafletPro',
+        'description' => 'LeafletPro general settings',
+        'resolvers_tab' => 'Resolvers',
+        'nominatim_url' => 'URL of Nominatim service',
+        'nominatim_url_comment' => 'Read more info about Nominatim service <a href="https://operations.osmfoundation.org/policies/nominatim/" target="_blank">here</a>',
     ]
 ];

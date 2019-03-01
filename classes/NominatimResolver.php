@@ -1,6 +1,7 @@
 <?php namespace Initbiz\LeafletPro\Classes;
 
 use maxh\Nominatim\Nominatim;
+use Initbiz\LeafletPro\Models\Settings;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
 class NominatimResolver implements AddressResolverInterface
@@ -11,7 +12,11 @@ class NominatimResolver implements AddressResolverInterface
 
     public function __construct()
     {
-        $url = "http://nominatim.openstreetmap.org/";
+        $url = Settings::get('nominatim_url');
+
+        if (empty($url)) {
+            $url = "http://nominatim.openstreetmap.org/";
+        }
 
         $this->nominatim = new Nominatim($url);
 
