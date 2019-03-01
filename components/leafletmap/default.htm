@@ -1,25 +1,26 @@
 {% set divId = __SELF__ ~ '-container' %}
+{% set mapVar = __SELF__ ~ 'Map' %}
 
-<div id="{{ divId }}">
+<div id="{{ divId }}" style="height: 600px;">
 
 </div>
 
-<script>
-  	var map = L.map('{{ divId }}', { scrollWheelZoom: {{ scrollProtection }).setView([{{ centerLongLat }}], {{ initialZoom }});
-
-  	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  		attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
-  		maxZoom: 18
-  	}).addTo(map);
-
-	map.once('focus', function() { map.scrollWheelZoom.enable(); });
-
-    {% for marker in markers %}
-	  	var marker = L.marker([{{ marker.long }}, {{ marker.lat }}]).addTo(map);
-		marker.bindPopup("{{ marker.name }}");
-    {% endfor %}
-</script>
 
 {% for plugin in activeLeafletPlugins %}
     {% partial __SELF__ ~ '::plugin_' ~ plugin %}
 {% endfor %}
+
+{% put scripts %}
+    <script>
+      	var {{ mapVar }} = L.map('{{ divId }}', { scrollWheelZoom: {{ scrollProtection }} }).setView([{{ centerLongLat }}], {{ initialZoom }});
+
+      	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      		attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+      		maxZoom: 18
+      	}).addTo({{ mapVar }});
+
+    	{{ mapVar }}.once('focus', function() { {{ mapVar }}.scrollWheelZoom.enable(); });
+    </script>
+{% endput %}
+
+{% partial __SELF__ ~ '::markers' markers=markers plugins=activeLeafletPlugins mapVar=mapVar %}

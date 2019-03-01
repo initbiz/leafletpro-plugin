@@ -8,12 +8,12 @@ columns:
         type: switch
     name:
         label: 'initbiz.leafletpro::lang.marker.name'
-    thoroughfare:
-        label: 'initbiz.leafletpro::lang.marker.thoroughfare'
     long:
         label: 'initbiz.leafletpro::lang.marker.long'
     lat:
         label: 'initbiz.leafletpro::lang.marker.lat'
+    thoroughfare:
+        label: 'initbiz.leafletpro::lang.marker.thoroughfare'
     city:
         label: 'initbiz.leafletpro::lang.marker.city'
     country:

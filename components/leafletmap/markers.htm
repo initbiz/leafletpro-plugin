@@ -1,0 +1,24 @@
+
+{% put scripts %}
+    {% if 'markercluster' in plugins %}
+    {#
+
+        <script>
+            var markers = L.markerClusterGroup();
+            markers.addLayer(L.marker)
+            {% for marker in markers %}
+        	  	var marker = L.marker([{{ marker.lat }}, {{ marker.long }}]).addTo({{ mapVar }});
+        		marker.bindPopup("{{ marker.name }}");
+            {% endfor %}
+        </script>
+
+    #}
+    {% else %}
+        <script>
+            {% for marker in markers %}
+        	  	var marker = L.marker([{{ marker.lat }}, {{ marker.long }}]).addTo({{ mapVar }});
+        		marker.bindPopup("{{ marker.name }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+{% endput %}
