@@ -3,6 +3,7 @@
 use Request;
 use BackendMenu;
 use Backend\Classes\Controller;
+use Initbiz\LeafletPro\Classes\AddressResolver;
 
 /**
  * Markers Back-end Controller
@@ -31,9 +32,18 @@ class Markers extends Controller
         $city = $markerInputs['city'];
         $country = $markerInputs['country'];
 
-        return [
-            'long' => '1.12312',
-            'lat' => '2.21332',
+        $addressResolver = new AddressResolver();
+
+        $response = $addressResolver->resolv($thoroughfare, $city, $country);
+
+        //TODO: to consider pop up with other possibilities, right now getting first element
+        $address = $response[0];
+
+        $result = [
+            'lat' => $address['lat'],
+            'long' => $address['lon'],
         ];
+
+        return $result;
     }
 }

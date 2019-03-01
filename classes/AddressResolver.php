@@ -3,7 +3,7 @@
 use Lang;
 use Validator;
 use October\Rain\Exception\ValidationException;
-use Initbiz\LeafletPro\Contracts\AddressResolver;
+use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
 /**
  * Class to resolve longitude and latitude of address
@@ -12,12 +12,16 @@ class AddressResolver
 {
     public $resolver;
 
-    public function __construct(AddressResolver $resolver = new NominatimResolver())
+    public function __construct(AddressResolverInterface $resolver = null)
     {
+        if (!$resolver) {
+            $resolver = new NominatimResolver();
+        }
+        
         $this->resolver = $resolver;
     }
 
-    public function resolv(string $thoroughfare = '', string $city = '', string $country = '')
+    public function resolv(string $thoroughfare, string $city, string $country = '')
     {
         $data = [
             'thoroughfare' => $thoroughfare,
