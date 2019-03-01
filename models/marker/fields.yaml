@@ -13,7 +13,7 @@ fields:
         span: left
         required: 1
     refresh_long_lat_button:
-        label: ''
+        label: 'initbiz.leafletpro::lang.marker.refresh_long_lat_label'
         type: partial
         span: right
     thoroughfare:

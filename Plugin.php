@@ -8,8 +8,8 @@ use System\Classes\PluginBase;
  */
 class Plugin extends PluginBase
 {
-    public $require = ['RainLab.Location'];
-    
+    public $require = ['RainLab.Location', 'October.Drivers'];
+
     /**
      * Registers any front-end components implemented in this plugin.
      *

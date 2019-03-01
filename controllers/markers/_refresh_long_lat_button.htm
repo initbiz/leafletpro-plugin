@@ -5,9 +5,16 @@
             class="btn btn-primary"
             id="<?= $field->getId() ?>-refresh-button"
             data-request="onLongLatRefresh"
-            data-request-success="$('#<?= $field->getId() ?>').val(data['result']);"
+            data-request-success="setLongLat(data)"
             >
             <?= e(trans('initbiz.leafletpro::lang.marker.refresh_long_lat_button')) ?>
         </button>
     </span>
 </div>
+
+<script>
+    function setLongLat(data) {
+        $("[name='Marker[long]']").val(data['long']);
+        $("[name='Marker[lat]']").val(data['lat']);
+    }
+</script>

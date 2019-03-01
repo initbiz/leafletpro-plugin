@@ -1,5 +1,6 @@
 <?php namespace Initbiz\LeafletPro\Controllers;
 
+use Request;
 use BackendMenu;
 use Backend\Classes\Controller;
 
@@ -25,5 +26,14 @@ class Markers extends Controller
 
     public function onLongLatRefresh()
     {
+        $markerInputs = Request::input('Marker');
+        $thoroughfare = $markerInputs['thoroughfare'];
+        $city = $markerInputs['city'];
+        $country = $markerInputs['country'];
+
+        return [
+            'long' => '1.12312',
+            'lat' => '2.21332',
+        ];
     }
 }
