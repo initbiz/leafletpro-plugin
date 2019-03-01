@@ -17,7 +17,7 @@ class AddressResolver
         if (!$resolver) {
             $resolver = new NominatimResolver();
         }
-        
+
         $this->resolver = $resolver;
     }
 
@@ -44,7 +44,7 @@ class AddressResolver
         $validator = Validator::make($addressData, $rules);
 
         if ($validator->fails()) {
-            throw new ValidationException($validator->messages);
+            throw new ValidationException($validator);
         }
     }
 }
