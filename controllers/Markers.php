@@ -1,8 +1,11 @@
 <?php namespace Initbiz\LeafletPro\Controllers;
 
+use Lang;
 use Request;
 use BackendMenu;
 use Backend\Classes\Controller;
+use RainLab\Location\Models\Country;
+use October\Rain\Exception\ApplicationException;
 use Initbiz\LeafletPro\Classes\AddressResolver;
 
 /**
@@ -30,13 +33,19 @@ class Markers extends Controller
         $markerInputs = Request::input('Marker');
         $thoroughfare = $markerInputs['thoroughfare'];
         $city = $markerInputs['city'];
-        $country = $markerInputs['country'];
+        if (!empty($markerInputs['country'])) {
+            $country = Country::find($markerInputs['country'])->name;
+        }
 
         $addressResolver = new AddressResolver();
 
         $response = $addressResolver->resolv($thoroughfare, $city, $country);
 
         //TODO: to consider pop up with other possibilities, right now getting first element
+        if (empty($response)) {
+            throw new ApplicationException(Lang::get('initbiz.leafletpro::lang.exceptions.address_resolver_empty_response'));
+        }
+
         $address = $response[0];
 
         $result = [

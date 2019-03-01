@@ -1,3 +1,25 @@
-{% for plugin in activePlugins %}
-    {% partial __SELF__ ~ '::' ~ plugin %}
+{% set divId = __SELF__ ~ '-container' %}
+
+<div id="{{ divId }}">
+
+</div>
+
+<script>
+  	var map = L.map('{{ divId }}', { scrollWheelZoom: {{ scrollProtection }).setView([{{ centerLongLat }}], {{ initialZoom }});
+
+  	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  		attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+  		maxZoom: 18
+  	}).addTo(map);
+
+	map.once('focus', function() { map.scrollWheelZoom.enable(); });
+
+    {% for marker in markers %}
+	  	var marker = L.marker([{{ marker.long }}, {{ marker.lat }}]).addTo(map);
+		marker.bindPopup("{{ marker.name }}");
+    {% endfor %}
+</script>
+
+{% for plugin in activeLeafletPlugins %}
+    {% partial __SELF__ ~ '::plugin_' ~ plugin %}
 {% endfor %}

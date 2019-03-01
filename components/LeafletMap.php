@@ -1,6 +1,7 @@
 <?php namespace Initbiz\LeafletPro\Components;
 
 use Cms\Classes\ComponentBase;
+use Initbiz\LeafletPro\Models\Marker;
 
 class LeafletMap extends ComponentBase
 {
@@ -9,14 +10,36 @@ class LeafletMap extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'initbiz.leafletpro::lang.components.leafletmap_name',
-            'description' => 'initbiz.leafletpro::lang.components.leafletmap_description'
+            'name'        => 'initbiz.leafletpro::lang.components.leafletmap.name',
+            'description' => 'initbiz.leafletpro::lang.components.leafletmap.description'
         ];
     }
 
     public function defineProperties()
     {
-        return $this->getLeafletPluginsProperties();
+        $properties = [
+            'centerLongLat' => [
+                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.center_long_lat',
+                'description'		=> 'initbiz.leafletpro::lang.components.leafletmap.center_long_lat_desc',
+                'type'              => 'string',
+                'default'			=> '51.505, -0.09'
+            ],
+            'initialZoom' => [
+                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.zoom_title',
+                'description'		=> 'initbiz.leafletpro::lang.components.leafletmap.zoom_description',
+                'validationPattern' => '^[0-9]+$',
+                'validationMessage' => 'initbiz.leafletpro::lang.components.leafletmap.zoom_validation_message',
+                'default'			=> '12'
+            ],
+            'scrollProtection' => [
+                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.scroll_protection_title',
+                'description'       => 'initbiz.leafletpro::lang.components.leafletmap.scroll_protection_description',
+                'default'           => 'false',
+                'type'              => 'checkbox',
+            ]
+        ];
+
+        return $properties + $this->getLeafletPluginsProperties();
     }
 
     public function onRun()
@@ -40,7 +63,13 @@ class LeafletMap extends ComponentBase
 
         $this->addCss($leafletCss);
 
-        $this->page['activePlugins'] = $activePlugins;
+        $this->page['activeLeafletPlugins'] = $activePlugins;
+        $this->page['centerLongLat'] = $this->property('centerLongLat');
+        $this->page['initialZoom'] = $this->property('initialZoom');
+        $this->page['scrollProtection'] = $this->property('scrollProtection');
+
+        //TODO: filtering markers by category and using only one marker
+        $this->page['markers'] = Marker::published()->get();
     }
 
     protected function getLeafletPluginsProperties()

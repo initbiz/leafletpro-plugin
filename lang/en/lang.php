@@ -4,8 +4,20 @@
         'description' => 'Use Leaflet service fully featured',
     ],
     'components' => [
-        'leafletmap_name' => 'Leaflet map',
-        'leafletmap_description' => 'Embed Leaflet map',
+        'leafletmap' => [
+            'name' => 'Leaflet map',
+            'description' => 'Embed Leaflet map',
+            'center_long_lat' => 'Long and lat of center',
+            'center_long_lat_desc' => 'Longitude and latitude of center of the map',
+            'zoom_title' => 'Initial zoom',
+            'zoom_description' => 'Initial zoom of the map',
+            'zoom_validation_message' => 'The value must be an integer',
+            'scroll_protection_title' => 'Scroll protection',
+            'scroll_protection_description' => 'Enforce user not to zoom the map using scroll',
+        ],
+    ],
+    'exceptions' => [
+        'address_resolver_empty_response' => 'Address resolver returned empty value',
     ],
     'leafletmap_plugins' => [
         'markercluster_name' => 'Marker Cluster',

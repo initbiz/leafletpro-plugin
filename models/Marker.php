@@ -40,4 +40,9 @@ class Marker extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
 }
