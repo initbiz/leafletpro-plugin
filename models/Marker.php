@@ -2,6 +2,7 @@
 
 use Lang;
 use Model;
+use Cms\Classes\Theme;
 use RainLab\Location\Models\Country;
 use Initbiz\CumulusCore\Models\Cluster;
 use Initbiz\LeafletPro\Classes\AddressResolver;
@@ -13,6 +14,9 @@ use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
  */
 class Marker extends Model implements AddressObjectInterface
 {
+    use \October\Rain\Database\Traits\Nullable;
+    use \System\Traits\ViewMaker;
+
     /**
      * @var string The database table used by the model.
      */
@@ -27,6 +31,11 @@ class Marker extends Model implements AddressObjectInterface
      * @var array Fillable fields
      */
     protected $fillable = [];
+
+    /**
+     * @var array Nullable fields
+     */
+    protected $nullable = ['cluster_id', 'country_id'];
 
     /**
      * @var array Relations
@@ -65,6 +74,15 @@ class Marker extends Model implements AddressObjectInterface
                     $fields->country_id->value = $countryId;
                 }
             }
+        }
+    }
+
+    public function afterSave()
+    {
+        if (empty($this->popup_content)) {
+            $this->addViewPath(Theme::getActiveTheme()->getPath().'/partials');
+            $this->popup_content = $this->makePartial('default_popup_content', ['model' => $this]);
+            $this->save();
         }
     }
 

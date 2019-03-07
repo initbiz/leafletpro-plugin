@@ -20,6 +20,8 @@ The plugin will automatically install [maxhelias/php-nominatim](https://github.c
 
 If you use the service : [http://nominatim.openstreetmap.org/](http://nominatim.openstreetmap.org/), please see [Nominatim usage policy](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy).
 
+`_default_popup_content.htm` can by overriden in theme.
+
 ## TODO / Future plans
 * Marker categories to filter markers on maps
 * Custom, easy configurable marker icons for markers and categories
