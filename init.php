@@ -50,6 +50,25 @@ Marker::extend(function ($model) {
 
 Cluster::extend(function ($model) {
     $model->hasMany['markers'] = ['Initbiz\LeafletPro\Models\Marker'];
+
+    $model->bindEvent('model.afterSave', function () use ($model) {
+        if (!empty($model->city) && !empty($model->thoroughfare) && !empty($model->name)) {
+            $marker = new Marker();
+            $marker->name = $model->name;
+            $marker->street = $model->thoroughfare;
+            $marker->city = $model->city;
+            if (!empty($marker->country_id)) {
+                $country = Country::find($marker->country_id);
+                $marker->country()->associate($country);
+            }
+            if (!empty($marker->postal_code)) {
+                $marker->postal_code = $model->postal_code;
+            }
+
+            $marker->refreshLongLat();
+            $marker->save();
+        }
+    });
 });
 
 Clusters::extendFormFields(function ($form, $model, $context) {
