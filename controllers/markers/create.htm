@@ -1,16 +1,20 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('initbiz/leafletpro/markers') ?>">Markers</a></li>
+        <li><a href="<?= Backend::url('initbiz/leafletpro/markers') ?>">
+            Markers</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
 
 <?php if (!$this->fatalError): ?>
 
-    <?= Form::open(['class' => 'layout']) ?>
+<?php Block::put('form-contents') ?>
 
+        <div class="layout-row min-size">
+            <?= $this->formRenderOutsideFields() ?>
+        </div>
         <div class="layout-row">
-            <?= $this->formRender() ?>
+            <?= $this->formRenderPrimaryTabs() ?>
         </div>
 
         <div class="form-buttons">
@@ -19,30 +23,43 @@
                     type="submit"
                     data-request="onSave"
                     data-hotkey="ctrl+s, cmd+s"
-                    data-load-indicator="Creating Marker..."
+                    data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
                     class="btn btn-primary">
-                    Create
+                    <?= e(trans('backend::lang.form.create')) ?>
                 </button>
                 <button
                     type="button"
                     data-request="onSave"
                     data-request-data="close:1"
                     data-hotkey="ctrl+enter, cmd+enter"
-                    data-load-indicator="Creating Marker..."
+                    data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
                     class="btn btn-default">
-                    Create and Close
+                    <?= e(trans('backend::lang.form.create_and_close')) ?>
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('initbiz/leafletpro/markers') ?>">Cancel</a>
+                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('initbiz/leafletpro/markers') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
                 </span>
             </div>
         </div>
 
-    <?= Form::close() ?>
+    <?php Block::endPut() ?>
+
+    <?php Block::put('form-sidebar') ?>
+    <div class="hide-tabs"><?= $this->formRenderSecondaryTabs() ?></div>
+    <?php Block::endPut() ?>
+
+    <?php Block::put('body') ?>
+        <?= Form::open(['class'=>'layout stretch']) ?>
+            <?= $this->makeLayout('form-with-sidebar') ?>
+        <?= Form::close() ?>
+    <?php Block::endPut() ?>
 
 <?php else: ?>
-
-    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('initbiz/leafletpro/markers') ?>" class="btn btn-default">Return to markers list</a></p>
-
+    <div class="control-breadcrumb">
+        <?= Block::placeholder('breadcrumb') ?>
+    </div>
+    <div class="padded-container">
+        <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+        <p><a href="<?= Backend::url('initbiz/leafletpro/markers') ?>" class="btn btn-default"><?= e(trans('backend::lang.form.return_to_list')) ?></a></p>
+    </div>
 <?php endif ?>

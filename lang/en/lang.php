@@ -46,6 +46,9 @@
         'popup_content' => 'Popup content',
         'refresh_long_lat_label' => 'Refresh longitude and latitude',
         'refresh_long_lat_button' => 'Get long and lat params using address',
+        'delete_confirm' => 'Are you sure you want to remove the marker?',
+        'cluster' => 'Cluster',
+        'cluster_comment' => 'After you select cluster empty address fields will be seeded with the cluster\'s address',
     ],
     'settings' => [
         'menu_category' => 'Leaflet Maps',

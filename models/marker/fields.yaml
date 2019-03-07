@@ -3,29 +3,15 @@
 # ===================================
 
 fields:
-    is_published:
-        label: 'initbiz.leafletpro::lang.marker.is_published'
-        type: switch
-        span: left
     name:
         label: 'initbiz.leafletpro::lang.marker.name'
         type: text
         span: left
         required: 1
-    refresh_long_lat_button:
-        label: 'initbiz.leafletpro::lang.marker.refresh_long_lat_label'
-        type: partial
+    popup_content:
+        label: 'initbiz.leafletpro::lang.marker.popup_content'
+        type: richeditor
         span: right
-    long:
-        label: 'initbiz.leafletpro::lang.marker.long'
-        type: text
-        span: right
-        required: 1
-    lat:
-        label: 'initbiz.leafletpro::lang.marker.lat'
-        type: text
-        span: right
-        required: 1
     street:
         label: 'initbiz.leafletpro::lang.marker.street'
         commentAbove: 'initbiz.leafletpro::lang.marker.street_comment'
@@ -44,6 +30,21 @@ fields:
         emptyOption: 'initbiz.leafletpro::lang.marker.country_empty_option'
         span: left
         type: dropdown
-    popup_content:
-        label: 'initbiz.leafletpro::lang.marker.popup_content'
-        type: richeditor
+    is_published:
+        label: 'initbiz.leafletpro::lang.marker.is_published'
+        type: switch
+        span: left
+
+secondaryTabs:
+    fields:
+        refresh_long_lat_button:
+            label: 'initbiz.leafletpro::lang.marker.refresh_long_lat_label'
+            type: partial
+        long:
+            label: 'initbiz.leafletpro::lang.marker.long'
+            type: text
+            required: 1
+        lat:
+            label: 'initbiz.leafletpro::lang.marker.lat'
+            type: text
+            required: 1

@@ -18,8 +18,10 @@ Event::listen('backend.form.extendFieldsBefore', function ($formWidget) {
 
     $clusterField = [];
     $clusterField['cluster_id'] = [
-        'label'   => 'Cluster',
+        'label'   => 'initbiz.leafletpro::lang.marker.cluster',
+        'commentAbove'   => 'initbiz.leafletpro::lang.marker.cluster_comment',
         'type'   => 'dropdown',
+        'span'   => 'right',
         'emptyOption'   => 'Select cluster',
     ];
 
