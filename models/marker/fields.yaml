@@ -46,6 +46,6 @@ fields:
         emptyOption: none
         span: left
         type: relation
-    description:
-        label: 'initbiz.leafletpro::lang.marker.description'
+    popup_content:
+        label: 'initbiz.leafletpro::lang.marker.popup_content'
         type: richeditor

@@ -42,7 +42,7 @@
         'city' => 'City',
         'country' => 'Country',
         'is_published' => 'Published',
-        'description' => 'Description',
+        'popup_content' => 'Popup content',
         'refresh_long_lat_label' => 'Refresh longitude and latitude',
         'refresh_long_lat_button' => 'Get long and lat params using address',
     ],

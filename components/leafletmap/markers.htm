@@ -16,8 +16,7 @@
     {% else %}
         <script>
             {% for marker in markers %}
-        	  	var marker = L.marker([{{ marker.lat }}, {{ marker.long }}]).addTo({{ mapVar }});
-        		marker.bindPopup("{{ marker.name }}");
+        	  	L.marker([{{ marker.lat }}, {{ marker.long }}]).addTo({{ mapVar }}).bindPopup('{{ marker.popup_content |replace({"\n": "", "\r": "", "\t": ""}) | raw }}');
             {% endfor %}
         </script>
     {% endif %}
