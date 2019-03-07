@@ -23,3 +23,4 @@ If you use the service : [http://nominatim.openstreetmap.org/](http://nominatim.
 ## TODO / Future plans
 * Marker categories to filter markers on maps
 * Custom, easy configurable marker icons for markers and categories
+* Add possibility to manage more than one marker by Cumulus clusters
