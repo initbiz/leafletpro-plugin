@@ -12,8 +12,8 @@ columns:
         label: 'initbiz.leafletpro::lang.marker.long'
     lat:
         label: 'initbiz.leafletpro::lang.marker.lat'
-    thoroughfare:
-        label: 'initbiz.leafletpro::lang.marker.thoroughfare'
+    street:
+        label: 'initbiz.leafletpro::lang.marker.street'
     city:
         label: 'initbiz.leafletpro::lang.marker.city'
     country:

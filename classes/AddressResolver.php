@@ -3,6 +3,7 @@
 use Lang;
 use Validator;
 use October\Rain\Exception\ValidationException;
+use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
 /**
@@ -21,27 +22,21 @@ class AddressResolver
         $this->resolver = $resolver;
     }
 
-    public function resolv(string $thoroughfare, string $city, string $country = '')
+    public function resolv(AddressObjectInterface $addressObj)
     {
-        $data = [
-            'thoroughfare' => $thoroughfare,
-            'city' => $city,
-            'country' => $country,
-        ];
+        self::validate($addressObj);
 
-        self::validate($data);
-
-        return $this->resolver->resolv($thoroughfare, $city, $country);
+        return $this->resolver->resolv($addressObj);
     }
 
-    public static function validate(array $addressData)
+    public static function validate(AddressObjectInterface $addressObj)
     {
         $rules = [
-            'thoroughfare' => 'required',
+            'street' => 'required',
             'city' => 'required',
         ];
 
-        $validator = Validator::make($addressData, $rules);
+        $validator = Validator::make($addressObj->toArray(), $rules);
 
         if ($validator->fails()) {
             throw new ValidationException($validator);

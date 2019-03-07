@@ -34,18 +34,17 @@
     ],
     'marker' => [
         'name' => 'Name',
-        'thoroughfare' => 'Thoroughfare (address line)',
+        'street' => 'Street',
+        'street_comment' => 'May include building no',
         'long' => 'Longitude',
         'lat' => 'Latitude',
+        'postal_code' => 'Postal code',
         'city' => 'City',
         'country' => 'Country',
         'is_published' => 'Published',
         'description' => 'Description',
         'refresh_long_lat_label' => 'Refresh longitude and latitude',
         'refresh_long_lat_button' => 'Get long and lat params using address',
-    ],
-    'address_resolver' => [
-        'thoroughfare_required' => '',
     ],
     'settings' => [
         'menu_category' => 'Leaflet Maps',

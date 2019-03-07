@@ -5,5 +5,5 @@
  */
 interface AddressResolverInterface
 {
-    public function resolv(string $thoroughfare, string $city, string $country = '');
+    public function resolv(AddressObjectInterface $addressObj);
 }

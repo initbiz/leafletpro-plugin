@@ -6,6 +6,7 @@
             id="<?= $field->getId() ?>-refresh-button"
             data-request="onLongLatRefresh"
             data-request-success="setLongLat(data)"
+            data-stripe-load-indicator
             >
             <?= e(trans('initbiz.leafletpro::lang.marker.refresh_long_lat_button')) ?>
         </button>

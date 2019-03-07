@@ -16,24 +16,29 @@ fields:
         label: 'initbiz.leafletpro::lang.marker.refresh_long_lat_label'
         type: partial
         span: right
-    thoroughfare:
-        label: 'initbiz.leafletpro::lang.marker.thoroughfare'
-        type: text
-        span: left
     long:
         label: 'initbiz.leafletpro::lang.marker.long'
         type: text
         span: right
         required: 1
-    city:
-        label: 'initbiz.leafletpro::lang.marker.city'
-        type: text
-        span: left
     lat:
         label: 'initbiz.leafletpro::lang.marker.lat'
         type: text
         span: right
         required: 1
+    street:
+        label: 'initbiz.leafletpro::lang.marker.street'
+        commentAbove: 'initbiz.leafletpro::lang.marker.street_comment'
+        type: text
+        span: left
+    postal_code:
+        label: 'initbiz.leafletpro::lang.marker.postal_code'
+        type: text
+        span: left
+    city:
+        label: 'initbiz.leafletpro::lang.marker.city'
+        type: text
+        span: left
     country:
         label: 'initbiz.leafletpro::lang.marker.country'
         nameFrom: name

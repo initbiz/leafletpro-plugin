@@ -2,6 +2,7 @@
 
 use maxh\Nominatim\Nominatim;
 use Initbiz\LeafletPro\Models\Settings;
+use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
 class NominatimResolver implements AddressResolverInterface
@@ -28,22 +29,35 @@ class NominatimResolver implements AddressResolverInterface
         $this->polygon = $polygon;
     }
 
-    public function resolv(string $thoroughfare, string $city, string $country = '')
+    public function resolv(AddressObjectInterface $addressObj)
     {
-        $search = $this->nominatim->newSearch();
-
-        if ($country !== '') {
-            $search = $search->country($country);
-        }
-
-        $search = $search
-                ->city($city)
-                ->street($thoroughfare)
-                ->polygon($this->polygon)
-                ->addressDetails();
-
+        $search = $this->prepareSearch($addressObj);
+        
         $result = $this->nominatim->find($search);
 
         return $result;
+    }
+
+    protected function prepareSearch(AddressObjectInterface $addressObj)
+    {
+        $search = $this->nominatim->newSearch();
+
+        $country = $addressObj->getCountry();
+        if (!empty($country)) {
+            $search = $search->country($country);
+        }
+
+        $postalCode = $addressObj->getPostalCode();
+        if (!empty($postalCode)) {
+            $search = $search->postalCode($postalCode);
+        }
+
+        $search = $search
+                ->city($addressObj->getCity())
+                ->street($addressObj->getStreet())
+                ->polygon($this->polygon)
+                ->addressDetails();
+
+        return $search;
     }
 }

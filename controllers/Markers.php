@@ -1,12 +1,10 @@
 <?php namespace Initbiz\LeafletPro\Controllers;
 
-use Lang;
 use Request;
 use BackendMenu;
 use Backend\Classes\Controller;
 use RainLab\Location\Models\Country;
-use October\Rain\Exception\ApplicationException;
-use Initbiz\LeafletPro\Classes\AddressResolver;
+use Initbiz\LeafletPro\Models\Marker;
 
 /**
  * Markers Back-end Controller
@@ -31,28 +29,17 @@ class Markers extends Controller
     public function onLongLatRefresh()
     {
         $markerInputs = Request::input('Marker');
-        $thoroughfare = $markerInputs['thoroughfare'];
-        $city = $markerInputs['city'];
+
+        $marker = new Marker();
+        $marker->street = $markerInputs['street'];
+        $marker->city = $markerInputs['city'];
         if (!empty($markerInputs['country'])) {
-            $country = Country::find($markerInputs['country'])->name;
+            $country = Country::find($markerInputs['country']);
+            $marker->country()->associate($country);
         }
 
-        $addressResolver = new AddressResolver();
+        $marker->refreshLongLat();
 
-        $response = $addressResolver->resolv($thoroughfare, $city, $country);
-
-        //TODO: to consider pop up with other possibilities, right now getting first element
-        if (empty($response)) {
-            throw new ApplicationException(Lang::get('initbiz.leafletpro::lang.exceptions.address_resolver_empty_response'));
-        }
-
-        $address = $response[0];
-
-        $result = [
-            'lat' => $address['lat'],
-            'long' => $address['lon'],
-        ];
-
-        return $result;
+        return $marker->getLongLat();
     }
 }
