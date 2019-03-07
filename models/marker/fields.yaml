@@ -39,13 +39,11 @@ fields:
         label: 'initbiz.leafletpro::lang.marker.city'
         type: text
         span: left
-    country:
+    country_id:
         label: 'initbiz.leafletpro::lang.marker.country'
-        nameFrom: name
-        descriptionFrom: description
-        emptyOption: none
+        emptyOption: 'initbiz.leafletpro::lang.marker.country_empty_option'
         span: left
-        type: relation
+        type: dropdown
     popup_content:
         label: 'initbiz.leafletpro::lang.marker.popup_content'
         type: richeditor

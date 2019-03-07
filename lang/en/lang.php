@@ -41,6 +41,7 @@
         'postal_code' => 'Postal code',
         'city' => 'City',
         'country' => 'Country',
+        'country_empty_option' => 'Select country',
         'is_published' => 'Published',
         'popup_content' => 'Popup content',
         'refresh_long_lat_label' => 'Refresh longitude and latitude',

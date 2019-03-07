@@ -19,3 +19,7 @@ The plugin will automatically install [maxhelias/php-nominatim](https://github.c
 ## Recall Usage Policy Nominatim
 
 If you use the service : [http://nominatim.openstreetmap.org/](http://nominatim.openstreetmap.org/), please see [Nominatim usage policy](http://wiki.openstreetmap.org/wiki/Nominatim_usage_policy).
+
+## TODO / Future plans
+* Marker categories to filter markers on maps
+* Custom, easy configurable marker icons for markers and categories

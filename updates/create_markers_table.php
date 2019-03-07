@@ -16,6 +16,7 @@ class CreateMarkersTable extends Migration
             $table->string('postal_code')->nullable();
             $table->string('city')->nullable();
             $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('cluster_id')->unsigned()->nullable();
             $table->boolean('is_published')->default(true);
             $table->text('popup_content')->nullable();
             $table->string('long');

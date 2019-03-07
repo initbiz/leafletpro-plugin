@@ -3,6 +3,7 @@
 use Lang;
 use Model;
 use RainLab\Location\Models\Country;
+use Initbiz\CumulusCore\Models\Cluster;
 use Initbiz\LeafletPro\Classes\AddressResolver;
 use October\Rain\Exception\ApplicationException;
 use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
@@ -30,20 +31,43 @@ class Marker extends Model implements AddressObjectInterface
     /**
      * @var array Relations
      */
-    public $hasOne = [];
-    public $hasMany = [];
     public $belongsTo = [
         'country' => [
             Country::class,
             'table' => 'rainlab_location_countries',
         ]
     ];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+
+    public function filterFields($fields, $context = null)
+    {
+        if (isset($fields->cluster_id) && $fields->cluster_id->value !== null) {
+            $cluster = Cluster::find($fields->cluster_id->value);
+
+            if (empty($fields->street->value)) {
+                $fields->street->value = $cluster->thoroughfare;
+            }
+
+            if (empty($fields->postal_code->value)) {
+                $fields->postal_code->value = $cluster->postal_code;
+            }
+
+            if (empty($fields->city->value)) {
+                $fields->city->value = $cluster->city;
+            }
+
+            if (empty($fields->country_id->value)) {
+                if ($cluster->country()->first()) {
+                    $countryId = $cluster->country()->first()->id;
+                    $fields->country_id->value = $countryId;
+                }
+            }
+        }
+    }
+
+    public function getCountryIdOptions()
+    {
+        return Country::all()->pluck('name', 'id')->toArray();
+    }
 
     public function scopePublished($query)
     {
