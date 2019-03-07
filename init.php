@@ -25,6 +25,7 @@ Event::listen('backend.form.extendFieldsBefore', function ($formWidget) {
 
     $fields = $formWidget->fields;
 
+    $fields['name']['dependsOn'] = 'cluster_id';
     $fields['street']['dependsOn'] = 'cluster_id';
     $fields['postal_code']['dependsOn'] = 'cluster_id';
     $fields['city']['dependsOn'] = 'cluster_id';

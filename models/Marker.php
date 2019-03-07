@@ -43,6 +43,10 @@ class Marker extends Model implements AddressObjectInterface
         if (isset($fields->cluster_id) && $fields->cluster_id->value !== null) {
             $cluster = Cluster::find($fields->cluster_id->value);
 
+            if (empty($fields->name->value)) {
+                $fields->name->value = $cluster->name;
+            }
+
             if (empty($fields->street->value)) {
                 $fields->street->value = $cluster->thoroughfare;
             }
@@ -116,6 +120,14 @@ class Marker extends Model implements AddressObjectInterface
 
     public function getCountry()
     {
-        return $this->country()->first()->name;
+        //Use relation or country_id attribute if relation does not exist yet
+        if ($this->country()->first()) {
+            return $this->country()->first()->name;
+        }
+        if (!empty($this->country_id)) {
+            return Country::find($this->country_id)::first()->name;
+        }
+
+        return null;
     }
 }
