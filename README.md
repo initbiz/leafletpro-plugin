@@ -1,5 +1,7 @@
 # Leaflet Pro
 
+![LeafletPro banner](https://raw.githubusercontent.com/initbizlab/oc-leafletpro-plugin/master/docs/images/leafletpro_banner.png)
+
 LeafletPro is an OctoberCMS plugin for easily embedding maps using [OpenStreetMap](https://www.openstreetmap.org) and [Leaflet](https://leafletjs.com/).
 
 [OpenStreetMap](https://www.openstreetmap.org) is a collaborative project to create a free editable map of the world while [Leaflet](https://leafletjs.com/) is the leading open-source JavaScript library for mobile-friendly interactive maps.
@@ -16,6 +18,7 @@ The plugin will automatically install [maxhelias/php-nominatim](https://github.c
 
 ## Embed the map
 You can embed a map using Leaflet map component.
+
 ![Leaflet map component](https://raw.githubusercontent.com/initbizlab/oc-leafletpro-plugin/master/docs/images/leafletmap_component.png)
 
 As you see in the above screenshot you can specify a few parameters:
@@ -25,6 +28,7 @@ As you see in the above screenshot you can specify a few parameters:
 * Leaflet plugins - checkboxes for enabling Leaflet plugins for the component
 
 ## Customize popup content
+
 ![Custom marker popup with InIT.biz logo](https://raw.githubusercontent.com/initbizlab/oc-leafletpro-plugin/master/docs/images/marker_with_initbiz_popup.png)
 
 The popup content is defined individually for every marker. By default it's seeded with the content of `plugins/initbiz/leafletpro/models/marker/_default_popup_content.htm`.
