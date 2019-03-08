@@ -84,6 +84,7 @@ class LeafletMap extends ComponentBase
                 'title'         => $pluginDef['title'],
                 'description'   => $pluginDef['description'],
                 'type'          => 'checkbox',
+                'group'         => 'initbiz.leafletpro::lang.components.leafletmap.plugins_group',
                 'default'       => 0,
             ];
 
