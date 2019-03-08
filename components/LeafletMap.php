@@ -68,10 +68,13 @@ class LeafletMap extends ComponentBase
         $this->page['initialZoom'] = $this->property('initialZoom');
         $this->page['scrollProtection'] = $this->property('scrollProtection');
 
-        //TODO: filtering markers by category and using only one marker
         $this->page['markers'] = Marker::published()->get();
     }
 
+    /**
+     * Makes properties definitions for Leaflet plugins, right now only checkboxes if enable the plugin for the component
+     * @return array component properties definitions for this component
+     */
     protected function getLeafletPluginsProperties()
     {
         $properties = [];
@@ -90,9 +93,13 @@ class LeafletMap extends ComponentBase
         return $properties;
     }
 
+    /**
+     * Registers Leaflet plugins to be used in the component
+     * @return array Leaflet plugins
+     */
     protected function getLeafletPlugins()
     {
-        $plugins = [
+        return [
             'markercluster' => [
                 'title' => 'initbiz.leafletpro::lang.leafletmap_plugins.markercluster_name',
                 'description' => 'initbiz.leafletpro::lang.leafletmap_plugins.markercluster_desc',
@@ -100,7 +107,5 @@ class LeafletMap extends ComponentBase
                 'cssPath' => 'assets/node_modules/leaflet.markercluster/dist/MarkerCluster.css',
             ]
         ];
-
-        return $plugins;
     }
 }

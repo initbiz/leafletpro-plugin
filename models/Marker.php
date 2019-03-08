@@ -49,6 +49,7 @@ class Marker extends Model implements AddressObjectInterface
 
     public function filterFields($fields, $context = null)
     {
+        // When Cluster selected automatically set the marker's params based on the cluster's ones
         if (isset($fields->cluster_id) && $fields->cluster_id->value !== null) {
             $cluster = Cluster::find($fields->cluster_id->value);
 
@@ -79,6 +80,7 @@ class Marker extends Model implements AddressObjectInterface
 
     public function afterSave()
     {
+        // When popup content empty after save than seed it with contents of _default_popup_content partial
         if (empty($this->popup_content)) {
             $this->addViewPath(Theme::getActiveTheme()->getPath().'/partials');
             $this->popup_content = $this->makePartial('default_popup_content', ['model' => $this]);
@@ -91,11 +93,20 @@ class Marker extends Model implements AddressObjectInterface
         return Country::all()->pluck('name', 'id')->toArray();
     }
 
+    /**
+     * Get only published markers
+     * @param  QueryBuilder $query
+     * @return QueryBuilder
+     */
     public function scopePublished($query)
     {
         return $query->where('is_published', true);
     }
 
+    /**
+     * Refresh this object's longitude and latitude attributes using address resolver and address specified in this object
+     * @return void
+     */
     public function refreshLonLat()
     {
         $addressResolver = new AddressResolver();
@@ -106,14 +117,17 @@ class Marker extends Model implements AddressObjectInterface
             throw new ApplicationException(Lang::get('initbiz.leafletpro::lang.exceptions.address_resolver_empty_response'));
         }
 
-        //TODO: to consider pop up with other possibilities, right now getting first element
         $address = $response[0];
 
         $this->lat = $address['lat'];
         $this->lon = $address['lon'];
     }
 
-    public function getLonLat()
+    /**
+     * Get array of this models lon and lat params
+     * @return array longitude and latitude of this marker
+     */
+    public function getLonLat(): array
     {
         return [
             'lon' => $this->lon,
@@ -121,22 +135,36 @@ class Marker extends Model implements AddressObjectInterface
         ];
     }
 
-    public function getStreet()
+    // Methods from Address Object interface
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStreet(): string
     {
-        return $this->street;
+        return $this->street ?? "";
     }
 
-    public function getPostalCode()
+    /**
+     * {@inheritdoc}
+     */
+    public function getPostalCode(): string
     {
-        return $this->postal_code;
+        return $this->postal_code ?? "";
     }
 
-    public function getCity()
+    /**
+     * {@inheritdoc}
+     */
+    public function getCity(): string
     {
-        return $this->city;
+        return $this->city ?? "";
     }
 
-    public function getCountry()
+    /**
+     * {@inheritdoc}
+     */
+    public function getCountry(): string
     {
         //Use relation or country_id attribute if relation does not exist yet
         if ($this->country()->first()) {
@@ -146,6 +174,6 @@ class Marker extends Model implements AddressObjectInterface
             return Country::find($this->country_id)::first()->name;
         }
 
-        return null;
+        return "";
     }
 }

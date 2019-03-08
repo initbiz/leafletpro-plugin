@@ -29,7 +29,7 @@ class AddressResolver
     /**
      * Resolv longitude and latitude from address
      * @param  AddressObjectInterface $addressObj Object that stores address (country, city, street)
-     * @return array
+     * @return array of resolved addresses with lon and lan params
      */
     public function resolv(AddressObjectInterface $addressObj)
     {
@@ -38,6 +38,12 @@ class AddressResolver
         return $this->resolver->resolv($addressObj);
     }
 
+    /**
+     * Validates if address object has correct data
+     * @param  AddressObjectInterface $addressObj
+     * @return bool true when validation passes
+     * @throws ValidationException when address object does not pass the validation
+     */
     public static function validate(AddressObjectInterface $addressObj)
     {
         $rules = [
@@ -50,5 +56,7 @@ class AddressResolver
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
+
+        return true;
     }
 }

@@ -7,9 +7,17 @@ use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
 class NominatimResolver implements AddressResolverInterface
 {
+    /**
+     * Nominatim object from maxh/Nominatim
+     * @var Nominatim
+     */
     public $nominatim;
 
-    public $polygon; //'geojson', 'kml', 'svg' and 'text'
+    /**
+     * polygon type for Nominatim, either 'geojson', 'kml', 'svg' or 'text'
+     * @var string
+     */
+    public $polygon;
 
     public function __construct()
     {
@@ -24,11 +32,18 @@ class NominatimResolver implements AddressResolverInterface
         $this->setPolygon();
     }
 
+    /**
+     * Sets polygon for Nominatim
+     * @param string $polygon [description]
+     */
     public function setPolygon(string $polygon='geojson')
     {
         $this->polygon = $polygon;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function resolv(AddressObjectInterface $addressObj): array
     {
         $search = $this->prepareSearch($addressObj);
@@ -38,6 +53,11 @@ class NominatimResolver implements AddressResolverInterface
         return $result;
     }
 
+    /**
+     * Prepares search object for maxh/Nominatim
+     * @param  AddressObjectInterface $addressObj object storing address
+     * @return \maxh\Nominatim\Search             prepared search
+     */
     protected function prepareSearch(AddressObjectInterface $addressObj)
     {
         $search = $this->nominatim->newSearch();

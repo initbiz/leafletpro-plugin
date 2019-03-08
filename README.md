@@ -26,3 +26,4 @@ If you use the service : [http://nominatim.openstreetmap.org/](http://nominatim.
 * Marker categories to filter markers on maps
 * Custom, easy configurable marker icons for markers and categories
 * Add possibility to manage more than one marker by Cumulus clusters
+* Pop up in backend with other possibilities for the same address (right now getting only the first element)
