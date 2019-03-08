@@ -7,10 +7,14 @@ use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
 /**
- * Class to resolve longitude and latitude of address
+ * Class to resolve longitude and latitude from address
  */
 class AddressResolver
 {
+    /**
+     * Address resolver object
+     * @var AddressResolverInterface
+     */
     public $resolver;
 
     public function __construct(AddressResolverInterface $resolver = null)
@@ -22,6 +26,11 @@ class AddressResolver
         $this->resolver = $resolver;
     }
 
+    /**
+     * Resolv longitude and latitude from address
+     * @param  AddressObjectInterface $addressObj Object that stores address (country, city, street)
+     * @return array
+     */
     public function resolv(AddressObjectInterface $addressObj)
     {
         self::validate($addressObj);

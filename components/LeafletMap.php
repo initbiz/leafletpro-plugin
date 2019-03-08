@@ -18,9 +18,9 @@ class LeafletMap extends ComponentBase
     public function defineProperties()
     {
         $properties = [
-            'centerLongLat' => [
-                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.center_long_lat',
-                'description'		=> 'initbiz.leafletpro::lang.components.leafletmap.center_long_lat_desc',
+            'centerLonLat' => [
+                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.center_lon_lat',
+                'description'		=> 'initbiz.leafletpro::lang.components.leafletmap.center_lon_lat_desc',
                 'type'              => 'string',
                 'default'			=> '51.505, -0.09'
             ],
@@ -64,7 +64,7 @@ class LeafletMap extends ComponentBase
         $this->addCss($leafletCss);
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
-        $this->page['centerLongLat'] = $this->property('centerLongLat');
+        $this->page['centerLonLat'] = $this->property('centerLonLat');
         $this->page['initialZoom'] = $this->property('initialZoom');
         $this->page['scrollProtection'] = $this->property('scrollProtection');
 

@@ -23,7 +23,7 @@ class Markers extends Controller
      * @var string HTML body tag class
      */
     public $bodyClass = 'compact-container';
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -31,7 +31,7 @@ class Markers extends Controller
         BackendMenu::setContext('Initbiz.LeafletPro', 'leafletpro-main-menu', 'leafletpro-side-menu-markers');
     }
 
-    public function onLongLatRefresh()
+    public function onLonLatRefresh()
     {
         $markerInputs = Request::input('Marker');
 
@@ -43,8 +43,8 @@ class Markers extends Controller
             $marker->country()->associate($country);
         }
 
-        $marker->refreshLongLat();
+        $marker->refreshLonLat();
 
-        return $marker->getLongLat();
+        return $marker->getLonLat();
     }
 }

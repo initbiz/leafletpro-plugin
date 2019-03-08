@@ -12,7 +12,7 @@
 
 {% put scripts %}
     <script>
-      	var {{ mapVar }} = L.map('{{ divId }}', { scrollWheelZoom: {{ scrollProtection }} }).setView([{{ centerLongLat }}], {{ initialZoom }});
+      	var {{ mapVar }} = L.map('{{ divId }}', { scrollWheelZoom: {{ scrollProtection }} }).setView([{{ centerLonLat }}], {{ initialZoom }});
 
       	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       		attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',

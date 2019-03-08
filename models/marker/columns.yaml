@@ -8,8 +8,8 @@ columns:
         type: switch
     name:
         label: 'initbiz.leafletpro::lang.marker.name'
-    long:
-        label: 'initbiz.leafletpro::lang.marker.long'
+    lon:
+        label: 'initbiz.leafletpro::lang.marker.lon'
     lat:
         label: 'initbiz.leafletpro::lang.marker.lat'
     street:

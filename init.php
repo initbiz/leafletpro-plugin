@@ -68,7 +68,7 @@ Cluster::extend(function ($model) {
                     $marker->postal_code = $model->postal_code;
                 }
 
-                $marker->refreshLongLat();
+                $marker->refreshLonLat();
                 $marker->save();
             }
         } else {
@@ -99,7 +99,7 @@ Cluster::extend(function ($model) {
                 }
 
                 if ($markerChanged) {
-                    $marker->refreshLongLat();
+                    $marker->refreshLonLat();
                     $marker->save();
                 }
             }

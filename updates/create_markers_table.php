@@ -19,7 +19,7 @@ class CreateMarkersTable extends Migration
             $table->integer('cluster_id')->unsigned()->nullable();
             $table->boolean('is_published')->default(true);
             $table->text('popup_content')->nullable();
-            $table->string('long');
+            $table->string('lon');
             $table->string('lat');
             $table->text('additional_data')->nullable();
             $table->timestamps();

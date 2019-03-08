@@ -96,7 +96,7 @@ class Marker extends Model implements AddressObjectInterface
         return $query->where('is_published', true);
     }
 
-    public function refreshLongLat()
+    public function refreshLonLat()
     {
         $addressResolver = new AddressResolver();
 
@@ -110,13 +110,13 @@ class Marker extends Model implements AddressObjectInterface
         $address = $response[0];
 
         $this->lat = $address['lat'];
-        $this->long = $address['lon'];
+        $this->lon = $address['lon'];
     }
 
-    public function getLongLat()
+    public function getLonLat()
     {
         return [
-            'long' => $this->long,
+            'lon' => $this->lon,
             'lat' => $this->lat,
         ];
     }

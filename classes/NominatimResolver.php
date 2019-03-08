@@ -29,10 +29,10 @@ class NominatimResolver implements AddressResolverInterface
         $this->polygon = $polygon;
     }
 
-    public function resolv(AddressObjectInterface $addressObj)
+    public function resolv(AddressObjectInterface $addressObj): array
     {
         $search = $this->prepareSearch($addressObj);
-        
+
         $result = $this->nominatim->find($search);
 
         return $result;

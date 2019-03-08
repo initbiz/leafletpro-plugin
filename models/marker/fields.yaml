@@ -37,11 +37,11 @@ fields:
 
 secondaryTabs:
     fields:
-        refresh_long_lat_button:
-            label: 'initbiz.leafletpro::lang.marker.refresh_long_lat_label'
+        refresh_lon_lat_button:
+            label: 'initbiz.leafletpro::lang.marker.refresh_lon_lat_label'
             type: partial
-        long:
-            label: 'initbiz.leafletpro::lang.marker.long'
+        lon:
+            label: 'initbiz.leafletpro::lang.marker.lon'
             type: text
             required: 1
         lat:
