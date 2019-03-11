@@ -66,7 +66,8 @@ class LeafletMap extends ComponentBase
         $this->page['activeLeafletPlugins'] = $activePlugins;
         $this->page['centerLonLat'] = $this->property('centerLonLat');
         $this->page['initialZoom'] = $this->property('initialZoom');
-        $this->page['scrollProtection'] = $this->property('scrollProtection');
+        // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
+        $this->page['scrollProtection'] = empty($this->property('scrollProtection')) ? 'enable' : 'disable';
 
         $this->page['markers'] = Marker::published()->get();
     }
