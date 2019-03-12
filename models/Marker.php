@@ -82,6 +82,7 @@ class Marker extends Model implements AddressObjectInterface
     {
         // When popup content empty after save than seed it with contents of _default_popup_content partial
         if (empty($this->popup_content)) {
+            $this->addViewPath($this->guessViewPath());
             $this->addViewPath(Theme::getActiveTheme()->getPath().'/partials');
             $this->popup_content = $this->makePartial('default_popup_content', ['model' => $this]);
             $this->save();
