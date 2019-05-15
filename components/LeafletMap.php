@@ -1,7 +1,11 @@
 <?php namespace Initbiz\LeafletPro\Components;
 
+use Lang;
 use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
+use Initbiz\LeafletPro\Classes\Address;
+use Initbiz\LeafletPro\Classes\AddressResolver;
+use October\Rain\Exception\ApplicationException;
 
 class LeafletMap extends ComponentBase
 {
@@ -36,6 +40,12 @@ class LeafletMap extends ComponentBase
                 'description'       => 'initbiz.leafletpro::lang.components.leafletmap.scroll_protection_description',
                 'default'           => 'false',
                 'type'              => 'checkbox',
+            ],
+            'getOverriding' => [
+                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.get_overriding_title',
+                'description'       => 'initbiz.leafletpro::lang.components.leafletmap.get_overriding_description',
+                'default'           => 'true',
+                'type'              => 'checkbox',
             ]
         ];
 
@@ -64,12 +74,45 @@ class LeafletMap extends ComponentBase
         $this->addCss($leafletCss);
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
-        $this->page['centerLonLat'] = $this->property('centerLonLat');
-        $this->page['initialZoom'] = $this->property('initialZoom');
+        
+        $initialParams = $this->calculateInitialParams();
+
+        $this->page['centerLonLat'] = $initialParams['centerLonLat'];
+        $this->page['initialZoom'] = $initialParams['initialZoom'];
+
         // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
         $this->page['scrollProtection'] = empty($this->property('scrollProtection')) ? 'enable' : 'disable';
 
         $this->page['markers'] = Marker::published()->get();
+    }
+
+    public function calculateInitialParams()
+    {
+        $centerLonLat = $this->property('centerLonLat');
+        $initialZoom = $this->property('initialZoom');
+
+        if ($this->property('getOverriding')) {
+            $data = get();
+
+            $address = new Address();
+            $address->setFromArray($data);
+
+            $addressResolver = new AddressResolver();
+
+            $response = $addressResolver->resolv($this);
+
+            $address = $response[0];
+
+            $centerLonLat = $address['lat'] . ', ' . $address['lon'];
+            $initialZomm = 1;
+        }
+
+        $result = [
+            'centerLonLat' => $centerLonLat,
+            'zoom' => $initialZoom,
+        ];
+
+        return $result;
     }
 
     /**

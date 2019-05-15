@@ -27,6 +27,8 @@ As you see in the above screenshot you can specify a few parameters:
 * Scroll protection to start zooming with scroll only after clicking the map
 * Leaflet plugins - checkboxes for enabling Leaflet plugins for the component
 
+
+
 ## Customize popup content
 
 ![Custom marker popup with InIT.biz logo](https://raw.githubusercontent.com/initbizlab/oc-leafletpro-plugin/master/docs/images/marker_with_initbiz_popup.png)

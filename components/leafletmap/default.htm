@@ -1,9 +1,7 @@
 {% set divId = __SELF__ ~ '-container' %}
 {% set mapVar = __SELF__ ~ 'Map' %}
 
-<div id="{{ divId }}" style="height: 600px;">
-
-</div>
+<div id="{{ divId }}" style="height: 600px;"></div>
 
 
 {% for plugin in activeLeafletPlugins %}
@@ -11,18 +9,25 @@
 {% endfor %}
 
 {% put scripts %}
-    <script>
-      	var {{ mapVar }} = L.map('{{ divId }}').setView([{{ centerLonLat }}], {{ initialZoom }});
+{# //TODO: methods for getting center long and lat and initial zoom on load in LeafletMap component
+//TODO: for example using city, concrete marker, country and so on
+//TODO: AJAX method that sends 'city' => 'Staszów', 'country' => Poland or markerId=>2 and refreshes the map after
+// getting params from server
+#}
+<script>
+    var {{ mapVar }} = L.map('{{ divId }}').setView([{{ centerLonLat }}], {{ initialZoom }});
 
-      	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      		attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
-      		maxZoom: 18
-      	}).addTo({{ mapVar }});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+        maxZoom: 18
+    }).addTo({{ mapVar }});
 
-        {{ mapVar }}.scrollWheelZoom.{{ scrollProtection }}();
-        
-    	{{ mapVar }}.once('focus', function() { {{ mapVar }}.scrollWheelZoom.enable(); });
-    </script>
+    {{ mapVar }}.scrollWheelZoom.{{ scrollProtection }}();
+
+    {{ mapVar }}.once('focus', function () {
+        {{ mapVar }}.scrollWheelZoom.enable();
+    });
+</script>
 {% endput %}
 
 {% partial __SELF__ ~ '::markers' markers=markers plugins=activeLeafletPlugins mapVar=mapVar %}

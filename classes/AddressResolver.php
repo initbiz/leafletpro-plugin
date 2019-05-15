@@ -3,6 +3,7 @@
 use Lang;
 use Validator;
 use October\Rain\Exception\ValidationException;
+use October\Rain\Exception\ApplicationException;
 use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
@@ -35,7 +36,13 @@ class AddressResolver
     {
         self::validate($addressObj);
 
-        return $this->resolver->resolv($addressObj);
+        $response = $this->resolver->resolv($addressObj);
+
+        if (empty($response)) {
+            throw new ApplicationException(Lang::get('initbiz.leafletpro::lang.exceptions.address_resolver_empty_response'));
+        }
+
+        return $response;
     }
 
     /**

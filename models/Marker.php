@@ -114,10 +114,6 @@ class Marker extends Model implements AddressObjectInterface
 
         $response = $addressResolver->resolv($this);
 
-        if (empty($response)) {
-            throw new ApplicationException(Lang::get('initbiz.leafletpro::lang.exceptions.address_resolver_empty_response'));
-        }
-
         $address = $response[0];
 
         $this->lat = $address['lat'];

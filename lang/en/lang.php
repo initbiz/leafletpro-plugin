@@ -15,6 +15,8 @@
             'plugins_group' => 'Leaflet plugins',
             'scroll_protection_title' => 'Scroll protection',
             'scroll_protection_description' => 'Enforce user not to zoom the map using scroll',
+            'get_overriding_title' => 'Override with GET params',
+            'get_overriding_description' => 'Override the initial zoom, lon and lat using address from GET',
         ],
     ],
     'exceptions' => [
