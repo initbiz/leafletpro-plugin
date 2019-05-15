@@ -5,6 +5,7 @@ use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
 use Initbiz\LeafletPro\Classes\Address;
 use Initbiz\LeafletPro\Classes\AddressResolver;
+use Initbiz\LeafletPro\Exceptions\EmptyResponse;
 use October\Rain\Exception\ApplicationException;
 
 class LeafletMap extends ComponentBase
@@ -44,7 +45,7 @@ class LeafletMap extends ComponentBase
             'getOverriding' => [
                 'title'             => 'initbiz.leafletpro::lang.components.leafletmap.get_overriding_title',
                 'description'       => 'initbiz.leafletpro::lang.components.leafletmap.get_overriding_description',
-                'default'           => 'true',
+                'default'           => 'false',
                 'type'              => 'checkbox',
             ]
         ];
@@ -75,7 +76,7 @@ class LeafletMap extends ComponentBase
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
         
-        $initialParams = $this->calculateInitialParams();
+        $initialParams = $this->getInitialParams();
 
         $this->page['centerLonLat'] = $initialParams['centerLonLat'];
         $this->page['initialZoom'] = $initialParams['initialZoom'];
@@ -86,10 +87,12 @@ class LeafletMap extends ComponentBase
         $this->page['markers'] = Marker::published()->get();
     }
 
-    public function calculateInitialParams()
+    public function getInitialParams()
     {
-        $centerLonLat = $this->property('centerLonLat');
-        $initialZoom = $this->property('initialZoom');
+        $result = [
+            'centerLonLat' => $this->property('centerLonLat'),
+            'initialZoom' => $this->property('initialZoom'),
+        ];
 
         if ($this->property('getOverriding')) {
             $data = get();
@@ -97,29 +100,34 @@ class LeafletMap extends ComponentBase
             $address = new Address();
             $address->setFromArray($data);
 
+            $this->page['requestedAddress'] = $address->toArray();
+
             $addressResolver = new AddressResolver();
 
-            $response = $addressResolver->resolv($address);
+            try {
+                $response = $addressResolver->resolv($address);
+            } catch (EmptyResponse $e) {
+                // Address not found - returning default parameters
+                $this->page['addressNotFound'] = true;
+                return $result;
+            } catch (\Throwable $e) {
+                throw new $e;
+            }
 
             $address = $response[0];
 
-            $centerLonLat = $address['lat'] . ', ' . $address['lon'];
+            $result['centerLonLat'] = $address['lat'] . ', ' . $address['lon'];
 
             if (!empty($data['country'])) {
-                $initialZoom = 6;
+                $result['initialZoom'] = 6;
             }
             if (!empty($data['city'])) {
-                $initialZoom = 12;
+                $result['initialZoom'] = 12;
             }
             if (!empty($data['street'])) {
-                $initialZoom = 15;
+                $result['initialZoom'] = 15;
             }
         }
-
-        $result = [
-            'centerLonLat' => $centerLonLat,
-            'initialZoom' => $initialZoom,
-        ];
 
         return $result;
     }
