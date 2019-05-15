@@ -54,8 +54,10 @@ class AddressResolver
     public static function validate(AddressObjectInterface $addressObj)
     {
         $rules = [
-            'street' => 'required',
-            'city' => 'required',
+            'street' => 'alpha_num',
+            'postal_code' => 'alpha_dash',
+            'city' => 'alpha_num',
+            'country' => 'alpha_num',
         ];
 
         $validator = Validator::make($addressObj->toArray(), $rules);

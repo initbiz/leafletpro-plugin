@@ -19,6 +19,7 @@ class Address implements AddressObjectInterface
      */
     public function getStreet(): string
     {
+        return $this->street ?? '';
     }
 
     /**
@@ -26,6 +27,7 @@ class Address implements AddressObjectInterface
      */
     public function getPostalCode(): string
     {
+        return $this->postalCode ?? '';
     }
 
     /**
@@ -33,6 +35,7 @@ class Address implements AddressObjectInterface
      */
     public function getCity(): string
     {
+        return $this->city ?? '';
     }
 
     /**
@@ -40,6 +43,7 @@ class Address implements AddressObjectInterface
      */
     public function getCountry(): string
     {
+        return $this->country ?? '';
     }
 
     /**
@@ -47,6 +51,12 @@ class Address implements AddressObjectInterface
      */
     public function toArray()
     {
+        return [
+            'country' => $this->getCountry(),
+            'city' => $this->getCity(),
+            'postal_code' => $this->getPostalCode(),
+            'street' => $this->getStreet(),
+        ];
     }
 
     /**
@@ -61,10 +71,10 @@ class Address implements AddressObjectInterface
      */
     public function setFromArray(array $data)
     {
-        $this->setCountry = $data['country'];
-        $this->setCity = $data['city'];
-        $this->setPostalCode = $data['postalCode'];
-        $this->setStreet = $data['street'];
+        $this->setCountry($data['country'] ?? '');
+        $this->setCity($data['city'] ?? '');
+        $this->setPostalCode($data['postalCode'] ?? '');
+        $this->setStreet($data['street'] ?? '');
     }
 
     /**
@@ -74,12 +84,6 @@ class Address implements AddressObjectInterface
      */
     public function setStreet($street)
     {
-        $validation = Validator::make(['street' => $street], ['street' => 'alpha_num']);
-
-        if ($validation->fails()) {
-            throw new ApplicationException("Bad format for street");
-        }
-
         $this->street = $street;
     }
 
@@ -90,12 +94,6 @@ class Address implements AddressObjectInterface
      */
     public function setPostalCode($postalCode)
     {
-        $validation = Validator::make(['postal_code' => $postalCode], ['postal_code' => 'alpha_dash']);
-
-        if ($validation->fails()) {
-            throw new ApplicationException("Bad format for postal code");
-        }
-
         $this->postalCode = $postalCode;
     }
 
@@ -106,12 +104,6 @@ class Address implements AddressObjectInterface
      */
     public function setCity($city)
     {
-        $validation = Validator::make(['city' => $city], ['city' => 'alpha_num']);
-
-        if ($validation->fails()) {
-            throw new ApplicationException("Bad format for city");
-        }
-
         $this->city = $city;
     }
 
@@ -122,12 +114,6 @@ class Address implements AddressObjectInterface
      */
     public function setCountry($country)
     {
-        $validation = Validator::make(['country' => $country], ['country' => 'alpha_num']);
-
-        if ($validation->fails()) {
-            throw new ApplicationException("Bad format for country");
-        }
-
         $this->country = $country;
     }
 }

@@ -99,17 +99,26 @@ class LeafletMap extends ComponentBase
 
             $addressResolver = new AddressResolver();
 
-            $response = $addressResolver->resolv($this);
+            $response = $addressResolver->resolv($address);
 
             $address = $response[0];
 
             $centerLonLat = $address['lat'] . ', ' . $address['lon'];
-            $initialZomm = 1;
+
+            if (!empty($data['country'])) {
+                $initialZoom = 6;
+            }
+            if (!empty($data['city'])) {
+                $initialZoom = 12;
+            }
+            if (!empty($data['street'])) {
+                $initialZoom = 15;
+            }
         }
 
         $result = [
             'centerLonLat' => $centerLonLat,
-            'zoom' => $initialZoom,
+            'initialZoom' => $initialZoom,
         ];
 
         return $result;
