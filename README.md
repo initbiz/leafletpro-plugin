@@ -16,18 +16,20 @@ You can install the plugin using any of the following methods:
 
 The plugin will automatically install [maxhelias/php-nominatim](https://github.com/maxhelias/php-nominatim), which is used to query [Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) service. If you are going to use the Nominatim service, recall the [Nominatim usage policy](https://operations.osmfoundation.org/policies/nominatim/).
 
-## Embed the map
-You can embed a map using Leaflet map component.
+## Embed the map (LeafletMap component)
 
-![Leaflet map component](https://raw.githubusercontent.com/initbizlab/oc-leafletpro-plugin/master/docs/images/leafletmap_component.png)
-
-As you see in the above screenshot you can specify a few parameters:
+You can customize a few parameters in the inspector of the component:
 * Longitude and latitude of the center of the map being shown
 * Initial zoom of the map
 * Scroll protection to start zooming with scroll only after clicking the map
+* GET parameters overriding initial lon, lat and zoom (described below)
 * Leaflet plugins - checkboxes for enabling Leaflet plugins for the component
 
+### Overriding initial lon, lat and zoom using GET params
+When the checkbox is checked your map will automatically zoom to country, city or street that is available in URL params.
 
+## Changing default marker icon
+You can specify URL of the custom marker icon in settings of LeafletPro plugin like for example: /themes/assets/images/marker-icon.png.
 
 ## Customize popup content
 

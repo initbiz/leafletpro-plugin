@@ -3,3 +3,5 @@
 1.0.2:
     - 'Added markers table'
     - create_markers_table.php
+1.0.3:
+    - 'Custom default marker icon URL in settings and overriding initial lon, lat and zoom using GET params'
