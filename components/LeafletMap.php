@@ -3,6 +3,7 @@
 use Lang;
 use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
+use Initbiz\LeafletPro\Models\Settings;
 use Initbiz\LeafletPro\Classes\Address;
 use Initbiz\LeafletPro\Classes\AddressResolver;
 use Initbiz\LeafletPro\Exceptions\EmptyResponse;
@@ -75,6 +76,8 @@ class LeafletMap extends ComponentBase
         $this->addCss($leafletCss);
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
+
+        $this->page['marker_icon_url'] = Settings::get('marker_icon_url') ?? '/plugins/initbiz/leafletpro/assets/node_modules/leaflet/dist/images/marker-icon.png';
         
         $initialParams = $this->getInitialParams();
 

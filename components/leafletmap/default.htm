@@ -9,11 +9,6 @@
 {% endfor %}
 
 {% put scripts %}
-{# //TODO: methods for getting center long and lat and initial zoom on load in LeafletMap component
-//TODO: for example using city, concrete marker, country and so on
-//TODO: AJAX method that sends 'city' => 'Staszów', 'country' => Poland or markerId=>2 and refreshes the map after
-// getting params from server
-#}
 <script>
     var {{ mapVar }} = L.map('{{ divId }}').setView([{{ centerLonLat }}], {{ initialZoom }});
 
@@ -29,5 +24,6 @@
     });
 </script>
 {% endput %}
+
 
 {% partial __SELF__ ~ '::markers' markers=markers plugins=activeLeafletPlugins mapVar=mapVar %}

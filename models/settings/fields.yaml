@@ -4,6 +4,12 @@
 
 tabs:
     fields:
+        marker_icon_url:
+            label: initbiz.leafletpro::lang.settings.marker_icon_url
+            tab: initbiz.leafletpro::lang.settings.general_tab
+            type: text
+            span: left
+            default: '/plugins/initbiz/leafletpro/assets/node_modules/leaflet/dist/images/marker-icon.png'
         nominatim_url:
             label: initbiz.leafletpro::lang.settings.nominatim_url
             commentAbove: initbiz.leafletpro::lang.settings.nominatim_url_comment
