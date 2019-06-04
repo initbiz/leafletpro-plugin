@@ -1,0 +1,3 @@
+{% for plugin in plugins %}
+    {% partial __SELF__ ~ '::plugin_' ~ plugin mapVar=mapVar %}
+{% endfor %}

@@ -1,0 +1,20 @@
+{% set divId = __SELF__ ~ '-container' %}
+
+<div id="{{ divId }}" class="leaflet-map"></div>
+
+{% put scripts %}
+<script>
+    var {{ mapVar }} = L.map('{{ divId }}').setView([{{ __SELF__.centerLonLat }}], {{ __SELF__.initialZoom }});
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '{% partial __SELF__ ~ "::attribution" %}',
+        maxZoom: 18
+    }).addTo({{ mapVar }});
+
+    {{ mapVar }}.scrollWheelZoom.{{ __SELF__.scrollProtection }}();
+
+    {{ mapVar }}.once('focus', function () {
+        {{ mapVar }}.scrollWheelZoom.enable();
+    });
+</script>
+{% endput %}
