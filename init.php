@@ -59,8 +59,18 @@ if (PluginManager::instance()->exists('Initbiz.CumulusCore')) {
                         $marker->postal_code = $model->postal_code;
                     }
 
-                    $marker->refreshLonLat();
-                    $marker->save();
+                    try {
+                        $marker->refreshLonLat();
+                        $marker->save();
+                    } catch (\Exception $e) {
+                        $message = [
+                            'message'   => 'Tried to refresh the marker',
+                            'marker'    => $marker->toArray(),
+                            'exception' => $e->getMessage(),
+                        ];
+
+                        trace_log($message);
+                    }
                 }
             } else {
                 // else get first and if address updated than update marker
@@ -90,12 +100,22 @@ if (PluginManager::instance()->exists('Initbiz.CumulusCore')) {
                     }
 
                     if ($markerChanged) {
-                        $marker->refreshLonLat();
-                        $marker->save();
+                        try {
+                            $marker->refreshLonLat();
+                            $marker->save();
+                        } catch (\Exception $e) {
+                            $message = [
+                                'message'   => 'Tried to refresh the marker',
+                                'marker'    => $marker->toArray(),
+                                'exception' => $e->getMessage(),
+                            ];
+
+                            trace_log($message);
+                        }
                     }
                 }
             }
-        });
+        }, 50);
     });
 
     \Initbiz\CumulusCore\Controllers\Clusters::extendFormFields(function ($form, $model, $context) {
