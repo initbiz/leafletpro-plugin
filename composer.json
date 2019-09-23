@@ -2,7 +2,7 @@
   "name": "initbiz/oc-leafletpro-plugin",
   "type": "october-plugin",
   "description": "October CMS plugin that helps using Leaflet maps",
-  "homepage": "http://init.biz",
+  "homepage": "https://www.init.biz",
   "keywords": ["october", "octobercms", "javascript", "leaflet", "map"],
   "license": "MIT",
   "authors": [
