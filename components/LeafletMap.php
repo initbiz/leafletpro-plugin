@@ -49,13 +49,13 @@ class LeafletMap extends ComponentBase
             'scrollProtection' => [
                 'title'             => 'initbiz.leafletpro::lang.components.scroll_protection_title',
                 'description'       => 'initbiz.leafletpro::lang.components.scroll_protection_description',
-                'default'           => 'true',
+                'default'           => '1',
                 'type'              => 'checkbox',
             ],
             'getOverriding' => [
                 'title'             => 'initbiz.leafletpro::lang.components.get_overriding_title',
                 'description'       => 'initbiz.leafletpro::lang.components.get_overriding_description',
-                'default'           => 'false',
+                'default'           => '0',
                 'type'              => 'checkbox',
             ]
         ];
@@ -92,7 +92,7 @@ class LeafletMap extends ComponentBase
         $this->initialZoom = $initialParams['initialZoom'];
 
         // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
-        $this->scrollProtection = empty($this->property('scrollProtection')) ? 'enable' : 'disable';
+        $this->scrollProtection = ($this->property('scrollProtection') === "0") ? 'enable' : 'disable';
 
         $this->markers = Marker::published()->get();
     }
@@ -104,7 +104,7 @@ class LeafletMap extends ComponentBase
             'initialZoom' => $this->property('initialZoom'),
         ];
 
-        if ($this->property('getOverriding')) {
+        if ($this->property('getOverriding') === "1") {
             $data = get();
 
             $address = new Address();
@@ -121,7 +121,12 @@ class LeafletMap extends ComponentBase
                 $this->page['addressNotFound'] = true;
                 return $result;
             } catch (\Throwable $e) {
-                throw new $e;
+                if (env('APP_DEBUG')) {
+                    throw new $e;
+                } else {
+                    trace_log($e);
+                    return;
+                }
             }
 
             $address = $response[0];
@@ -180,5 +185,4 @@ class LeafletMap extends ComponentBase
             ]
         ];
     }
-    
 }

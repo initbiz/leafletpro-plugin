@@ -52,7 +52,7 @@ class SingleMarkerMap extends ComponentBase
             'scrollProtection' => [
                 'title'             => 'initbiz.leafletpro::lang.components.scroll_protection_title',
                 'description'       => 'initbiz.leafletpro::lang.components.scroll_protection_description',
-                'default'           => 'true',
+                'default'           => '1',
                 'type'              => 'checkbox',
             ],
         ];
@@ -69,7 +69,7 @@ class SingleMarkerMap extends ComponentBase
         $markers = [$marker];
         $this->markers = $markers;
 
-        $this->scrollProtection = empty($this->property('scrollProtection')) ? 'enable' : 'disable';
+        $this->scrollProtection = ($this->property('scrollProtection') === "0") ? 'enable' : 'disable';
 
         $this->initialZoom = $this->property('initialZoom');
         $this->centerLonLat = $marker->lat . ', ' . $marker->lon;
@@ -79,5 +79,4 @@ class SingleMarkerMap extends ComponentBase
     {
         return Marker::published()->get()->pluck('name', 'id')->toArray();
     }
-
 }
