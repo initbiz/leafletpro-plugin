@@ -22,4 +22,12 @@ class Plugin extends PluginBase
             'Initbiz\LeafletPro\Components\SingleMarkerMap' => 'singleMarkerMap',
         ];
     }
+
+    public function registerPageSnippets()
+    {
+        return [
+            'Initbiz\LeafletPro\Components\LeafletMap'      => 'leafletmap',
+            'Initbiz\LeafletPro\Components\SingleMarkerMap' => 'singleMarkerMap',
+        ];
+    }
 }
