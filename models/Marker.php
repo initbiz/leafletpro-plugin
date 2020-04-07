@@ -91,7 +91,7 @@ class Marker extends Model implements AddressObjectInterface
 
     public function getCountryIdOptions()
     {
-        return Country::all()->pluck('name', 'id')->toArray();
+        return Country::getNameList();
     }
 
     /**
