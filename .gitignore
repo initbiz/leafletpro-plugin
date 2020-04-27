@@ -20,12 +20,17 @@ assets/node_modules/*
 !assets/node_modules/leaflet
 assets/node_modules/leaflet/*
 !assets/node_modules/leaflet/dist/
-!assets/node_modules/leaflet/dist/*
+assets/node_modules/leaflet/dist/*
+!assets/node_modules/leaflet/dist/leaflet.js
+!assets/node_modules/leaflet/dist/leaflet.css
+!assets/node_modules/leaflet/dist/images
+!assets/node_modules/leaflet/dist/images/*
 # Plugins for leaflet
 !assets/node_modules/leaflet.markercluster
 assets/node_modules/leaflet.markercluster/*
 !assets/node_modules/leaflet.markercluster/dist
-!assets/node_modules/leaflet.markercluster/dist/*
+!assets/node_modules/leaflet.markercluster/dist/leaflet.markercluster.js
+!assets/node_modules/leaflet.markercluster/dist/MarkeCluster.css
 !assets/node_modules/leaflet.tilelayer.colorfilter
 assets/node_modules/leaflet.tilelayer.colorfilter/*
 !assets/node_modules/leaflet.tilelayer.colorfilter/src
