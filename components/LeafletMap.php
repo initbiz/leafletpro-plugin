@@ -76,7 +76,9 @@ class LeafletMap extends ComponentBase
             if ($this->property($pluginCode . $this->pluginPropertySuffix)) {
                 $activePlugins[] = $pluginCode;
                 $leafletJs[] = $pluginDef['jsPath'];
-                $leafletCss[] = $pluginDef['cssPath'];
+                if (in_array('cssPath', $pluginDef)){
+                    $leafletCss[] = $pluginDef['cssPath'];
+                }
             }
         }
 
@@ -182,6 +184,11 @@ class LeafletMap extends ComponentBase
                 'description' => 'initbiz.leafletpro::lang.leafletmap_plugins.markercluster_desc',
                 'jsPath' => 'assets/node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js',
                 'cssPath' => 'assets/node_modules/leaflet.markercluster/dist/MarkerCluster.css',
+            ],
+            'colorfilter' => [
+                'title' => 'initbiz.leafletpro::lang.leafletmap_plugins.colorfilter_name',
+                'description' => 'initbiz.leafletpro::lang.leafletmap_plugins.colorfilter_desc',
+                'jsPath' => 'assets/node_modules/leaflet.tilelayer.colorfilter/src/leaflet-tilelayer-colorfilter.js',
             ]
         ];
     }

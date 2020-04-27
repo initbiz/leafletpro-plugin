@@ -1,0 +1,15 @@
+{% put scripts %}
+<script>
+    var myFilter = [
+        'grayscale:100%',
+        'bright:79%',
+        'contrast:179%'
+    ];
+
+    L.tileLayer.colorFilter('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '{% partial __SELF__ ~ "::attribution" %}',
+        maxZoom: 18,
+        filter: myFilter,
+    }).addTo({{ mapVar }});
+</script>
+{% endput %}
