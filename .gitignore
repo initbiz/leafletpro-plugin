@@ -21,6 +21,7 @@ assets/node_modules/*
 assets/node_modules/leaflet/*
 !assets/node_modules/leaflet/dist/
 !assets/node_modules/leaflet/dist/*
+# Plugins for leaflet
 !assets/node_modules/leaflet.markercluster
 assets/node_modules/leaflet.markercluster/*
 !assets/node_modules/leaflet.markercluster/dist
