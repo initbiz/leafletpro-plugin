@@ -29,4 +29,4 @@ assets/node_modules/leaflet.markercluster/*
 !assets/node_modules/leaflet.tilelayer.colorfilter
 assets/node_modules/leaflet.tilelayer.colorfilter/*
 !assets/node_modules/leaflet.tilelayer.colorfilter/src
-!assets/node_modules/leaflet.tilelayer.colorfilter/src/*
+!assets/node_modules/leaflet.tilelayer.colorfilter/src/leaflet-tilelayer-colorfilter.js
