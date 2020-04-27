@@ -75,8 +75,11 @@ class LeafletMap extends ComponentBase
         foreach ($this->getLeafletPlugins() as $pluginCode => $pluginDef) {
             if ($this->property($pluginCode . $this->pluginPropertySuffix)) {
                 $activePlugins[] = $pluginCode;
-                $leafletJs[] = $pluginDef['jsPath'];
-                if (in_array('cssPath', $pluginDef)){
+
+                if (isset($pluginDef['jsPath'])) {
+                    $leafletJs[] = $pluginDef['jsPath'];
+                }
+                if (isset($pluginDef['cssPath'])){
                     $leafletCss[] = $pluginDef['cssPath'];
                 }
             }
