@@ -116,4 +116,18 @@ class Address implements AddressObjectInterface
     {
         $this->country = $country;
     }
+
+    /**
+     * Shortcut to create object of the Address class using array with params
+     *
+     * @param array $addressArray
+     * @return Address
+     */
+    public static function ofArray(array $addressArray): Address
+    {
+        $address = new Address();
+        $address->setFromArray($addressArray);
+        return $address;
+    }
+
 }

@@ -3,7 +3,6 @@
 use Lang;
 use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
-use Initbiz\LeafletPro\Models\Settings;
 use Initbiz\LeafletPro\Classes\Address;
 use Initbiz\LeafletPro\Classes\AddressResolver;
 use Initbiz\LeafletPro\Exceptions\EmptyResponse;
@@ -11,6 +10,16 @@ use October\Rain\Exception\ApplicationException;
 
 class LeafletMap extends ComponentBase
 {
+    use \Initbiz\LeafletPro\Traits\LeafletHelpers;
+
+    public $centerLonLat;
+
+    public $initialZoom;
+
+    public $markers;
+
+    public $scrollProtection;
+
     protected $pluginPropertySuffix = 'PluginEnabled';
 
     public function componentDetails()
@@ -25,28 +34,28 @@ class LeafletMap extends ComponentBase
     {
         $properties = [
             'centerLonLat' => [
-                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.center_lon_lat',
-                'description'		=> 'initbiz.leafletpro::lang.components.leafletmap.center_lon_lat_desc',
+                'title'             => 'initbiz.leafletpro::lang.components.center_lon_lat',
+                'description'		=> 'initbiz.leafletpro::lang.components.center_lon_lat_desc',
                 'type'              => 'string',
                 'default'			=> '51.505, -0.09'
             ],
             'initialZoom' => [
-                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.zoom_title',
-                'description'		=> 'initbiz.leafletpro::lang.components.leafletmap.zoom_description',
+                'title'             => 'initbiz.leafletpro::lang.components.zoom_title',
+                'description'		=> 'initbiz.leafletpro::lang.components.zoom_description',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'initbiz.leafletpro::lang.components.leafletmap.zoom_validation_message',
+                'validationMessage' => 'initbiz.leafletpro::lang.components.zoom_validation_message',
                 'default'			=> '12'
             ],
             'scrollProtection' => [
-                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.scroll_protection_title',
-                'description'       => 'initbiz.leafletpro::lang.components.leafletmap.scroll_protection_description',
-                'default'           => 'false',
+                'title'             => 'initbiz.leafletpro::lang.components.scroll_protection_title',
+                'description'       => 'initbiz.leafletpro::lang.components.scroll_protection_description',
+                'default'           => '1',
                 'type'              => 'checkbox',
             ],
             'getOverriding' => [
-                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.get_overriding_title',
-                'description'       => 'initbiz.leafletpro::lang.components.leafletmap.get_overriding_description',
-                'default'           => 'false',
+                'title'             => 'initbiz.leafletpro::lang.components.get_overriding_title',
+                'description'       => 'initbiz.leafletpro::lang.components.get_overriding_description',
+                'default'           => '0',
                 'type'              => 'checkbox',
             ]
         ];
@@ -77,17 +86,15 @@ class LeafletMap extends ComponentBase
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
 
-        $this->page['marker_icon_url'] = Settings::get('marker_icon_url') ?? '/plugins/initbiz/leafletpro/assets/node_modules/leaflet/dist/images/marker-icon.png';
-        
         $initialParams = $this->getInitialParams();
 
-        $this->page['centerLonLat'] = $initialParams['centerLonLat'];
-        $this->page['initialZoom'] = $initialParams['initialZoom'];
+        $this->centerLonLat = $initialParams['centerLonLat'];
+        $this->initialZoom = $initialParams['initialZoom'];
 
         // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
-        $this->page['scrollProtection'] = empty($this->property('scrollProtection')) ? 'enable' : 'disable';
+        $this->scrollProtection = ($this->property('scrollProtection') === "0") ? 'enable' : 'disable';
 
-        $this->page['markers'] = Marker::published()->get();
+        $this->markers = Marker::published()->get();
     }
 
     public function getInitialParams()
@@ -97,7 +104,7 @@ class LeafletMap extends ComponentBase
             'initialZoom' => $this->property('initialZoom'),
         ];
 
-        if ($this->property('getOverriding')) {
+        if ($this->property('getOverriding') === "1") {
             $data = get();
 
             $address = new Address();
@@ -114,7 +121,12 @@ class LeafletMap extends ComponentBase
                 $this->page['addressNotFound'] = true;
                 return $result;
             } catch (\Throwable $e) {
-                throw new $e;
+                if (env('APP_DEBUG')) {
+                    throw new $e;
+                } else {
+                    trace_log($e);
+                    return;
+                }
             }
 
             $address = $response[0];

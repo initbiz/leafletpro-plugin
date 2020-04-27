@@ -18,7 +18,16 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Initbiz\LeafletPro\Components\LeafletMap' => 'leafletmap',
+            'Initbiz\LeafletPro\Components\LeafletMap'      => 'leafletmap',
+            'Initbiz\LeafletPro\Components\SingleMarkerMap' => 'singleMarkerMap',
+        ];
+    }
+
+    public function registerPageSnippets()
+    {
+        return [
+            'Initbiz\LeafletPro\Components\LeafletMap'      => 'leafletmap',
+            'Initbiz\LeafletPro\Components\SingleMarkerMap' => 'singleMarkerMap',
         ];
     }
 }

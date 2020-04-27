@@ -54,7 +54,6 @@ class AddressResolver
     public static function validate(AddressObjectInterface $addressObj)
     {
         $rules = [
-            'street' => 'alpha_num',
             'postal_code' => 'alpha_dash',
             'city' => 'alpha_num',
             'country' => 'alpha_num',

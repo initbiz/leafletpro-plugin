@@ -16,11 +16,11 @@
     {% else %}
         <script>
             var leafletProIcon = L.icon({
-                iconUrl: '{{ marker_icon_url | app }}',
+                iconUrl: '{{ __SELF__.getMarkerIconUrl() | app }}',
                 iconSize: [40, 40]
             });
 
-            {% for marker in markers %}
+            {% for marker in __SELF__.markers %}
                   L.marker([{{ marker.lat }}, {{ marker.lon }}], {icon: leafletProIcon})
                    .addTo({{ mapVar }})
                    .bindPopup('{{ marker.popup_content |replace({"\n": " ","\r": " ",  "\t": " "}) | raw }}');

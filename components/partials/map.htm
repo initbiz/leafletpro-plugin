@@ -1,0 +1,11 @@
+<div id="{{ __SELF__ ~ '-container' }}" class="leaflet-map"></div>
+
+{% partial __SELF__ ~ '::map-script' %}
+
+{% put styles %}
+<style>
+    .leaflet-map {
+        min-height: 100px;
+    }
+</style>
+{% endput %}
