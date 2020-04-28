@@ -1,10 +1,14 @@
 {% put scripts %}
 <script>
-    var marker = L.marker(latlng, {
-        icon: L.icon.glyph({
-            prefix: 'mdi',
-            glyph: 'package'
+    {% for marker in __SELF__.markers %}
+        L.marker([{{ marker.lat }}, {{ marker.lon }}],{
+                icon: L.icon.glyph({
+                    prefix: 'mdi',
+                    glyph: 'package'
+            })
         })
-    });
+        .addTo({{ mapVar }})
+        .bindPopup('{{ marker.popup_content |replace({"\n": " ","\r": " ",  "\t": " "}) | raw }}');
+    {% endfor %}
 </script>
 {% endput %}
