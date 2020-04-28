@@ -4,6 +4,8 @@ assets/node_modules/*
 assets/node_modules/leaflet/*
 !assets/node_modules/leaflet/dist
 assets/node_modules/leaflet/dist/*
+!assets/node_modules/leaflet/dist/images
+!assets/node_modules/leaflet/dist/images/*
 !assets/node_modules/leaflet/dist/leaflet.css
 !assets/node_modules/leaflet/dist/leaflet.js
 # Plugins for leaflet
