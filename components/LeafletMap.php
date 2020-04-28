@@ -192,6 +192,11 @@ class LeafletMap extends ComponentBase
                 'title' => 'initbiz.leafletpro::lang.leafletmap_plugins.colorfilter_name',
                 'description' => 'initbiz.leafletpro::lang.leafletmap_plugins.colorfilter_desc',
                 'jsPath' => 'assets/node_modules/leaflet.tilelayer.colorfilter/src/leaflet-tilelayer-colorfilter.js',
+            ],
+            'iconglyph' => [
+                'title' => 'initbiz.leafletpro::lang.leafletmap_plugins.iconglyph_name',
+                'description' => 'initbiz.leafletpro::lang.leafletmap_plugins.iconglyph_desc',
+                'jsPath' => 'assets/node_modules/leaflet.icon.glyph/Leaflet.Icon.Glyph.js',
             ]
         ];
     }

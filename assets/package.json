@@ -1,0 +1,13 @@
+{
+  "name": "leafletpro",
+  "version": "1.0.0",
+  "dependencies": {
+    "leaflet": "^1.6.0",
+    "leaflet.icon.glyph": "^0.2.1",
+    "leaflet.markercluster": "^1.4.1",
+    "leaflet.tilelayer.colorfilter": "^1.2.5"
+  },
+  "author": "InIT.biz",
+  "license": "MIT",
+  "url": "https://www.init.biz"
+}

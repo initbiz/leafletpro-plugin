@@ -37,6 +37,8 @@
         'markercluster_desc' => 'Marker Clustering plugin for Leaflet',
         'colorfilter_name' => 'Color Filter',
         'colorfilter_desc' => 'A simple and lightweight Leaflet plugin to apply CSS filters on map tiles',
+        'iconglyph_name' => 'Icon Glyph',
+        'iconglyph_desc' => 'Add glyphs from icon fonts to your LeafletJS markers',
     ],
     'navigation' => [
         'main' => 'Leaflet maps',

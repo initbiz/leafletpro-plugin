@@ -7,14 +7,20 @@ assets/node_modules/leaflet/dist/*
 !assets/node_modules/leaflet/dist/leaflet.css
 !assets/node_modules/leaflet/dist/leaflet.js
 # Plugins for leaflet
+# Marker Cluster
 !assets/node_modules/leaflet.markercluster
 assets/node_modules/leaflet.markercluster/*
 !assets/node_modules/leaflet.markercluster/dist
 assets/node_modules/leaflet.markercluster/dist/*
 !assets/node_modules/leaflet.markercluster/dist/MarkerCluster.css
 !assets/node_modules/leaflet.markercluster/dist/leaflet.markercluster.js
+# Color Filter
 !assets/node_modules/leaflet.tilelayer.colorfilter
 assets/node_modules/leaflet.tilelayer.colorfilter/*
 !assets/node_modules/leaflet.tilelayer.colorfilter/src
 assets/node_modules/leaflet.tilelayer.colorfilter/src/*
 !assets/node_modules/leaflet.tilelayer.colorfilter/src/leaflet-tilelayer-colorfilter.js
+# Icon Glyph
+!assets/node_modules/leaflet.icon.glyph
+assets/node_modules/leaflet.icon.glyph/*
+!assets/node_modules/leaflet.icon.glyph/Leaflet.Icon.Glyph.js
