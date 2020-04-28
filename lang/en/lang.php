@@ -35,6 +35,8 @@
     'leafletmap_plugins' => [
         'markercluster_name' => 'Marker Cluster',
         'markercluster_desc' => 'Marker Clustering plugin for Leaflet',
+        'colorfilter_name' => 'Color Filter',
+        'colorfilter_desc' => 'A simple and lightweight Leaflet plugin to apply CSS filters on map tiles',
     ],
     'navigation' => [
         'main' => 'Leaflet maps',

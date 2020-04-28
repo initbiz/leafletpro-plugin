@@ -9,3 +9,5 @@
     - 'Added single map component and a few major changes'
 1.1.1:
     - 'Fix issue in checkbox properties'
+1.2.0:
+    - 'Add new plugin Color Filter'

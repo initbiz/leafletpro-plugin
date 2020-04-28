@@ -1,0 +1,21 @@
+{% put scripts %}
+<script>
+    var customLeafletFilter = [
+        // 'blur:0px',
+        'brightness:79%',
+        'contrast:179%',
+        'grayscale:100%',
+        // 'hue:290deg',
+        // 'opacity:100%',
+        // 'invert:100%',
+        // 'saturate:300%',
+        // 'sepia:10%',
+    ];
+
+    L.tileLayer.colorFilter('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '{% partial __SELF__ ~ "::attribution" %}',
+        maxZoom: 18,
+        filter: customLeafletFilter,
+    }).addTo({{ mapVar }});
+</script>
+{% endput %}
