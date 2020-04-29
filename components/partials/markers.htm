@@ -20,9 +20,9 @@
                     iconUrl: '{{ __SELF__.getMarkerIconUrl()|media }}',
                     iconSize: [40,40],
                 });
+                L.Marker.prototype.options.icon = DefaultIcon;
             {% endif %}
 
-            L.Marker.prototype.options.icon = DefaultIcon;
             {% for marker in __SELF__.markers %}
                   L.marker([{{ marker.lat }}, {{ marker.lon }}])
                    .addTo({{ mapVar }})
