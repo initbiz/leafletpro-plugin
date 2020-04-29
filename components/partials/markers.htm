@@ -15,8 +15,14 @@
     #}
     {% else %}
         <script>
-            L.Icon.Default.prototype.options.iconUrl = '{{ __SELF__.getMarkerIconUrl()|app }}';
+            {% if __SELF__.getMarkerIconUrl() %}
+                let DefaultIcon = L.icon({
+                    iconUrl: '{{ __SELF__.getMarkerIconUrl()|media }}',
+                    iconSize: [40,40],
+                });
+            {% endif %}
 
+            L.Marker.prototype.options.icon = DefaultIcon;
             {% for marker in __SELF__.markers %}
                   L.marker([{{ marker.lat }}, {{ marker.lon }}])
                    .addTo({{ mapVar }})
