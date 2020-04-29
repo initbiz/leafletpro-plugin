@@ -70,7 +70,7 @@
         'label' => 'LeafletPro',
         'description' => 'LeafletPro general settings',
         'general_tab' => 'General',
-        'marker_icon_url' => 'Full URL of the default marker icon',
+        'marker_icon_url' => 'Select the icon from the mediafinder',
         'resolvers_tab' => 'Resolvers',
         'nominatim_url' => 'URL of Nominatim service',
         'nominatim_url_comment' => 'Read more info about Nominatim service <a href="https://operations.osmfoundation.org/policies/nominatim/" target="_blank">here</a>',
