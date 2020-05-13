@@ -4,11 +4,32 @@
 
 tabs:
     fields:
+        marker_icon_from:
+            label: initbiz.leafletpro::lang.settings.marker_icon_from
+            tab: initbiz.leafletpro::lang.settings.general_tab
+            span: left
+            type: dropdown
+            options:
+                url: initbiz.leafletpro::lang.settings.marker_icon_from_url
+                media: initbiz.leafletpro::lang.settings.marker_icon_from_media
         marker_icon_url:
             label: initbiz.leafletpro::lang.settings.marker_icon_url
             tab: initbiz.leafletpro::lang.settings.general_tab
+            type: text
+            span: right
+            trigger:
+                action: show
+                field: marker_icon_from
+                condition: value[url]
+        marker_icon_media:
+            label: initbiz.leafletpro::lang.settings.marker_icon_media
+            tab: initbiz.leafletpro::lang.settings.general_tab
             type: mediafinder
-            span: left
+            span: right
+            trigger:
+                action: show
+                field: marker_icon_from
+                condition: value[media]
         nominatim_url:
             label: initbiz.leafletpro::lang.settings.nominatim_url
             commentAbove: initbiz.leafletpro::lang.settings.nominatim_url_comment

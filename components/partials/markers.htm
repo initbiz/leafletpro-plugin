@@ -17,7 +17,7 @@
         <script>
             {% if __SELF__.getMarkerIconUrl() %}
                 let DefaultIcon = L.icon({
-                    iconUrl: '{{ __SELF__.getMarkerIconUrl()|media }}',
+                    iconUrl: '{{ __SELF__.getMarkerIconUrl() }}',
                     iconSize: [40,40],
                 });
                 L.Marker.prototype.options.icon = DefaultIcon;

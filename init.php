@@ -2,8 +2,8 @@
 
 use Event;
 use System\Classes\PluginManager;
+use RainLab\Location\Models\Country;
 use Initbiz\LeafletPro\Models\Marker;
-use Initbiz\LeafletPro\Controllers\Markers;
 
 if (PluginManager::instance()->exists('Initbiz.CumulusCore')) {
     Event::listen('backend.form.extendFieldsBefore', function ($formWidget) {

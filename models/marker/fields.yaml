@@ -30,13 +30,12 @@ fields:
         emptyOption: 'initbiz.leafletpro::lang.marker.country_empty_option'
         span: left
         type: dropdown
-    is_published:
-        label: 'initbiz.leafletpro::lang.marker.is_published'
-        type: switch
-        span: left
 
 secondaryTabs:
     fields:
+        is_published:
+            label: 'initbiz.leafletpro::lang.marker.is_published'
+            type: switch
         refresh_lon_lat_button:
             label: 'initbiz.leafletpro::lang.marker.refresh_lon_lat_label'
             type: partial
