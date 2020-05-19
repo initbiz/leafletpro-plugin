@@ -46,7 +46,7 @@ interface AddressObjectInterface
      * in format "lon, lat"
      * @return string
      */
-    public function getLonLat(): ?string;
+    public function getLatLon(): ?string;
 
     /**
      * Get array of the data

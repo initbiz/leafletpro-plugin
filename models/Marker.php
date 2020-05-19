@@ -130,7 +130,7 @@ class Marker extends Model implements AddressObjectInterface
      * Get array of this models lon and lat params
      * @return array longitude and latitude of this marker
      */
-    public function getLonLatArray(): array
+    public function getLatLonArray(): array
     {
         return [
             'lon' => $this->lon,
@@ -199,13 +199,13 @@ class Marker extends Model implements AddressObjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getLonLat(): string
+    public function getLatLon(): string
     {
-        $lon = $this->getLon();
         $lat = $this->getLat();
+        $lon = $this->getLon();
 
-        if (!empty($lon) && !empty($lat)) {
-            return $lon . ' ' . $lat;
+        if (!empty($lat) && !empty($lon)) {
+            return $lat . ' ' . $lon;
         }
     }
 }

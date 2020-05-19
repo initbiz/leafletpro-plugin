@@ -56,7 +56,7 @@ class SingleMarkerMap extends LeafletMapBase
         $centerLonLat = parent::makeInitialCenterLonLat();
 
         if (!$this->getOverriding && !empty($this->markers)) {
-            $centerLonLat = $this->markers->first()->getLonLat();
+            $centerLonLat = $this->markers->first()->getLatLon();
         }
 
         return $centerLonLat;

@@ -45,6 +45,6 @@ class Markers extends Controller
 
         $marker->refreshLonLat();
 
-        return $marker->getLonLat();
+        return $marker->getLatLon();
     }
 }

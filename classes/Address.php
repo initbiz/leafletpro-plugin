@@ -74,13 +74,13 @@ class Address implements AddressObjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getLonLat(): ?string
+    public function getLatLon(): ?string
     {
-        $lon = $this->getLon();
         $lat = $this->getLat();
+        $lon = $this->getLon();
 
-        if (!empty($lon) && !empty($lat)) {
-            return $lon . ' ' . $lat;
+        if (!empty($lat) && !empty($lon)) {
+            return $lat . ', ' . $lon;
         }
 
         return null;
@@ -178,7 +178,7 @@ class Address implements AddressObjectInterface
      */
     public function setLat($lat)
     {
-        $this->country = $lat;
+        $this->lat = $lat;
     }
 
     /**

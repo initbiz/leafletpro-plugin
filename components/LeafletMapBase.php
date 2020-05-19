@@ -152,8 +152,7 @@ abstract class LeafletMapBase extends ComponentBase
 
         if ($this->getOverriding) {
             $resolvedAddress = $this->makeResolvedAddress();
-            $lonLat = $resolvedAddress->getLonLat();
-
+            $lonLat = $resolvedAddress->getLatLon();
             if (!empty($lonLat)) {
                 $centerLonLat = $lonLat;
             }
@@ -194,7 +193,6 @@ abstract class LeafletMapBase extends ComponentBase
         $address->setFromArray($data);
 
         $this->resolvedAddress = $resolvedAddress = $this->resolveAddress($address);
-
         return $resolvedAddress;
     }
 
@@ -203,7 +201,6 @@ abstract class LeafletMapBase extends ComponentBase
         if (is_null($addressResolver)) {
             $addressResolver = new AddressResolver();
         }
-
         try {
             $response = $addressResolver->resolv($address);
         } catch (EmptyResponse $e) {
