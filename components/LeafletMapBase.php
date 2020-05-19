@@ -16,7 +16,7 @@ abstract class LeafletMapBase extends ComponentBase
      *
      * @var string
      */
-    public $centerLonLat;
+    public $centerLatLon;
 
     /**
      * Initial zoom of the map
@@ -68,7 +68,7 @@ abstract class LeafletMapBase extends ComponentBase
     public function leafletProperties()
     {
         $properties = [
-            'centerLonLat' => [
+            'centerLatLon' => [
                 'title'             => 'initbiz.leafletpro::lang.components.center_lon_lat',
                 'description'		=> 'initbiz.leafletpro::lang.components.center_lon_lat_desc',
                 'type'              => 'string',
@@ -130,7 +130,7 @@ abstract class LeafletMapBase extends ComponentBase
 
         $this->getOverriding = ($this->property('getOverriding') === '1') ? true : false;
 
-        $this->centerLonLat = $this->makeInitialCenterLonLat();
+        $this->centerLatLon = $this->makeInitialCenterLatLon();
         $this->initialZoom = $this->makeInitialZoom();
 
         // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
@@ -146,19 +146,19 @@ abstract class LeafletMapBase extends ComponentBase
         return Marker::published()->get();
     }
 
-    public function makeInitialCenterLonLat()
+    public function makeInitialCenterLatLon()
     {
-        $centerLonLat = $this->property('centerLonLat');
+        $centerLatLon = $this->property('centerLatLon');
 
         if ($this->getOverriding) {
             $resolvedAddress = $this->makeResolvedAddress();
-            $lonLat = $resolvedAddress->getLatLon();
-            if (!empty($lonLat)) {
-                $centerLonLat = $lonLat;
+            $LatLon = $resolvedAddress->getLatLon();
+            if (!empty($LatLon)) {
+                $centerLatLon = $LatLon;
             }
         }
 
-        return $centerLonLat;
+        return $centerLatLon;
     }
 
     public function makeInitialZoom()

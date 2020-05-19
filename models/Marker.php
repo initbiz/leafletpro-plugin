@@ -112,7 +112,7 @@ class Marker extends Model implements AddressObjectInterface
      * resolver and address specified in this object
      * @return void
      */
-    public function refreshLonLat(AddressResolverInterface $addressResolver = null)
+    public function refreshLatLon(AddressResolverInterface $addressResolver = null)
     {
         if (is_null($addressResolver)) {
             $addressResolver = new AddressResolver();

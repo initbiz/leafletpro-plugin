@@ -60,7 +60,7 @@ if (PluginManager::instance()->exists('Initbiz.CumulusCore')) {
                     }
 
                     try {
-                        $marker->refreshLonLat();
+                        $marker->refreshLatLon();
                         $marker->save();
                     } catch (\Exception $e) {
                         $message = [
@@ -101,7 +101,7 @@ if (PluginManager::instance()->exists('Initbiz.CumulusCore')) {
 
                     if ($markerChanged) {
                         try {
-                            $marker->refreshLonLat();
+                            $marker->refreshLatLon();
                             $marker->save();
                         } catch (\Exception $e) {
                             $message = [
