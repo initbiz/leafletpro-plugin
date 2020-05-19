@@ -191,13 +191,13 @@ abstract class LeafletMapBase extends ComponentBase
 
         $address = new Address();
         $address->setFromArray($data);
-
         $this->resolvedAddress = $resolvedAddress = $this->resolveAddress($address);
         return $resolvedAddress;
     }
 
     protected function resolveAddress(Address $address, AddressResolverInterface $addressResolver = null): Address
     {
+
         if (is_null($addressResolver)) {
             $addressResolver = new AddressResolver();
         }
