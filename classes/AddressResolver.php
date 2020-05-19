@@ -34,8 +34,6 @@ class AddressResolver
      */
     public function resolv(AddressObjectInterface $addressObj)
     {
-        self::validate($addressObj);
-
         $response = $this->resolver->resolv($addressObj);
 
         if (empty($response)) {
@@ -43,28 +41,5 @@ class AddressResolver
         }
 
         return $response;
-    }
-
-    /**
-     * Validates if address object has correct data
-     * @param  AddressObjectInterface $addressObj
-     * @return bool true when validation passes
-     * @throws ValidationException when address object does not pass the validation
-     */
-    public static function validate(AddressObjectInterface $addressObj)
-    {
-        $rules = [
-            'postal_code' => 'alpha_dash',
-            'city' => 'alpha_num',
-            'country' => 'alpha_num',
-        ];
-
-        $validator = Validator::make($addressObj->toArray(), $rules);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
-
-        return true;
     }
 }

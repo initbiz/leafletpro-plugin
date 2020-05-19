@@ -1,18 +1,27 @@
 <?php namespace Initbiz\LeafletPro\Classes;
 
-use Validator;
-use October\Rain\Exception\ApplicationException;
 use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 
 class Address implements AddressObjectInterface
 {
-    protected $street = '';
+    public $street = '';
 
-    protected $postalCode = '';
+    public $postalCode = '';
 
-    protected $city = '';
-    
-    protected $country = '';
+    public $city = '';
+
+    public $country = '';
+
+    public $lon = '';
+
+    public $lat = '';
+
+    /**
+     * When resolver cannot resolve the address we can set this to true
+     *
+     * @var boolean
+     */
+    public $irresolvable = false;
 
     /**
      * {@inheritdoc}
@@ -49,6 +58,37 @@ class Address implements AddressObjectInterface
     /**
      * {@inheritdoc}
      */
+    public function getLon(): string
+    {
+        return $this->lon ?? '';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLat(): string
+    {
+        return $this->lat ?? '';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLatLon(): ?string
+    {
+        $lat = $this->getLat();
+        $lon = $this->getLon();
+
+        if (!empty($lat) && !empty($lon)) {
+            return $lat . ', ' . $lon;
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function toArray()
     {
         return [
@@ -56,6 +96,8 @@ class Address implements AddressObjectInterface
             'city' => $this->getCity(),
             'postal_code' => $this->getPostalCode(),
             'street' => $this->getStreet(),
+            'lon' => $this->getLon(),
+            'lat' => $this->getLat(),
         ];
     }
 
@@ -75,6 +117,8 @@ class Address implements AddressObjectInterface
         $this->setCity($data['city'] ?? '');
         $this->setPostalCode($data['postalCode'] ?? '');
         $this->setStreet($data['street'] ?? '');
+        $this->setLon($data['lon'] ?? '');
+        $this->setLat($data['lat'] ?? '');
     }
 
     /**
@@ -115,6 +159,26 @@ class Address implements AddressObjectInterface
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    /**
+     * Set the value of lon
+     *
+     * @return  self
+     */
+    public function setLon($lon)
+    {
+        $this->lon = $lon;
+    }
+
+    /**
+     * Set the value of lat
+     *
+     * @return  self
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
     }
 
     /**

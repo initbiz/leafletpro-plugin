@@ -31,7 +31,7 @@ class Markers extends Controller
         BackendMenu::setContext('Initbiz.LeafletPro', 'leafletpro-main-menu', 'leafletpro-side-menu-markers');
     }
 
-    public function onLonLatRefresh()
+    public function onLatLonRefresh()
     {
         $markerInputs = Request::input('Marker');
 
@@ -43,8 +43,8 @@ class Markers extends Controller
             $marker->country()->associate($country);
         }
 
-        $marker->refreshLonLat();
+        $marker->refreshLatLon();
 
-        return $marker->getLonLat();
+        return $marker->getLatLon();
     }
 }
