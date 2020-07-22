@@ -3,6 +3,7 @@
 namespace Initbiz\LeafletPro\Components;
 
 use Initbiz\LeafletPro\Models\Marker;
+use Initbiz\LeafletPro\Classes\Address;
 use Initbiz\LeafletPro\Components\LeafletMapBase;
 
 class SingleMarkerMap extends LeafletMapBase
@@ -33,7 +34,13 @@ class SingleMarkerMap extends LeafletMapBase
                     'id'   => 'initbiz.leafletpro::lang.components.single_marker_map.find_by_id',
                     'name' => 'initbiz.leafletpro::lang.components.single_marker_map.find_by_name',
                 ],
-            ]
+            ],
+            'centerToMarker' => [
+                'title'             => 'initbiz.leafletpro::lang.components.single_marker_map.center_to_marker',
+                'description'       => 'initbiz.leafletpro::lang.components.single_marker_map.center_to_marker_description',
+                'default'           => '1',
+                'type'              => 'checkbox',
+            ],
         ];
     }
 
@@ -57,6 +64,13 @@ class SingleMarkerMap extends LeafletMapBase
 
         if (!$this->getOverriding && !empty($this->markers)) {
             $centerLatLon = $this->markers->first()->getLatLon();
+        }
+
+        if ($this->property('centerToMarker') == 1) {
+            $resolvedAddress = $this->makeMarkers();
+            $lat = $resolvedAddress[0]['lat'];
+            $lon = $resolvedAddress[0]['lon'];
+            $centerLatLon = $lat.', '.$lon;
         }
 
         return $centerLatLon;
