@@ -23,6 +23,8 @@
             'description' => 'Render map with one marker on it',
             'marker_title' => 'Marker',
             'marker_description' => 'Marker to display on map',
+            'marker_title' => 'Center to marker',
+            'marker_description' => 'Center of the map to marker',
             'find_by_title' => 'Find marker by',
             'find_by_description' => 'Use this parameter to find the marker',
             'find_by_id' => 'ID',
