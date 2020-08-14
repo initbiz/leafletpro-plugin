@@ -68,12 +68,6 @@ abstract class LeafletMapBase extends ComponentBase
     public function leafletProperties()
     {
         $properties = [
-            'centerLatLon' => [
-                'title'             => 'initbiz.leafletpro::lang.components.center_lon_lat',
-                'description'		=> 'initbiz.leafletpro::lang.components.center_lon_lat_desc',
-                'type'              => 'string',
-                'default'			=> '51.505, -0.09'
-            ],
             'initialZoom' => [
                 'title'             => 'initbiz.leafletpro::lang.components.zoom_title',
                 'description'		=> 'initbiz.leafletpro::lang.components.zoom_description',
@@ -146,21 +140,6 @@ abstract class LeafletMapBase extends ComponentBase
         return Marker::published()->get();
     }
 
-    public function makeInitialCenterLatLon()
-    {
-        $centerLatLon = $this->property('centerLatLon');
-
-        if ($this->getOverriding) {
-            $resolvedAddress = $this->makeResolvedAddress();
-            $LatLon = $resolvedAddress->getLatLon();
-            if (!empty($LatLon)) {
-                $centerLatLon = $LatLon;
-            }
-        }
-
-        return $centerLatLon;
-    }
-
     public function makeInitialZoom()
     {
         $initialZoom = $this->property('initialZoom');
@@ -193,6 +172,10 @@ abstract class LeafletMapBase extends ComponentBase
         $address->setFromArray($data);
         $this->resolvedAddress = $resolvedAddress = $this->resolveAddress($address);
         return $resolvedAddress;
+    }
+
+    public function makeInitialCenterLatLon()
+    {
     }
 
     protected function resolveAddress(Address $address, AddressResolverInterface $addressResolver = null): Address

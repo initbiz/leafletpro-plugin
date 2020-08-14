@@ -53,8 +53,6 @@ class SingleMarkerMap extends LeafletMapBase
 
     public function makeInitialCenterLatLon()
     {
-        $centerLatLon = parent::makeInitialCenterLatLon();
-
         if (!$this->getOverriding && !empty($this->markers)) {
             $centerLatLon = $this->markers->first()->getLatLon();
         }

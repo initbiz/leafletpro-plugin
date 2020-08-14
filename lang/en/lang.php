@@ -4,8 +4,6 @@
         'description' => 'Use Leaflet service fully featured',
     ],
     'components' => [
-        'center_lon_lat' => 'Lon and lat of center',
-        'center_lon_lat_desc' => 'Longitude and latitude of center of the map',
         'zoom_title' => 'Initial zoom',
         'zoom_description' => 'Initial zoom of the map',
         'zoom_validation_message' => 'The value must be an integer',
@@ -17,6 +15,8 @@
             'name' => 'Leaflet map',
             'description' => 'Embed Leaflet map',
             'plugins_group' => 'Leaflet plugins',
+            'center_lon_lat' => 'Lon and lat of center',
+            'center_lon_lat_desc' => 'Longitude and latitude of center of the map',
         ],
         'single_marker_map' => [
             'name' => 'Map with single marker',

@@ -14,6 +14,18 @@ class LeafletMap extends LeafletMapBase
         ];
     }
 
+    public function defineProperties()
+    {
+        return $this->leafletProperties() + [
+            'centerLatLon' => [
+                'title'             => 'initbiz.leafletpro::lang.components.leafletmap.center_lon_lat',
+                'description'       => 'initbiz.leafletpro::lang.components.leafletmap.center_lon_lat_desc',
+                'type'              => 'string',
+                'default'           => '51.505, -0.09'
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -31,5 +43,21 @@ class LeafletMap extends LeafletMapBase
         ];
 
         return $plugins;
+    }
+
+
+    public function makeInitialCenterLatLon()
+    {
+        $centerLatLon = $this->property('centerLatLon');
+
+        if ($this->getOverriding) {
+            $resolvedAddress = $this->makeResolvedAddress();
+            $LatLon = $resolvedAddress->getLatLon();
+            if (!empty($LatLon)) {
+                $centerLatLon = $LatLon;
+            }
+        }
+
+        return $centerLatLon;
     }
 }
