@@ -46,17 +46,20 @@ class SingleMarkerMap extends LeafletMapBase
     {
         $marker = Marker::where($this->property('findBy'), $this->property('marker'))->first();
 
-        $markers = collect($marker);
+        $markers = collect();
+
+        if (!empty($marker)) {
+            $markers = $markers->push($marker);
+        }
 
         return $markers;
     }
 
     public function makeInitialCenterLatLon()
     {
-        $centerLatLon = parent::makeInitialCenterLatLon();
-
-        if (!$this->getOverriding && !empty($this->markers)) {
-            $centerLatLon = $this->markers->first()->getLatLon();
+        $centerLatLon = null;
+        if (!$this->getOverriding & !empty($this->markers)) {
+            $centerLatLon = $this->markers->first()->getLatLon(', ');
         }
 
         return $centerLatLon;

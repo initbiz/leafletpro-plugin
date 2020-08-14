@@ -68,12 +68,6 @@ abstract class LeafletMapBase extends ComponentBase
     public function leafletProperties()
     {
         $properties = [
-            'centerLatLon' => [
-                'title'             => 'initbiz.leafletpro::lang.components.center_lon_lat',
-                'description'		=> 'initbiz.leafletpro::lang.components.center_lon_lat_desc',
-                'type'              => 'string',
-                'default'			=> '51.505, -0.09'
-            ],
             'initialZoom' => [
                 'title'             => 'initbiz.leafletpro::lang.components.zoom_title',
                 'description'		=> 'initbiz.leafletpro::lang.components.zoom_description',
@@ -130,13 +124,13 @@ abstract class LeafletMapBase extends ComponentBase
 
         $this->getOverriding = ($this->property('getOverriding') === '1') ? true : false;
 
-        $this->centerLatLon = $this->makeInitialCenterLatLon();
         $this->initialZoom = $this->makeInitialZoom();
 
         // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
         $this->scrollProtection = ($this->property('scrollProtection') === "0") ? 'enable' : 'disable';
 
         $this->markers = $this->makeMarkers();
+        $this->centerLatLon = $this->makeInitialCenterLatLon();
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
     }
@@ -144,21 +138,6 @@ abstract class LeafletMapBase extends ComponentBase
     public function makeMarkers()
     {
         return Marker::published()->get();
-    }
-
-    public function makeInitialCenterLatLon()
-    {
-        $centerLatLon = $this->property('centerLatLon');
-
-        if ($this->getOverriding) {
-            $resolvedAddress = $this->makeResolvedAddress();
-            $LatLon = $resolvedAddress->getLatLon();
-            if (!empty($LatLon)) {
-                $centerLatLon = $LatLon;
-            }
-        }
-
-        return $centerLatLon;
     }
 
     public function makeInitialZoom()
@@ -193,6 +172,10 @@ abstract class LeafletMapBase extends ComponentBase
         $address->setFromArray($data);
         $this->resolvedAddress = $resolvedAddress = $this->resolveAddress($address);
         return $resolvedAddress;
+    }
+
+    public function makeInitialCenterLatLon()
+    {
     }
 
     protected function resolveAddress(Address $address, AddressResolverInterface $addressResolver = null): Address
