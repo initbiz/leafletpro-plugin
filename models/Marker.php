@@ -199,13 +199,13 @@ class Marker extends Model implements AddressObjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getLatLon(): string
+    public function getLatLon(string $delimiter = ' '): string
     {
         $lat = $this->getLat();
         $lon = $this->getLon();
 
         if (!empty($lat) && !empty($lon)) {
-            return $lat . ' ' . $lon;
+            return $lat . $delimiter . $lon;
         }
     }
 }

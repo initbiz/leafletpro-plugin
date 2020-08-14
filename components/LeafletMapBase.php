@@ -124,13 +124,13 @@ abstract class LeafletMapBase extends ComponentBase
 
         $this->getOverriding = ($this->property('getOverriding') === '1') ? true : false;
 
-        $this->centerLatLon = $this->makeInitialCenterLatLon();
         $this->initialZoom = $this->makeInitialZoom();
 
         // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
         $this->scrollProtection = ($this->property('scrollProtection') === "0") ? 'enable' : 'disable';
 
         $this->markers = $this->makeMarkers();
+        $this->centerLatLon = $this->makeInitialCenterLatLon();
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
     }
