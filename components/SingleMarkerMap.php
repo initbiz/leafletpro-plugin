@@ -48,7 +48,6 @@ class SingleMarkerMap extends LeafletMapBase
     public function makeMarkers()
     {
         $marker = Marker::where($this->property('findBy'), $this->property('marker'))->first();
-        dd($this->property('marker'));
 
         $markers = collect();
 
