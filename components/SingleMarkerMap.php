@@ -2,6 +2,7 @@
 
 namespace Initbiz\LeafletPro\Components;
 
+use Request;
 use Initbiz\LeafletPro\Models\Marker;
 use Initbiz\LeafletPro\Components\LeafletMapBase;
 
@@ -18,12 +19,6 @@ class SingleMarkerMap extends LeafletMapBase
     public function defineProperties()
     {
         return $this->leafletProperties() + [
-            'marker' => [
-                'title'             => 'initbiz.leafletpro::lang.components.single_marker_map.marker_title',
-                'description'       => 'initbiz.leafletpro::lang.components.single_marker_map.marker_description',
-                'default'           => 'true',
-                'type'              => 'dropdown',
-            ],
             'findBy' => [
                 'title'             => 'initbiz.leafletpro::lang.components.single_marker_map.find_by_title',
                 'description'       => 'initbiz.leafletpro::lang.components.single_marker_map.find_by_description',
@@ -33,18 +28,27 @@ class SingleMarkerMap extends LeafletMapBase
                     'id'   => 'initbiz.leafletpro::lang.components.single_marker_map.find_by_id',
                     'name' => 'initbiz.leafletpro::lang.components.single_marker_map.find_by_name',
                 ],
-            ]
+            ],
+            'marker' => [
+                'title'             => 'initbiz.leafletpro::lang.components.single_marker_map.marker_title',
+                'description'       => 'initbiz.leafletpro::lang.components.single_marker_map.marker_description',
+                'default'           => 'true',
+                'depends'           => ['findBy'],
+                'type'              => 'dropdown',
+            ],
         ];
     }
 
     public function getMarkerOptions()
     {
-        return Marker::published()->get()->pluck('name', 'id')->toArray();
+        $findBy = Request::input('findBy');
+        return Marker::published()->get()->pluck('name', $findBy)->toArray();
     }
 
     public function makeMarkers()
     {
         $marker = Marker::where($this->property('findBy'), $this->property('marker'))->first();
+        dd($this->property('marker'));
 
         $markers = collect();
 
