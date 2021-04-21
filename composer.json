@@ -1,17 +1,23 @@
 {
-  "name": "initbiz/oc-leafletpro-plugin",
-  "type": "october-plugin",
-  "description": "October CMS plugin that helps using Leaflet maps",
-  "homepage": "https://www.init.biz",
-  "keywords": ["october", "octobercms", "javascript", "leaflet", "map"],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Tomasz Strojny",
-      "email": "tomasz@init.biz"
+    "name": "initbiz/leafletpro-plugin",
+    "type": "october-plugin",
+    "description": "October CMS plugin that helps using Leaflet maps",
+    "homepage": "https://init.biz",
+    "keywords": [
+        "october",
+        "octobercms",
+        "javascript",
+        "leaflet",
+        "map"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomasz Strojny",
+            "email": "tomasz@init.biz"
+        }
+    ],
+    "require": {
+        "maxh/php-nominatim": "dev-master"
     }
-  ],
-  "require": {
-    "maxh/php-nominatim": "dev-master"
-  }
 }
