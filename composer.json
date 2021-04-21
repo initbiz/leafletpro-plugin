@@ -18,6 +18,8 @@
         }
     ],
     "require": {
+        "rainlab/location-plugin": "dev-master",
+        "october/drivers-plugin": "dev-master",
         "maxh/php-nominatim": "dev-master"
     }
 }
