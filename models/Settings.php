@@ -1,7 +1,9 @@
-<?php namespace Initbiz\LeafletPro\Models;
+<?php
+
+namespace Initbiz\LeafletPro\Models;
 
 use Model;
-use System\Classes\MediaLibrary;
+use Media\Classes\MediaLibrary;
 
 /**
  * GeneralSettings Model

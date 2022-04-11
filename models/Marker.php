@@ -2,13 +2,11 @@
 
 namespace Initbiz\LeafletPro\Models;
 
-use Lang;
 use Model;
 use Cms\Classes\Theme;
 use RainLab\Location\Models\Country;
 use Initbiz\CumulusCore\Models\Cluster;
 use Initbiz\LeafletPro\Classes\AddressResolver;
-use October\Rain\Exception\ApplicationException;
 use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 

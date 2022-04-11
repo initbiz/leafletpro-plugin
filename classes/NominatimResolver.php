@@ -1,4 +1,6 @@
-<?php namespace Initbiz\LeafletPro\Classes;
+<?php
+
+namespace Initbiz\LeafletPro\Classes;
 
 use maxh\Nominatim\Nominatim;
 use Initbiz\LeafletPro\Models\Settings;
@@ -36,7 +38,7 @@ class NominatimResolver implements AddressResolverInterface
      * Sets polygon for Nominatim
      * @param string $polygon [description]
      */
-    public function setPolygon(string $polygon='geojson')
+    public function setPolygon(string $polygon = 'geojson')
     {
         $this->polygon = $polygon;
     }
@@ -73,10 +75,10 @@ class NominatimResolver implements AddressResolverInterface
         }
 
         $search = $search
-                ->city($addressObj->getCity())
-                ->street($addressObj->getStreet())
-                ->polygon($this->polygon)
-                ->addressDetails();
+            ->city($addressObj->getCity())
+            ->street($addressObj->getStreet())
+            ->polygon($this->polygon)
+            ->addressDetails();
 
         return $search;
     }

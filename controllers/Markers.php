@@ -1,4 +1,6 @@
-<?php namespace Initbiz\LeafletPro\Controllers;
+<?php
+
+namespace Initbiz\LeafletPro\Controllers;
 
 use Request;
 use BackendMenu;

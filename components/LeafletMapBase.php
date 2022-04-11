@@ -1,4 +1,6 @@
-<?php namespace Initbiz\LeafletPro\Components;
+<?php
+
+namespace Initbiz\LeafletPro\Components;
 
 use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
@@ -70,10 +72,10 @@ abstract class LeafletMapBase extends ComponentBase
         $properties = [
             'initialZoom' => [
                 'title'             => 'initbiz.leafletpro::lang.components.zoom_title',
-                'description'		=> 'initbiz.leafletpro::lang.components.zoom_description',
+                'description'        => 'initbiz.leafletpro::lang.components.zoom_description',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => 'initbiz.leafletpro::lang.components.zoom_validation_message',
-                'default'			=> '12'
+                'default'            => '12'
             ],
             'scrollProtection' => [
                 'title'             => 'initbiz.leafletpro::lang.components.scroll_protection_title',
@@ -113,7 +115,7 @@ abstract class LeafletMapBase extends ComponentBase
                 if (isset($pluginDef['jsPath'])) {
                     $leafletJs[] = $pluginDef['jsPath'];
                 }
-                if (isset($pluginDef['cssPath'])){
+                if (isset($pluginDef['cssPath'])) {
                     $leafletCss[] = $pluginDef['cssPath'];
                 }
             }

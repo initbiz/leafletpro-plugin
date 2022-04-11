@@ -1,6 +1,7 @@
-<?php namespace Initbiz\LeafletPro;
+<?php
 
-use Backend;
+namespace Initbiz\LeafletPro;
+
 use System\Classes\PluginBase;
 
 /**
