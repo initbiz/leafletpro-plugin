@@ -51,7 +51,8 @@ class Marker extends Model implements AddressObjectInterface
     public function filterFields($fields, $context = null)
     {
         // When Cluster selected automatically set the marker's params based on the cluster's ones
-        if (isset($fields->cluster_id) && $fields->cluster_id->value !== null) {
+        if (isset($fields->cluster_id) && !empty($fields->cluster_id->value)) {
+
             $cluster = Cluster::find($fields->cluster_id->value);
 
             if (empty($fields->name->value)) {
