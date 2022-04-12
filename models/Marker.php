@@ -15,6 +15,7 @@ use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
  */
 class Marker extends Model implements AddressObjectInterface
 {
+    use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\Nullable;
     use \System\Traits\ViewMaker;
 
@@ -22,6 +23,12 @@ class Marker extends Model implements AddressObjectInterface
      * @var string The database table used by the model.
      */
     public $table = 'initbiz_leafletpro_markers';
+
+    public $rules = [
+        'name' => 'required',
+        'lat' => 'required|numeric',
+        'lon' => 'required|numeric'
+    ];
 
     /**
      * @var array Guarded fields

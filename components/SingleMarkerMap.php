@@ -3,6 +3,7 @@
 namespace Initbiz\LeafletPro\Components;
 
 use Request;
+use Illuminate\Support\Str;
 use Initbiz\LeafletPro\Models\Marker;
 use Initbiz\LeafletPro\Components\LeafletMapBase;
 
@@ -62,7 +63,9 @@ class SingleMarkerMap extends LeafletMapBase
     {
         $centerLatLon = null;
         if (!$this->getOverriding & !empty($this->markers)) {
-            $centerLatLon = $this->markers->first()->getLatLon(', ');
+            $lat = str_replace(',', '.', $this->markers->first()->getLat());
+            $lon = str_replace(',', '.', $this->markers->first()->getLon());
+            $centerLatLon = $lat . ',' . $lon;
         }
 
         return $centerLatLon;
