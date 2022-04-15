@@ -5,23 +5,3 @@
 {% partial __SELF__ ~ '::markers' markers=markers plugins=activeLeafletPlugins mapVar=mapVar %}
 
 {% partial __SELF__ ~ '::plugins' plugins=activeLeafletPlugins mapVar=mapVar %}
-
-
-<div id="map" class="leaflet-map" style="height: 180px"></div>
-{# put scripts #}
-var markerLat = '{{ __SELF__.markers.first.lat }}'.replace(',', '.');
-var markerLon = '{{ __SELF__.markers.first.lon }}'.replace(',', '.');
-    var map = L.map('map', {
-        center: [ markerLat, markerLon],
-        zoom: 13
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '{% partial __SELF__ ~ "::attribution" %}',
-        maxZoom: 18
-    }).addTo(map);
-
-    L.marker([markerLat, markerLon])
-        .addTo(map)
-        .bindPopup('{{ marker.popup_content |replace({"\n": " ","\r": " ",  "\t": " "})|raw }}');
-{# endput #}
