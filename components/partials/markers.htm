@@ -6,6 +6,7 @@
         iconSize: [40, 40],
     });
     L.Marker.prototype.options.icon = defaultIcon;
+    {% endif %}
 
     {% if 'markercluster' in plugins %}
     var markers = L.markerClusterGroup();
@@ -20,5 +21,4 @@
 
     {{ mapVar }}.addLayer(markers)
 </script>
-{% endif %}
 {% endput %}

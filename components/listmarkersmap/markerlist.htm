@@ -1,21 +1,23 @@
-{% for group in groups %}
-<h3>{{ group.name }}</h3>
-<ul>
-    {% for marker in group.markers %}
-    <li>
-        <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</li>
-    </li>
+<div class="marker-group">
+    {% for group in groups %}
+    <h3>{{ group.name }}</h3>
+    <ul>
+        {% for marker in group.markers %}
+        <li>
+            <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</li>
+        </li>
+        {% endfor %}
+    </ul>
     {% endfor %}
-</ul>
-{% endfor %}
 
-<ul>
-{% for marker in markersWithoutGroup %}
-    <li>
-        <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</li>
-    </li>
-{% endfor %}
-</ul>
+    <ul>
+    {% for marker in markersWithoutGroup %}
+        <li>
+            <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</li>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
 
 
 {% put scripts %}
@@ -24,4 +26,25 @@
             {{ mapVar }}.setView(new L.LatLng(lat, lon), {{ zoomOnClick }});
         }
     </script>
+{% endput %}
+{% put styles %}
+<style>
+    .marker-group {
+        width: 300px;
+    }
+    .marker-group h3 {
+        padding: 10px;
+        font-size: 24px;
+    }
+    .marker-group ul li {
+        background-color: #fafafa;
+        padding: 10px;
+    }
+    .marker-group ul li:hover {
+        background-color: #eee;
+    }
+    .marker-group ul li a{
+        display: block;
+    }
+</style>
 {% endput %}
