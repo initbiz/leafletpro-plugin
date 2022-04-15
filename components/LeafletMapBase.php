@@ -3,7 +3,6 @@
 namespace Initbiz\LeafletPro\Components;
 
 use Cms\Classes\ComponentBase;
-use Initbiz\Leafletpro\Models\Group;
 use Initbiz\LeafletPro\Models\Marker;
 use Initbiz\LeafletPro\Classes\Address;
 use Initbiz\LeafletPro\Models\Settings;
