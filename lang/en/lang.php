@@ -30,7 +30,8 @@
         ],
         'list_markers_map' => [
             'name' => 'List markers',
-            'description' => 'Render map and displays a list of markers divided into groups'
+            'description' => 'Render map and displays a list of markers divided into groups',
+            'ungrouped' => 'Ungrouped'
         ]
     ],
     'exceptions' => [

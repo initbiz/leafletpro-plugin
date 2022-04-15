@@ -7,19 +7,11 @@ class ListMarkersMap extends LeafletMap
     public $zoomOnClick;
 
     /**
-     * Collection of Markers
+     * Collection of Groups
      *
      * @var Collection
      */
-    public $markers;
-
-    /**
-     * Collection of Markers without group
-     *
-     * @var Collection
-     */
-    public $markersWithoutGroup;
-
+    public $groups;
 
     public function componentDetails()
     {
@@ -47,8 +39,18 @@ class ListMarkersMap extends LeafletMap
 
         $this->zoomOnClick = $this->property('zoomOnClick', 17);
         $this->groups = $this->getGroups();
-        $this->markersWithoutGroup = $this->getMarkersWithoutGroup();
-
+        $test = 'asd';
     }
 
+    /**
+     * Get groups
+     *
+     * @return Collection
+     */
+    public function getGroups()
+    {
+        return $this->markers->groupBy(function ($marker) {
+            return $marker->group->slug ?? 'ungrouped';
+        });
+    }
 }

@@ -30,6 +30,13 @@ abstract class LeafletMapBase extends ComponentBase
     public $initialZoom = '12';
 
     /**
+     * Collection of Markers
+     *
+     * @var Collection
+     */
+    public $markers;
+
+    /**
      * Protection of scrolling while pointing mouse on the map
      * need click to start using zoom
      *
@@ -147,27 +154,7 @@ abstract class LeafletMapBase extends ComponentBase
      */
     public function getMarkers()
     {
-        return Marker::published()->get();
-    }
-
-    /**
-     * Get groups
-     *
-     * @return Collection
-     */
-    public function getGroups()
-    {
-        return Group::get();
-    }
-
-    /**
-     * Get published markers without group
-     *
-     * @return Collection
-     */
-    public function getMarkersWithoutGroup()
-    {
-        return Marker::whereNull('group_id')->published()->get();
+        return Marker::with('group')->published()->get();
     }
 
     public function makeInitialZoom()

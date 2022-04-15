@@ -1,22 +1,14 @@
 <div class="marker-group">
-    {% for group in groups %}
-    <h3>{{ group.name }}</h3>
+    {% for groupSlug,markers in groups %}
+    <h3>{{ markers.first.group.name ?? 'initbiz.leafletpro::lang.components.list_markers_map.ungrouped'|trans }}</h3>
     <ul>
-        {% for marker in group.markers %}
+        {% for marker in markers %}
         <li>
-            <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</li>
+            <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</a>
         </li>
         {% endfor %}
     </ul>
     {% endfor %}
-
-    <ul>
-    {% for marker in markersWithoutGroup %}
-        <li>
-            <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</li>
-        </li>
-    {% endfor %}
-    </ul>
 </div>
 
 
