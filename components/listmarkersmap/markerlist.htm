@@ -1,0 +1,18 @@
+{% for group in groups %}
+<h3>{{ group.name }}</h3>
+<ul>
+    {% for marker in group.markers %}
+    <li>
+        <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</li>
+    </li>
+    {% endfor %}
+</ul>
+{% endfor %}
+
+{% put scripts %}
+    <script>
+        window.centerTo = function(lat, lon) {
+            {{ mapVar }}.setView(new L.LatLng(lat, lon), {{ zoomOnClick }});
+        }
+    </script>
+{% endput %}

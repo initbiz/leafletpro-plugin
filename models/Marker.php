@@ -52,7 +52,10 @@ class Marker extends Model implements AddressObjectInterface
         'country' => [
             Country::class,
             'table' => 'rainlab_location_countries',
-        ]
+        ],
+        'group' => [
+            Group::class
+        ],
     ];
 
     public function filterFields($fields, $context = null)
@@ -87,6 +90,17 @@ class Marker extends Model implements AddressObjectInterface
         }
     }
 
+    public function beforeSave()
+    {
+        $markerIcon = null;
+        if ($this->marker_icon_from === 'url') {
+            $markerIcon = $this->getOriginalPurgeValue('marker_icon_url');
+        } elseif ($this->marker_icon_from === 'media') {
+            $markerIcon = $this->getOriginalPurgeValue('marker_icon_media');
+        }
+        $this->marker_icon = $markerIcon;
+    }
+
     public function afterSave()
     {
         // When popup content empty after save than seed it with contents of _default_popup_content partial
@@ -101,6 +115,20 @@ class Marker extends Model implements AddressObjectInterface
     public function getCountryIdOptions()
     {
         return Country::getNameList();
+    }
+
+    public function getMarkerIconUrlAttribute()
+    {
+        if ($this->marker_icon_from === 'url') {
+            return $this->marker_icon;
+        }
+    }
+
+    public function getMarkerIconMediaAttribute()
+    {
+        if ($this->marker_icon_from === 'media') {
+            return $this->marker_icon;
+        }
     }
 
     /**

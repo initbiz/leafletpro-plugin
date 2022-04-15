@@ -28,6 +28,10 @@
             'find_by_id' => 'ID',
             'find_by_name' => 'Name',
         ],
+        'list_markers_map' => [
+            'name' => 'List markers',
+            'description' => 'Render map and displays a list of markers divided into groups'
+        ]
     ],
     'exceptions' => [
         'address_resolver_empty_response' => 'Address resolver returned empty value',
@@ -41,6 +45,7 @@
     'navigation' => [
         'main' => 'Leaflet maps',
         'markers' => 'Markers',
+        'groups' => 'Groups',
     ],
     'permissions' => [
         'leafletpro' => 'Leaflet Pro',
@@ -64,6 +69,33 @@
         'delete_confirm' => 'Are you sure you want to remove the marker?',
         'cluster' => 'Cluster',
         'cluster_comment' => 'After you select cluster empty address fields will be seeded with the cluster\'s address',
+        'marker' => 'Marker',
+        'group' => 'Group',
+        'group_empty_option' => 'Group not selected'
+    ],
+    'group' => [
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'description' => 'Description',
+        'marker_icon_from' => 'Where to get default icon from',
+        'marker_icon_from_url' => 'URL',
+        'marker_icon_from_media' => 'Media',
+        'marker_icon_url' => 'Type the path of the icon',
+        'marker_icon_media' => 'Select the icon from the mediafinder',
+        'new' => 'New Group',
+        'label' => 'Group',
+        'create_title' => 'Create Group',
+        'update_title' => 'Edit Group',
+        'preview_title' => 'Preview Group',
+        'list_title' => 'Manage Groups',
+    ],
+    'groups' => [
+        'delete_selected_confirm' => 'Delete the selected Groups?',
+        'menu_label' => 'Groups',
+        'return_to_list' => 'Return to Groups',
+        'delete_confirm' => 'Do you really want to delete this Group?',
+        'delete_selected_success' => 'Successfully deleted the selected Groups.',
+        'delete_selected_empty' => 'There are no selected Groups to delete.',
     ],
     'settings' => [
         'menu_category' => 'Leaflet Maps',
@@ -78,5 +110,5 @@
         'resolvers_tab' => 'Resolvers',
         'nominatim_url' => 'URL of Nominatim service',
         'nominatim_url_comment' => 'Read more info about Nominatim service <a href="https://operations.osmfoundation.org/policies/nominatim/" target="_blank">here</a>',
-    ]
+    ],
 ];

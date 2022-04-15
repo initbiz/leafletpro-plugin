@@ -36,6 +36,10 @@ secondaryTabs:
         is_published:
             label: 'initbiz.leafletpro::lang.marker.is_published'
             type: switch
+        group:
+            label: 'initbiz.leafletpro::lang.marker.group'
+            type: relation
+            emptyOption: 'initbiz.leafletpro::lang.marker.group_empty_option'
         refresh_lon_lat_button:
             label: 'initbiz.leafletpro::lang.marker.refresh_lon_lat_label'
             type: partial

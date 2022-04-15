@@ -1,0 +1,13 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+markers:
+    label: 'initbiz.leafletpro::lang.marker.marker'
+    view:
+        list: $/initbiz/leafletpro/models/marker/columns.yaml
+        toolbarButtons: create|add|remove
+        showSearch: true
+    manage:
+            form: $/initbiz/leafletpro/models/marker/fields.yaml
+            recordsPerPage: 10

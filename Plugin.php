@@ -21,6 +21,7 @@ class Plugin extends PluginBase
         return [
             'Initbiz\LeafletPro\Components\LeafletMap'      => 'leafletmap',
             'Initbiz\LeafletPro\Components\SingleMarkerMap' => 'singleMarkerMap',
+            'Initbiz\LeafletPro\Components\ListMarkersMap'  => 'ListMarkersMap',
         ];
     }
 

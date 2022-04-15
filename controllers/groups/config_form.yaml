@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: initbiz.leafletpro::lang.group.label
+
+# Model Form Field configuration
+form: $/initbiz/leafletpro/models/group/fields.yaml
+
+# Model Class name
+modelClass: Initbiz\Leafletpro\Models\Group
+
+# Default redirect location
+defaultRedirect: initbiz/leafletpro/groups
+
+# Create page
+create:
+    title: initbiz.leafletpro::lang.group.create_title
+    redirect: initbiz/leafletpro/groups/update/:id
+    redirectClose: initbiz/leafletpro/groups
+
+# Update page
+update:
+    title: initbiz.leafletpro::lang.group.update_title
+    redirect: initbiz/leafletpro/groups
+    redirectClose: initbiz/leafletpro/groups
+
+# Preview page
+preview:
+    title: initbiz.leafletpro::lang.group.preview_title
