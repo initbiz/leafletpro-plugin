@@ -6,4 +6,4 @@
 
 {% partial __SELF__ ~ '::plugins' plugins=activeLeafletPlugins mapVar=mapVar %}
 
-{% partial '@markerlist.htm' groups=__SELF__.groups mapVar=mapVar zoomOnClick=__SELF__.zoomOnClick %}
+{% partial '@markerlist.htm' groups=__SELF__.groups mapVar=mapVar zoomOnClick=__SELF__.zoomOnClick markersWithoutGroup=__SELF__.markersWithoutGroup %}

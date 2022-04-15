@@ -37,6 +37,13 @@ abstract class LeafletMapBase extends ComponentBase
     public $markers;
 
     /**
+     * Collection of Markers without group
+     *
+     * @var Collection
+     */
+    public $markersWithoutGroup;
+
+    /**
      * Protection of scrolling while pointing mouse on the map
      * need click to start using zoom
      *
@@ -135,6 +142,7 @@ abstract class LeafletMapBase extends ComponentBase
 
         $this->markers = $this->getMarkers();
         $this->groups = $this->getGroups();
+        $this->markersWithoutGroup = $this->getMarkersWithoutGroup();
         $this->centerLatLon = $this->makeInitialCenterLatLon();
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
@@ -166,6 +174,16 @@ abstract class LeafletMapBase extends ComponentBase
     public function getGroups()
     {
         return Group::get();
+    }
+
+    /**
+     * Get published markers without group
+     *
+     * @return Collection
+     */
+    public function getMarkersWithoutGroup()
+    {
+        return Marker::whereNull('group_id')->published()->get();
     }
 
     public function makeInitialZoom()

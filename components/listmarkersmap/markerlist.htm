@@ -9,6 +9,15 @@
 </ul>
 {% endfor %}
 
+<ul>
+{% for marker in markersWithoutGroup %}
+    <li>
+        <a onclick="centerTo({{ marker.lat }}, {{ marker.lon }})" href="javascript:void(0)">{{ marker.name }}</li>
+    </li>
+{% endfor %}
+</ul>
+
+
 {% put scripts %}
     <script>
         window.centerTo = function(lat, lon) {

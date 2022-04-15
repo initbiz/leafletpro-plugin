@@ -15,8 +15,7 @@
 
     {% for marker in __SELF__.markers %}
     {% set popupContent = marker.popup_content|replace({"\n": " ","\r": " ",  "\t": " "}) %}
-    var marker = L.marker([{{ marker.lat }}, {{ marker.lon }}]).bindPopup('{{ popupContent|raw }}');
-    markers.addLayer(marker);
+    markers.addLayer(L.marker([{{ marker.lat }}, {{ marker.lon }}]).bindPopup('{{ popupContent|raw }}'));
     {% endfor %}
 
     {{ mapVar }}.addLayer(markers)
