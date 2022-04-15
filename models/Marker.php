@@ -4,6 +4,7 @@ namespace Initbiz\LeafletPro\Models;
 
 use Model;
 use Cms\Classes\Theme;
+use Media\Classes\MediaLibrary;
 use RainLab\Location\Models\Country;
 use Initbiz\CumulusCore\Models\Cluster;
 use Initbiz\LeafletPro\Classes\AddressResolver;
@@ -16,6 +17,7 @@ use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 class Marker extends Model implements AddressObjectInterface
 {
     use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\Purgeable;
     use \October\Rain\Database\Traits\Nullable;
     use \System\Traits\ViewMaker;
 
@@ -44,6 +46,8 @@ class Marker extends Model implements AddressObjectInterface
      * @var array Nullable fields
      */
     protected $nullable = ['cluster_id', 'country_id'];
+
+    protected $purgeable = ['marker_icon_url', 'marker_icon_media'];
 
     /**
      * @var array Relations
@@ -129,6 +133,23 @@ class Marker extends Model implements AddressObjectInterface
         if ($this->marker_icon_from === 'media') {
             return $this->marker_icon;
         }
+    }
+
+
+    public function getIconUrlAttribute()
+    {
+        $markerIcon = null;
+        if (isset($this->marker_icon)) {
+            if ($this->marker_icon_from === 'url') {
+                $markerIcon = $this->marker_icon;
+            } elseif ($this->marker_icon_from === 'media') {
+                $markerIcon = MediaLibrary::url($this->marker_icon);
+            }
+        } elseif ($this->group && $this->group->iconUrl) {
+            $markerIcon = $this->group->iconUrl;
+        }
+
+        return $markerIcon;
     }
 
     /**

@@ -71,7 +71,12 @@
         'cluster_comment' => 'After you select cluster empty address fields will be seeded with the cluster\'s address',
         'marker' => 'Marker',
         'group' => 'Group',
-        'group_empty_option' => 'Group not selected'
+        'group_empty_option' => 'Group not selected',
+        'marker_icon_from' => 'Where to get default icon from',
+        'marker_icon_from_url' => 'URL',
+        'marker_icon_from_media' => 'Media',
+        'marker_icon_url' => 'Type the path of the icon',
+        'marker_icon_media' => 'Select the icon from the mediafinder',
     ],
     'group' => [
         'name' => 'Name',

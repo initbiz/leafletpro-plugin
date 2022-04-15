@@ -30,20 +30,6 @@ abstract class LeafletMapBase extends ComponentBase
     public $initialZoom = '12';
 
     /**
-     * Collection of Markers
-     *
-     * @var Collection
-     */
-    public $markers;
-
-    /**
-     * Collection of Markers without group
-     *
-     * @var Collection
-     */
-    public $markersWithoutGroup;
-
-    /**
      * Protection of scrolling while pointing mouse on the map
      * need click to start using zoom
      *
@@ -141,8 +127,6 @@ abstract class LeafletMapBase extends ComponentBase
         $this->scrollProtection = ($this->property('scrollProtection') === "0") ? 'enable' : 'disable';
 
         $this->markers = $this->getMarkers();
-        $this->groups = $this->getGroups();
-        $this->markersWithoutGroup = $this->getMarkersWithoutGroup();
         $this->centerLatLon = $this->makeInitialCenterLatLon();
 
         $this->page['activeLeafletPlugins'] = $activePlugins;

@@ -3,6 +3,7 @@
 namespace Initbiz\Leafletpro\Models;
 
 use Model;
+use Media\Classes\MediaLibrary;
 
 /**
  * Group Model
@@ -74,6 +75,19 @@ class Group extends Model
         if ($this->marker_icon_from === 'media') {
             return $this->marker_icon;
         }
+    }
+    public function getIconUrlAttribute()
+    {
+        $markerIcon = null;
+        if ($this->marker_icon) {
+            if ($this->marker_icon_from === 'url') {
+                $markerIcon = $this->marker_icon;
+            } elseif ($this->marker_icon_from === 'media') {
+                $markerIcon = MediaLibrary::url($this->marker_icon);
+            }
+        }
+
+        return $markerIcon;
     }
 
     public $hasMany = [

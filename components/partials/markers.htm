@@ -1,11 +1,8 @@
 {% put scripts %}
 <script>
     {% if __SELF__.getMarkerIconUrl() %}
-    let defaultIcon = L.icon({
-        iconUrl: '{{ __SELF__.getMarkerIconUrl() }}',
-        iconSize: [40, 40],
-    });
-    L.Marker.prototype.options.icon = defaultIcon;
+    L.Marker.prototype.options.icon = L.icon({iconUrl: '{{ __SELF__.getMarkerIconUrl() }}', iconSize: [40, 40]});
+    {% endif %}
 
     {% if 'markercluster' in plugins %}
     var markers = L.markerClusterGroup();
@@ -14,11 +11,15 @@
     {% endif %}
 
     {% for marker in __SELF__.markers %}
+
     {% set popupContent = marker.popup_content|replace({"\n": " ","\r": " ",  "\t": " "}) %}
-    markers.addLayer(L.marker([{{ marker.lat }}, {{ marker.lon }}]).bindPopup('{{ popupContent|raw }}'));
+    var marker = L.marker([{{ marker.lat }}, {{ marker.lon }}]).bindPopup('{{ popupContent|raw }}');
+    {% if marker.iconUrl %}
+        marker.setIcon(L.icon({iconUrl: '{{ marker.iconUrl }}', iconSize: [40, 40]}));
+    {% endif %}
+    markers.addLayer(marker);
     {% endfor %}
 
     {{ mapVar }}.addLayer(markers)
 </script>
-{% endif %}
 {% endput %}

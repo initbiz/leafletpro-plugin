@@ -30,6 +30,31 @@ fields:
         emptyOption: 'initbiz.leafletpro::lang.marker.country_empty_option'
         span: left
         type: dropdown
+    marker_icon_from:
+        label: 'initbiz.leafletpro::lang.marker.marker_icon_from'
+        span: right
+        default: media
+        type: balloon-selector
+        options:
+            media: 'initbiz.leafletpro::lang.marker.marker_icon_from_media'
+            url: 'initbiz.leafletpro::lang.marker.marker_icon_from_url'
+    marker_icon_url:
+        label: 'initbiz.leafletpro::lang.marker.marker_icon_url'
+        span: right
+        type: text
+        trigger:
+            action: show
+            field: marker_icon_from
+            condition: value[url]
+    marker_icon_media:
+        label: 'initbiz.leafletpro::lang.marker.marker_icon_media'
+        span: right
+        type: mediafinder
+        trigger:
+            action: show
+            field: marker_icon_from
+            condition: value[media]
+
 
 secondaryTabs:
     fields:
