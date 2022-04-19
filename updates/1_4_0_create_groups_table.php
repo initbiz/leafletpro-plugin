@@ -15,7 +15,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('marker_icon_from', 20)->nullable();
             $table->string('marker_icon')->nullable();
             $table->timestamps();

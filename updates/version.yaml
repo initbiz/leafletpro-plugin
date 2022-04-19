@@ -19,5 +19,5 @@
     - 'Fix marker property'
 1.4.0:
     - 'Added group markers and cleanup code'
-    - create_groups_table.php
-    - add_marker_icon_to_markers_table.php
+    - 1_4_0_create_groups_table.php
+    - 1_4_0_add_marker_icon_to_markers_table.php

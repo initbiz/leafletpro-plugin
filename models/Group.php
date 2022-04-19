@@ -49,6 +49,10 @@ class Group extends Model
         'updated_at'
     ];
 
+    public $hasMany = [
+        'markers' => \Initbiz\LeafletPro\Models\Marker::class
+    ];
+
     protected $purgeable = ['marker_icon_url', 'marker_icon_media'];
 
     public function beforeSave()
@@ -89,8 +93,4 @@ class Group extends Model
 
         return $markerIcon;
     }
-
-    public $hasMany = [
-        'markers' => \Initbiz\LeafletPro\Models\Marker::class
-    ];
 }

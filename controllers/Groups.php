@@ -33,26 +33,6 @@ class Groups extends Controller
         BackendMenu::setContext('Initbiz.LeafletPro', 'leafletpro-main-menu', 'leafletpro-side-menu-groups');
     }
 
-    /**
-     * Deleted checked groups.
-     */
-    public function index_onDelete()
-    {
-        if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
-
-            foreach ($checkedIds as $groupId) {
-                if (!$group = group::find($groupId)) continue;
-                $group->delete();
-            }
-
-            Flash::success(Lang::get('initbiz.leafletpro::lang.groups.delete_selected_success'));
-        } else {
-            Flash::error(Lang::get('initbiz.leafletpro::lang.groups.delete_selected_empty'));
-        }
-
-        return $this->listRefresh();
-    }
-
     public function onLatLonRefresh()
     {
         $markerInputs = Request::input('Marker');
