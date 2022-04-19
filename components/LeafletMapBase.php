@@ -6,6 +6,7 @@ use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
 use Initbiz\LeafletPro\Classes\Address;
 use Initbiz\LeafletPro\Models\Settings;
+use Illuminate\Database\Eloquent\Collection;
 use Initbiz\LeafletPro\Classes\AddressResolver;
 use Initbiz\LeafletPro\Exceptions\EmptyResponse;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
@@ -131,15 +132,28 @@ abstract class LeafletMapBase extends ComponentBase
         // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
         $this->scrollProtection = ($this->property('scrollProtection') === "0") ? 'enable' : 'disable';
 
-        $this->markers = $this->makeMarkers();
+        $this->markers = $this->getMarkers();
         $this->centerLatLon = $this->makeInitialCenterLatLon();
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
     }
 
+    /**
+     * @deprecated
+     */
     public function makeMarkers()
     {
-        return Marker::published()->get();
+        return $this->getMarkers();
+    }
+
+    /**
+     * Get published markers
+     *
+     * @return Collection
+     */
+    public function getMarkers()
+    {
+        return Marker::with('group')->published()->get();
     }
 
     public function makeInitialZoom()

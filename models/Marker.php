@@ -4,6 +4,8 @@ namespace Initbiz\LeafletPro\Models;
 
 use Model;
 use Cms\Classes\Theme;
+use System\Classes\MediaLibrary;
+use Cms\Classes\MediaLibrary;
 use RainLab\Location\Models\Country;
 use Initbiz\CumulusCore\Models\Cluster;
 use Initbiz\LeafletPro\Classes\AddressResolver;
@@ -15,6 +17,8 @@ use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
  */
 class Marker extends Model implements AddressObjectInterface
 {
+    use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\Purgeable;
     use \October\Rain\Database\Traits\Nullable;
     use \System\Traits\ViewMaker;
 
@@ -22,6 +26,12 @@ class Marker extends Model implements AddressObjectInterface
      * @var string The database table used by the model.
      */
     public $table = 'initbiz_leafletpro_markers';
+
+    public $rules = [
+        'name' => 'required',
+        'lat' => 'required|numeric',
+        'lon' => 'required|numeric'
+    ];
 
     /**
      * @var array Guarded fields
@@ -38,6 +48,8 @@ class Marker extends Model implements AddressObjectInterface
      */
     protected $nullable = ['cluster_id', 'country_id'];
 
+    protected $purgeable = ['marker_icon_url', 'marker_icon_media'];
+
     /**
      * @var array Relations
      */
@@ -45,13 +57,17 @@ class Marker extends Model implements AddressObjectInterface
         'country' => [
             Country::class,
             'table' => 'rainlab_location_countries',
-        ]
+        ],
+        'group' => [
+            Group::class
+        ],
     ];
 
     public function filterFields($fields, $context = null)
     {
         // When Cluster selected automatically set the marker's params based on the cluster's ones
-        if (isset($fields->cluster_id) && $fields->cluster_id->value !== null) {
+        if (isset($fields->cluster_id) && !empty($fields->cluster_id->value)) {
+
             $cluster = Cluster::find($fields->cluster_id->value);
 
             if (empty($fields->name->value)) {
@@ -79,6 +95,17 @@ class Marker extends Model implements AddressObjectInterface
         }
     }
 
+    public function beforeSave()
+    {
+        $markerIcon = null;
+        if ($this->marker_icon_from === 'url') {
+            $markerIcon = $this->getOriginalPurgeValue('marker_icon_url');
+        } elseif ($this->marker_icon_from === 'media') {
+            $markerIcon = $this->getOriginalPurgeValue('marker_icon_media');
+        }
+        $this->marker_icon = $markerIcon;
+    }
+
     public function afterSave()
     {
         // When popup content empty after save than seed it with contents of _default_popup_content partial
@@ -93,6 +120,41 @@ class Marker extends Model implements AddressObjectInterface
     public function getCountryIdOptions()
     {
         return Country::getNameList();
+    }
+
+    public function getMarkerIconUrlAttribute()
+    {
+        if ($this->marker_icon_from === 'url') {
+            return $this->marker_icon;
+        }
+    }
+
+    public function getMarkerIconMediaAttribute()
+    {
+        if ($this->marker_icon_from === 'media') {
+            return $this->marker_icon;
+        }
+    }
+
+    public function getIconUrlAttribute(): ?string
+    {
+        $markerIcon = null;
+        if (isset($this->marker_icon)) {
+            if ($this->marker_icon_from === 'url') {
+                $markerIcon = $this->marker_icon;
+            } elseif ($this->marker_icon_from === 'media') {
+                if (class_exists('System'))  {
+                    $markerIcon = \Media\Classes\MediaLibrary::url($this->marker_icon);
+                }
+                else {
+                    $markerIcon = \System\Classes\MediaLibrary::url($this->marker_icon);
+                }
+            }
+        } elseif ($this->group && $this->group->iconUrl) {
+            $markerIcon = $this->group->iconUrl;
+        }
+
+        return $markerIcon;
     }
 
     /**

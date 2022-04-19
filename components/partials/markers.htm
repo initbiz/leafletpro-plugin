@@ -1,33 +1,25 @@
-
 {% put scripts %}
-    {% if 'markercluster' in plugins %}
-    {#
-
-        <script>
-            var markers = L.markerClusterGroup();
-            markers.addLayer(L.marker)
-            {% for marker in markers %}
-        	  	var marker = L.marker([{{ marker.lat }}, {{ marker.lon }}]).addTo({{ mapVar }});
-        		marker.bindPopup("{{ marker.name }}");
-            {% endfor %}
-        </script>
-
-    #}
-    {% else %}
-        <script>
-            {% if __SELF__.getMarkerIconUrl() %}
-                let DefaultIcon = L.icon({
-                    iconUrl: '{{ __SELF__.getMarkerIconUrl() }}',
-                    iconSize: [40,40],
-                });
-                L.Marker.prototype.options.icon = DefaultIcon;
-            {% endif %}
-
-            {% for marker in __SELF__.markers %}
-                  L.marker([{{ marker.lat }}, {{ marker.lon }}])
-                   .addTo({{ mapVar }})
-                   .bindPopup('{{ marker.popup_content |replace({"\n": " ","\r": " ",  "\t": " "}) | raw }}');
-            {% endfor %}
-        </script>
+<script>
+    {% if __SELF__.getMarkerIconUrl() %}
+    L.Marker.prototype.options.icon = L.icon({iconUrl: '{{ __SELF__.getMarkerIconUrl() }}', iconSize: [40, 40]});
     {% endif %}
+
+    {% if 'markercluster' in plugins %}
+    var markers = L.markerClusterGroup();
+    {% else %}
+    var markers = L.featureGroup();
+    {% endif %}
+
+    {% for marker in __SELF__.markers %}
+
+    {% set popupContent = marker.popup_content|replace({"\n": " ","\r": " ",  "\t": " "}) %}
+    var marker = L.marker([{{ marker.lat }}, {{ marker.lon }}]).bindPopup('{{ popupContent|raw }}');
+    {% if marker.iconUrl %}
+        marker.setIcon(L.icon({iconUrl: '{{ marker.iconUrl }}', iconSize: [40, 40]}));
+    {% endif %}
+    markers.addLayer(marker);
+    {% endfor %}
+
+    {{ mapVar }}.addLayer(markers)
+</script>
 {% endput %}

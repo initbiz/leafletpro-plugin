@@ -18,10 +18,19 @@ navigation:
                 icon: icon-map-marker
                 permissions:
                     0: 'initbiz.leafletpro.access_markers'
+            leafletpro-side-menu-groups:
+                label: 'initbiz.leafletpro::lang.navigation.groups'
+                url: initbiz/leafletpro/groups
+                icon: icon-map-signs
+                permissions:
+                    0: 'initbiz.leafletpro.access_groups'
 permissions:
     initbiz.leafletpro.access_markers:
         tab: 'initbiz.leafletpro::lang.permissions.leafletpro'
         label: 'initbiz.leafletpro::lang.permissions.leafletpro_markers'
+    initbiz.leafletpro.access_groups:
+        tab: 'initbiz.leafletpro::lang.permissions.leafletpro'
+        label: 'initbiz.leafletpro::lang.permissions.leafletpro_groups'
     initbiz.leafletpro.settings_access:
         tab: 'initbiz.leafletpro::lang.permissions.leafletpro'
         label: 'initbiz.leafletpro::lang.permissions.settings_access'

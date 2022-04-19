@@ -37,7 +37,7 @@ class LeafletMap extends LeafletMapBase
             'markercluster' => [
                 'title'       => 'initbiz.leafletpro::lang.leafletmap_plugins.markercluster_name',
                 'description' => 'initbiz.leafletpro::lang.leafletmap_plugins.markercluster_desc',
-                'jsPath'      => 'assets/node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js',
+                'jsPath'      => 'assets/node_modules/leaflet.markercluster/dist/leaflet.markercluster.js',
                 'cssPath'     => 'assets/node_modules/leaflet.markercluster/dist/MarkerCluster.css',
             ]
         ];
