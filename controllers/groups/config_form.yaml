@@ -25,7 +25,3 @@ update:
     title: initbiz.leafletpro::lang.group.update_title
     redirect: initbiz/leafletpro/groups
     redirectClose: initbiz/leafletpro/groups
-
-# Preview page
-preview:
-    title: initbiz.leafletpro::lang.group.preview_title

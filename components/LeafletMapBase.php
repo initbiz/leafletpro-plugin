@@ -143,7 +143,7 @@ abstract class LeafletMapBase extends ComponentBase
      */
     public function makeMarkers()
     {
-        $this->getMarkers();
+        return $this->getMarkers();
     }
 
     /**
