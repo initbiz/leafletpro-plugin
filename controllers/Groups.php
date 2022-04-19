@@ -26,6 +26,8 @@ class Groups extends Controller
     public $listConfig = 'config_list.yaml';
     public $relationConfig = 'config_relation.yaml';
 
+    public $requiredPermissions = ['initbiz.leafletpro.access_groups'];
+
     public function __construct()
     {
         parent::__construct();

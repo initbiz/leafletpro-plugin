@@ -52,6 +52,7 @@
         'leafletpro' => 'Leaflet Pro',
         'leafletpro_markers' => 'Manage markers',
         'settings_access' => 'Manage Leaflet Pro settings',
+        'leafletpro_groups' => 'Manage groups'
     ],
     'marker' => [
         'name' => 'Name',
