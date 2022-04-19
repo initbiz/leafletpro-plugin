@@ -13,7 +13,7 @@ class CreateMarkersTable extends Migration
         Schema::table('initbiz_leafletpro_markers', function (Blueprint $table) {
             $table->string('marker_icon_from', 20)->nullable();
             $table->string('marker_icon')->nullable();
-            $table->integer('group_id')->nullable();
+            $table->integer('group_id')->unsigned()->nullable();
             $table->foreign('group_id', 'initbiz_leafletpro_markers_group_id')->references('id')->on('initbiz_leafletpro_groups');
         });
     }
