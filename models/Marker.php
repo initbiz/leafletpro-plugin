@@ -135,7 +135,7 @@ class Marker extends Model implements AddressObjectInterface
         }
     }
 
-    public function getIconUrlAttribute()
+    public function getIconUrlAttribute(): ?string
     {
         $markerIcon = null;
         if (isset($this->marker_icon)) {
