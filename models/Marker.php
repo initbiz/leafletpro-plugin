@@ -4,7 +4,8 @@ namespace Initbiz\LeafletPro\Models;
 
 use Model;
 use Cms\Classes\Theme;
-use Media\Classes\MediaLibrary;
+use System\Classes\MediaLibrary;
+use Cms\Classes\MediaLibrary;
 use RainLab\Location\Models\Country;
 use Initbiz\CumulusCore\Models\Cluster;
 use Initbiz\LeafletPro\Classes\AddressResolver;
@@ -142,7 +143,12 @@ class Marker extends Model implements AddressObjectInterface
             if ($this->marker_icon_from === 'url') {
                 $markerIcon = $this->marker_icon;
             } elseif ($this->marker_icon_from === 'media') {
-                $markerIcon = MediaLibrary::url($this->marker_icon);
+                if (class_exists('System'))  {
+                    $markerIcon = \Media\Classes\MediaLibrary::url($this->marker_icon);
+                }
+                else {
+                    $markerIcon = \System\Classes\MediaLibrary::url($this->marker_icon);
+                }
             }
         } elseif ($this->group && $this->group->iconUrl) {
             $markerIcon = $this->group->iconUrl;

@@ -87,7 +87,11 @@ class Group extends Model
             if ($this->marker_icon_from === 'url') {
                 $markerIcon = $this->marker_icon;
             } elseif ($this->marker_icon_from === 'media') {
-                $markerIcon = MediaLibrary::url($this->marker_icon);
+                if (class_exists('System')) {
+                    $markerIcon = \Media\Classes\MediaLibrary::url($this->marker_icon);
+                } else {
+                    // Running October CMS 1.0
+                }
             }
         }
 
