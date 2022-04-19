@@ -67,5 +67,4 @@ class SingleMarkerMap extends LeafletMapBase
 
         return $centerLatLon;
     }
-
 }

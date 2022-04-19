@@ -1,8 +1,8 @@
-<?php namespace Initbiz\LeafletPro\Classes;
+<?php
+
+namespace Initbiz\LeafletPro\Classes;
 
 use Lang;
-use Validator;
-use October\Rain\Exception\ValidationException;
 use Initbiz\LeafletPro\Exceptions\EmptyResponse;
 use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;

@@ -1,0 +1,21 @@
+<div class="input-group">
+    <span class="input-group-btn">
+        <button
+            type="button"
+            class="btn btn-primary"
+            id="<?= $field->getId() ?>-refresh-button"
+            data-request="onLatLonRefresh"
+            data-request-success="setLatLon(data)"
+            data-stripe-load-indicator
+            >
+            <?= e(trans('initbiz.leafletpro::lang.marker.refresh_lon_lat_button')) ?>
+        </button>
+    </span>
+</div>
+
+<script>
+    function setLatLon(data) {
+        $("[name='Marker[lon]']").val(data['lon']);
+        $("[name='Marker[lat]']").val(data['lat']);
+    }
+</script>

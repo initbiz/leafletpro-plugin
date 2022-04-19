@@ -1,4 +1,6 @@
-<?php namespace Initbiz\LeafletPro\Contracts;
+<?php
+
+namespace Initbiz\LeafletPro\Contracts;
 
 /**
  * Address resolver contract

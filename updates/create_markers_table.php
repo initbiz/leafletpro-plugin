@@ -1,4 +1,6 @@
-<?php namespace Initbiz\LeafletPro\Updates;
+<?php
+
+namespace Initbiz\LeafletPro\Updates;
 
 use Schema;
 use October\Rain\Database\Schema\Blueprint;

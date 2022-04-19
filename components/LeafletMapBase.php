@@ -1,9 +1,12 @@
-<?php namespace Initbiz\LeafletPro\Components;
+<?php
+
+namespace Initbiz\LeafletPro\Components;
 
 use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
 use Initbiz\LeafletPro\Classes\Address;
 use Initbiz\LeafletPro\Models\Settings;
+use Illuminate\Database\Eloquent\Collection;
 use Initbiz\LeafletPro\Classes\AddressResolver;
 use Initbiz\LeafletPro\Exceptions\EmptyResponse;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
@@ -70,10 +73,10 @@ abstract class LeafletMapBase extends ComponentBase
         $properties = [
             'initialZoom' => [
                 'title'             => 'initbiz.leafletpro::lang.components.zoom_title',
-                'description'		=> 'initbiz.leafletpro::lang.components.zoom_description',
+                'description'        => 'initbiz.leafletpro::lang.components.zoom_description',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => 'initbiz.leafletpro::lang.components.zoom_validation_message',
-                'default'			=> '12'
+                'default'            => '12'
             ],
             'scrollProtection' => [
                 'title'             => 'initbiz.leafletpro::lang.components.scroll_protection_title',
@@ -113,7 +116,7 @@ abstract class LeafletMapBase extends ComponentBase
                 if (isset($pluginDef['jsPath'])) {
                     $leafletJs[] = $pluginDef['jsPath'];
                 }
-                if (isset($pluginDef['cssPath'])){
+                if (isset($pluginDef['cssPath'])) {
                     $leafletCss[] = $pluginDef['cssPath'];
                 }
             }
@@ -129,15 +132,28 @@ abstract class LeafletMapBase extends ComponentBase
         // Leaflet use scrollWheelZoom param, to it's negated scrollProtection
         $this->scrollProtection = ($this->property('scrollProtection') === "0") ? 'enable' : 'disable';
 
-        $this->markers = $this->makeMarkers();
+        $this->markers = $this->getMarkers();
         $this->centerLatLon = $this->makeInitialCenterLatLon();
 
         $this->page['activeLeafletPlugins'] = $activePlugins;
     }
 
+    /**
+     * @deprecated
+     */
     public function makeMarkers()
     {
-        return Marker::published()->get();
+        return $this->getMarkers();
+    }
+
+    /**
+     * Get published markers
+     *
+     * @return Collection
+     */
+    public function getMarkers()
+    {
+        return Marker::with('group')->published()->get();
     }
 
     public function makeInitialZoom()

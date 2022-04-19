@@ -20,8 +20,8 @@
     "require": {
         "php": ">=7.0",
         "composer/installers": "~1.0",
-        "rainlab/location-plugin": "dev-master",
-        "october/drivers-plugin": "dev-master",
+        "rainlab/location-plugin": "^v1.0",
+        "october/drivers-plugin": "^v1.0",
         "maxh/php-nominatim": "dev-master"
     }
 }

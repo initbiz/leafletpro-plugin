@@ -1,4 +1,6 @@
-<?php namespace Initbiz\LeafletPro\Classes;
+<?php
+
+namespace Initbiz\LeafletPro\Classes;
 
 use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 
@@ -193,5 +195,4 @@ class Address implements AddressObjectInterface
         $address->setFromArray($addressArray);
         return $address;
     }
-
 }

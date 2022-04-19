@@ -1,0 +1,25 @@
+{
+    "name": "leafletpro",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+        "leaflet.markercluster": "^1.5.3",
+        "leaflet": "^1.7.1",
+        "leaflet.tilelayer.colorfilter": "^1.2.5"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/initbiz/leafletpro-plugin.git"
+    },
+    "author": "initbiz",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/initbiz/leafletpro-plugin/issues"
+    },
+    "homepage": "https://github.com/initbiz/leafletpro-plugin#readme"
+}

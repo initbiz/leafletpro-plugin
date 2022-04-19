@@ -1,0 +1,34 @@
+<div class="marker-group">
+    {% for groupSlug,markers in groups %}
+    <h3>{{ markers.first.group.name ?? 'initbiz.leafletpro::lang.components.list_markers_map.ungrouped'|trans }}</h3>
+    <ul>
+        {% for marker in markers %}
+        <li>
+            <a onclick="{{ mapVar }}.setView(new L.LatLng({{ marker.lat }}, {{ marker.lon }}), {{ zoomOnClick }})" href="javascript:void(0)">{{ marker.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</div>
+
+{% put styles %}
+<style>
+    .marker-group {
+        width: 300px;
+    }
+    .marker-group h3 {
+        padding: 10px;
+        font-size: 24px;
+    }
+    .marker-group ul li {
+        background-color: #fafafa;
+        padding: 10px;
+    }
+    .marker-group ul li:hover {
+        background-color: #eee;
+    }
+    .marker-group ul li a{
+        display: block;
+    }
+</style>
+{% endput %}

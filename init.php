@@ -1,4 +1,6 @@
-<?php namespace Initbiz\LeafletPro;
+<?php
+
+namespace Initbiz\LeafletPro;
 
 use Event;
 use System\Classes\PluginManager;

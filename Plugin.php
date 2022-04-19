@@ -1,6 +1,7 @@
-<?php namespace Initbiz\LeafletPro;
+<?php
 
-use Backend;
+namespace Initbiz\LeafletPro;
+
 use System\Classes\PluginBase;
 
 /**
@@ -20,6 +21,7 @@ class Plugin extends PluginBase
         return [
             'Initbiz\LeafletPro\Components\LeafletMap'      => 'leafletmap',
             'Initbiz\LeafletPro\Components\SingleMarkerMap' => 'singleMarkerMap',
+            'Initbiz\LeafletPro\Components\ListMarkersMap'  => 'listMarkersMap',
         ];
     }
 
