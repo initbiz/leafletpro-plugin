@@ -39,7 +39,6 @@ class ListMarkersMap extends LeafletMap
 
         $this->zoomOnClick = $this->property('zoomOnClick', 17);
         $this->groups = $this->getGroups();
-        $test = 'asd';
     }
 
     /**
