@@ -3,7 +3,6 @@
 namespace Initbiz\Leafletpro\Models;
 
 use Model;
-use Media\Classes\MediaLibrary;
 
 /**
  * Group Model
@@ -90,7 +89,7 @@ class Group extends Model
                 if (class_exists('System')) {
                     $markerIcon = \Media\Classes\MediaLibrary::url($this->marker_icon);
                 } else {
-                    // Running October CMS 1.0
+                    $markerIcon = \System\Classes\MediaLibrary::url($this->marker_icon);
                 }
             }
         }

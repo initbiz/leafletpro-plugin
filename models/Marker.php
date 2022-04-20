@@ -4,8 +4,6 @@ namespace Initbiz\LeafletPro\Models;
 
 use Model;
 use Cms\Classes\Theme;
-use System\Classes\MediaLibrary;
-use Cms\Classes\MediaLibrary;
 use RainLab\Location\Models\Country;
 use Initbiz\CumulusCore\Models\Cluster;
 use Initbiz\LeafletPro\Classes\AddressResolver;
