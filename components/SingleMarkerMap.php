@@ -45,7 +45,7 @@ class SingleMarkerMap extends LeafletMapBase
         return Marker::published()->get()->pluck('name', $findBy)->toArray();
     }
 
-    public function makeMarkers()
+    public function getMarkers()
     {
         $marker = Marker::where($this->property('findBy'), $this->property('marker'))->first();
 
@@ -56,6 +56,14 @@ class SingleMarkerMap extends LeafletMapBase
         }
 
         return $markers;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function makeMarkers()
+    {
+        return $this->getMarkers();
     }
 
     public function makeInitialCenterLatLon()
