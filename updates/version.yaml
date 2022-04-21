@@ -23,3 +23,6 @@
     - 1_4_0_add_marker_icon_to_markers_table.php
 1.4.1:
     - 'Add compatibility for october 1'
+1.4.2:
+    - Add image to groups table
+    - 1_4_2_add_image_to_groups_table.php

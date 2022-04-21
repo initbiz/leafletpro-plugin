@@ -27,9 +27,9 @@ class AddMarkerIconToMarkersTable extends Migration
         }
 
         Schema::table('initbiz_leafletpro_markers', function (Blueprint $table) {
-            $table->dropColumn('marker_icon_from')->nullable();
-            $table->dropColumn('marker_icon')->nullable();
-            $table->dropColumn('group_id')->nullable();
+            $table->dropColumn('marker_icon_from');
+            $table->dropColumn('marker_icon');
+            $table->dropColumn('group_id');
         });
     }
 }

@@ -1,9 +1,9 @@
 {% set mapVar = __SELF__ ~ 'Map' %}
 
+{% partial __SELF__ ~ '::markerlist' groups=__SELF__.groups mapVar=mapVar zoomOnClick=__SELF__.zoomOnClick %}
+
 {% partial __SELF__ ~ '::map' mapVar=mapVar %}
 
 {% partial __SELF__ ~ '::markers' markers=markers plugins=activeLeafletPlugins mapVar=mapVar %}
 
 {% partial __SELF__ ~ '::plugins' plugins=activeLeafletPlugins mapVar=mapVar %}
-
-{% partial '@markerlist.htm' groups=__SELF__.groups mapVar=mapVar zoomOnClick=__SELF__.zoomOnClick %}

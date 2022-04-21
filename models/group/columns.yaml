@@ -6,3 +6,8 @@ columns:
     name:
         label: 'initbiz.leafletpro::lang.group.name'
         type: text
+    markers_count:
+        label: 'initbiz.leafletpro::lang.group.markers_count'
+        relation: markers
+        relationCount: true
+        sortable: false
