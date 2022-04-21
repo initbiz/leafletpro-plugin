@@ -1,33 +1,59 @@
-<div class="marker-group">
+<div class="marker-groups">
     {% for groupSlug,markers in groups %}
-    <h3>{{ markers.first.group.name ?? 'initbiz.leafletpro::lang.components.list_markers_map.ungrouped'|trans }}</h3>
-    <ul>
-        {% for marker in markers %}
-        <li>
-            <a onclick="{{ mapVar }}.setView(new L.LatLng({{ marker.lat }}, {{ marker.lon }}), {{ zoomOnClick }})" href="javascript:void(0)">{{ marker.name }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+    {% set group = markers.first.group %}
+    <div class="marker-group" data-group-slug="{{ group.slug ?? 'ungrouped' }}">
+        <h3>{{ group.name ?? 'initbiz.leafletpro::lang.components.list_markers_map.ungrouped'|trans }}</h3>
+        <img src="{{ group.image|media }}" alt="">
+        <ul>
+            {% for marker in markers %}
+            <li>
+                <a onclick="{{ mapVar }}.setView(new L.LatLng({{ marker.lat }}, {{ marker.lon }}), {{ zoomOnClick }})" href="javascript:void(0)">{{ marker.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
     {% endfor %}
 </div>
 
+{% put scripts %}
+{# This code will hide/show markers on map when hover over group div, remove if you don't like it #}
+    <script>
+        $('.marker-group').on('mouseover', function() {
+            var groupSlug = $(this).data('group-slug');
+            var groupIconSlug = 'icon-group-' + groupSlug;
+            $('.leaflet-marker-icon').each(function(){
+                if ($(this).hasClass(groupIconSlug)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        })
+        $('.marker-group').on('mouseout', function() {
+            $('.leaflet-marker-icon').each(function(){
+                $(this).show();
+            });
+        })
+    </script>
+{% endput %}
+
 {% put styles %}
 <style>
-    .marker-group {
+    .marker-groups {
         width: 300px;
     }
-    .marker-group h3 {
+    .marker-groups h3 {
         padding: 10px;
         font-size: 24px;
     }
-    .marker-group ul li {
+    .marker-groups ul li {
         background-color: #fafafa;
         padding: 10px;
     }
-    .marker-group ul li:hover {
+    .marker-groups ul li:hover {
         background-color: #eee;
     }
-    .marker-group ul li a{
+    .marker-groups ul li a{
         display: block;
     }
 </style>

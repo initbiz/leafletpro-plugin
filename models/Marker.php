@@ -137,14 +137,13 @@ class Marker extends Model implements AddressObjectInterface
     public function getIconUrlAttribute(): ?string
     {
         $markerIcon = null;
-        if (isset($this->marker_icon)) {
+        if (!empty($this->marker_icon)) {
             if ($this->marker_icon_from === 'url') {
                 $markerIcon = $this->marker_icon;
             } elseif ($this->marker_icon_from === 'media') {
-                if (class_exists('System'))  {
+                if (class_exists('System')) {
                     $markerIcon = \Media\Classes\MediaLibrary::url($this->marker_icon);
-                }
-                else {
+                } else {
                     $markerIcon = \System\Classes\MediaLibrary::url($this->marker_icon);
                 }
             }

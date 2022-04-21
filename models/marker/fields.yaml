@@ -8,70 +8,93 @@ fields:
         type: text
         span: left
         required: 1
-    popup_content:
-        label: 'initbiz.leafletpro::lang.marker.popup_content'
-        type: richeditor
+    group:
+        label: 'initbiz.leafletpro::lang.marker.group'
         span: right
-    street:
-        label: 'initbiz.leafletpro::lang.marker.street'
-        commentAbove: 'initbiz.leafletpro::lang.marker.street_comment'
-        type: text
-        span: left
-    postal_code:
-        label: 'initbiz.leafletpro::lang.marker.postal_code'
-        type: text
-        span: left
-    city:
-        label: 'initbiz.leafletpro::lang.marker.city'
-        type: text
-        span: left
-    country_id:
-        label: 'initbiz.leafletpro::lang.marker.country'
-        emptyOption: 'initbiz.leafletpro::lang.marker.country_empty_option'
-        span: left
-        type: dropdown
-    marker_icon_from:
-        label: 'initbiz.leafletpro::lang.marker.marker_icon_from'
-        span: right
-        default: media
-        type: balloon-selector
-        options:
-            media: 'initbiz.leafletpro::lang.marker.marker_icon_from_media'
-            url: 'initbiz.leafletpro::lang.marker.marker_icon_from_url'
-    marker_icon_url:
-        label: 'initbiz.leafletpro::lang.marker.marker_icon_url'
-        span: right
-        type: text
-        trigger:
-            action: show
-            field: marker_icon_from
-            condition: value[url]
-    marker_icon_media:
-        label: 'initbiz.leafletpro::lang.marker.marker_icon_media'
-        span: right
-        type: mediafinder
-        trigger:
-            action: show
-            field: marker_icon_from
-            condition: value[media]
+        type: relation
+        emptyOption: 'initbiz.leafletpro::lang.marker.group_empty_option'
+        tab: 'initbiz.leafletpro::lang.marker.address_tab'
 
+tabs:
+    fields:
+        popup_content:
+            label: 'initbiz.leafletpro::lang.marker.popup_content'
+            type: richeditor
+            span: left
+            tab: 'initbiz.leafletpro::lang.marker.content_tab'
+
+        marker_icon_from:
+            label: 'initbiz.leafletpro::lang.marker.marker_icon_from'
+            span: right
+            default: media
+            tab: 'initbiz.leafletpro::lang.marker.content_tab'
+            type: balloon-selector
+            options:
+                media: 'initbiz.leafletpro::lang.marker.marker_icon_from_media'
+                url: 'initbiz.leafletpro::lang.marker.marker_icon_from_url'
+
+        marker_icon_media:
+            label: ''
+            span: right
+            type: mediafinder
+            tab: 'initbiz.leafletpro::lang.marker.content_tab'
+            trigger:
+                action: show
+                field: marker_icon_from
+                condition: value[media]
+
+        marker_icon_url:
+            label: ''
+            span: right
+            type: text
+            tab: 'initbiz.leafletpro::lang.marker.content_tab'
+            placeholder: 'https://example.com/icon.png'
+            trigger:
+                action: show
+                field: marker_icon_from
+                condition: value[url]
+
+        postal_code:
+            label: 'initbiz.leafletpro::lang.marker.postal_code'
+            type: text
+            span: left
+            tab: 'initbiz.leafletpro::lang.marker.address_tab'
+
+        city:
+            label: 'initbiz.leafletpro::lang.marker.city'
+            type: text
+            span: right
+            tab: 'initbiz.leafletpro::lang.marker.address_tab'
+
+        street:
+            label: 'initbiz.leafletpro::lang.marker.street'
+            type: text
+            span: left
+            tab: 'initbiz.leafletpro::lang.marker.address_tab'
+
+        country_id:
+            label: 'initbiz.leafletpro::lang.marker.country'
+            emptyOption: 'initbiz.leafletpro::lang.marker.country_empty_option'
+            span: right
+            type: dropdown
+            tab: 'initbiz.leafletpro::lang.marker.address_tab'
 
 secondaryTabs:
     fields:
         is_published:
             label: 'initbiz.leafletpro::lang.marker.is_published'
             type: switch
-        group:
-            label: 'initbiz.leafletpro::lang.marker.group'
-            type: relation
-            emptyOption: 'initbiz.leafletpro::lang.marker.group_empty_option'
+            default: true
+
         refresh_lon_lat_button:
-            label: 'initbiz.leafletpro::lang.marker.refresh_lon_lat_label'
+            label: ''
             type: partial
+
         lon:
             label: 'initbiz.leafletpro::lang.marker.lon'
             type: text
             required: 1
+
         lat:
             label: 'initbiz.leafletpro::lang.marker.lat'
             type: text

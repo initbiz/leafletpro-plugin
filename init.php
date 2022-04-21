@@ -15,22 +15,22 @@ if (PluginManager::instance()->exists('Initbiz.CumulusCore')) {
 
         $clusterField = [];
         $clusterField['cluster_id'] = [
-            'label'   => 'initbiz.leafletpro::lang.marker.cluster',
-            'commentAbove'   => 'initbiz.leafletpro::lang.marker.cluster_comment',
-            'type'   => 'dropdown',
-            'span'   => 'right',
-            'emptyOption'   => 'Select cluster',
+            'label' => 'initbiz.leafletpro::lang.marker.cluster',
+            'commentAbove' => 'initbiz.leafletpro::lang.marker.cluster_comment',
+            'type' => 'dropdown',
+            'span' => 'full',
+            'emptyOption' => 'initbiz.leafletpro::lang.marker.cluster_empty_option',
+            'tab' => 'initbiz.leafletpro::lang.marker.address_tab',
         ];
 
-        $fields = $formWidget->fields;
+        $fields = $formWidget->tabs['fields'];
 
-        $fields['name']['dependsOn'] = 'cluster_id';
         $fields['street']['dependsOn'] = 'cluster_id';
         $fields['postal_code']['dependsOn'] = 'cluster_id';
         $fields['city']['dependsOn'] = 'cluster_id';
         $fields['country_id']['dependsOn'] = 'cluster_id';
 
-        $formWidget->fields = $clusterField + $fields;
+        $formWidget->tabs['fields'] = $clusterField + $fields;
     });
 
     Marker::extend(function ($model) {

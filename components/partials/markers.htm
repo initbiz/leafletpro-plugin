@@ -1,22 +1,16 @@
 {% put scripts %}
 <script>
-    {% if __SELF__.getMarkerIconUrl() %}
-    L.Marker.prototype.options.icon = L.icon({iconUrl: '{{ __SELF__.getMarkerIconUrl() }}', iconSize: [40, 40]});
-    {% endif %}
-
     {% if 'markercluster' in plugins %}
     var markers = L.markerClusterGroup();
     {% else %}
     var markers = L.featureGroup();
     {% endif %}
-
     {% for marker in __SELF__.markers %}
-
     {% set popupContent = marker.popup_content|replace({"\n": " ","\r": " ",  "\t": " "}) %}
+    {% set iconUrl = marker.iconUrl ?? __SELF__.getMarkerIconUrl() %}
+    {% set groupClass = 'icon-group-' ~ (marker.group.slug ?? "ungrouped") %}
     var marker = L.marker([{{ marker.lat }}, {{ marker.lon }}]).bindPopup('{{ popupContent|raw }}');
-    {% if marker.iconUrl %}
-        marker.setIcon(L.icon({iconUrl: '{{ marker.iconUrl }}', iconSize: [40, 40]}));
-    {% endif %}
+    marker.setIcon(L.icon({iconUrl: '{{ iconUrl }}', iconSize: [40, 40], className: '{{ groupClass }}'}));
     markers.addLayer(marker);
     {% endfor %}
 
