@@ -7,7 +7,6 @@ use Flash;
 use Request;
 use BackendMenu;
 use Backend\Classes\Controller;
-use Initbiz\Leafletpro\Models\group;
 use RainLab\Location\Models\Country;
 use Initbiz\LeafletPro\Models\Marker;
 
@@ -50,5 +49,34 @@ class Groups extends Controller
         $marker->refreshLatLon();
 
         return $marker->getLatLonArray();
+    }
+
+    public function index_onDelete()
+    {
+        $checkedIds = post('checked');
+
+        if (!$checkedIds || !is_array($checkedIds) || !count($checkedIds)) {
+            Flash::error(Lang::get('backend::lang.list.delete_selected_empty'));
+            return $this->listRefresh();
+        }
+
+        $markers = Marker::whereIn('group_id', $checkedIds)->get();
+        foreach ($markers as $marker) {
+            $marker->group_id = null;
+            $marker->save();
+        }
+
+        return $this->asExtension('ListController')->index_onDelete();
+    }
+
+    public function update_onDelete($recordId = null)
+    {
+        $markers = Marker::where('group_id', $recordId)->get();
+        foreach ($markers as $marker) {
+            $marker->group_id = null;
+            $marker->save();
+        }
+
+        return $this->asExtension('FormController')->update_onDelete($recordId);
     }
 }

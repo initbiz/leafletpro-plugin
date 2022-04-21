@@ -98,6 +98,7 @@
         'settings_tab' => 'Settings',
         'markers_tab' => 'Markers',
         'image' => 'Group image',
+        'markers_count' => 'Number of markers',
     ],
     'groups' => [
         'delete_selected_confirm' => 'Delete the selected Groups?',
