@@ -8,6 +8,7 @@ fields:
         span: left
         required: 1
         type: text
+
     slug:
         label: 'initbiz.leafletpro::lang.group.slug'
         span: right
@@ -16,36 +17,53 @@ fields:
         preset:
             field: name
             type: slug
-    markers:
-        label: ''
-        nameFrom: name
-        span: left
-        type: partial
-    description:
-        label: 'initbiz.leafletpro::lang.group.description'
-        span: right
-        type: richeditor
-    marker_icon_from:
-        label: 'initbiz.leafletpro::lang.group.marker_icon_from'
-        span: right
-        default: media
-        type: balloon-selector
-        options:
-            media: 'initbiz.leafletpro::lang.group.marker_icon_from_media'
-            url: 'initbiz.leafletpro::lang.group.marker_icon_from_url'
-    marker_icon_url:
-        label: 'initbiz.leafletpro::lang.group.marker_icon_url'
-        span: right
-        type: text
-        trigger:
-            action: show
-            field: marker_icon_from
-            condition: value[url]
-    marker_icon_media:
-        label: 'initbiz.leafletpro::lang.group.marker_icon_media'
-        span: right
-        type: mediafinder
-        trigger:
-            action: show
-            field: marker_icon_from
-            condition: value[media]
+
+tabs:
+    fields:
+        markers:
+            label: ''
+            nameFrom: name
+            type: partial
+            tab: 'initbiz.leafletpro::lang.group.markers_tab'
+
+        description:
+            label: 'initbiz.leafletpro::lang.group.description'
+            span: left
+            type: richeditor
+            tab: 'initbiz.leafletpro::lang.group.settings_tab'
+
+        marker_icon_from:
+            label: 'initbiz.leafletpro::lang.group.marker_icon_from'
+            span: right
+            default: media
+            tab: 'initbiz.leafletpro::lang.group.settings_tab'
+            type: balloon-selector
+            options:
+                media: 'initbiz.leafletpro::lang.group.marker_icon_from_media'
+                url: 'initbiz.leafletpro::lang.group.marker_icon_from_url'
+
+        marker_icon_url:
+            label: ''
+            span: right
+            type: text
+            tab: 'initbiz.leafletpro::lang.group.settings_tab'
+            trigger:
+                action: show
+                field: marker_icon_from
+                condition: value[url]
+
+        marker_icon_media:
+            label: ''
+            span: right
+            type: mediafinder
+            tab: 'initbiz.leafletpro::lang.group.settings_tab'
+            trigger:
+                action: show
+                field: marker_icon_from
+                condition: value[media]
+
+        image:
+            label: 'initbiz.leafletpro::lang.group.image'
+            span: right
+            type: mediafinder
+            tab: 'initbiz.leafletpro::lang.group.settings_tab'

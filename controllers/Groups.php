@@ -49,6 +49,6 @@ class Groups extends Controller
 
         $marker->refreshLatLon();
 
-        return $marker->getLatLon();
+        return $marker->getLatLonArray();
     }
 }
