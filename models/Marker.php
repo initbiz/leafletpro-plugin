@@ -30,6 +30,16 @@ class Marker extends Model implements AddressObjectInterface
         'lat' => 'required|numeric',
         'lon' => 'required|numeric'
     ];
+    
+    /**
+    * @var translatable marker fields
+    */
+    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
+    
+    public $translatable = [
+        'name',
+        'popup_content'
+    ];
 
     /**
      * @var array Guarded fields
