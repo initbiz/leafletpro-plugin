@@ -3,7 +3,7 @@
         {{ 'initbiz.leafletpro::lang.components.pick_localization.longitude'|trans }}
     </span>
     <input class="input-field"
-           id="longitude"
+           id="{{  __SELF__ ~ '-longitude'}}"
            name="longitude"
     />
 </label>
@@ -12,7 +12,7 @@
         {{ 'initbiz.leafletpro::lang.components.pick_localization.latitude'|trans }}
     </span>
     <input class="input-field"
-           id="latitude"
+           id="{{  __SELF__ ~ '-latitude' }}"
            name="latitude"
     />
 </label>
@@ -20,49 +20,53 @@
     <button type="button" class="btn btn-secondary find-localization-button">{{ 'initbiz.leafletpro::lang.components.pick_localization.find_localization'|trans }}</button>
 </div>
 
-<div id="pick-localization-container" class="leaflet-map rounded-2xl border border-primary drop-shadow-tertiary-lg lg:col-span-2"></div>
-
+<div class="rounded-2xl border border-primary drop-shadow-tertiary-lg lg:col-span-2">
+    {% set mapVar = __SELF__ ~ 'Map' %}
+    <div id='{{ __SELF__ ~ "-container" }}' class="leaflet-map"></div>
+</div>
 {% put scripts %}
 <script>
-    var leafletContainer = 'pick-localization-container';
-    var map = L.map(leafletContainer).setView([$('#latitude').val(), $('#longitude').val()], 16);
+    var leafletContainer = '{{ __SELF__ ~ "-container" }}';
+
+    if ($('#{{__SELF__}}-latitude').val() == null || $('#{{__SELF__}}-latitude').val() == '') {
+        var {{ mapVar }} = L.map(leafletContainer).setView([ 50.061546997919635, 19.937192201614383], 15);
+    } else {
+        var {{ mapVar }} = L.map(leafletContainer).setView([$('#{{__SELF__}}-latitude').val(), $('#{{__SELF__}}-longitude').val()], 16);
+    };
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: ' &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a> ',
+        attribution: '{% partial __SELF__ ~ "::attribution" %}',
         maxZoom: 18
-    }).addTo(map);
+    }).addTo({{ mapVar }});
 
-    map.once('focus', function () {
-        map.scrollWheelZoom.enable();
+    {{ mapVar }}.once('focus', function () {
+        {{ mapVar }}.scrollWheelZoom.enable();
     });
 
-    $(leafletContainer).css('cursor','crosshair');
 
-    let layerGroup = L.layerGroup();
-
-    function markersMap (coords) {
-        if (map.hasLayer(layerGroup)) {
-            layerGroup.clearLayers();
+    let {{ mapVar ~ "LayerGroup" }} = L.layerGroup();
+    function {{ mapVar ~ "markersMap" }} (coords) {
+        if ({{mapVar}}.hasLayer({{ mapVar ~ "LayerGroup" }})) {
+            {{ mapVar ~ "LayerGroup" }}.clearLayers();
         }
 
         var marker = L.marker(coords);
-        layerGroup.addLayer(marker);
-        map.addLayer(layerGroup);
+        {{ mapVar ~ "LayerGroup" }}.addLayer(marker);
+        {{ mapVar }}.addLayer({{ mapVar ~ "LayerGroup" }});
     }
 
-    markersMap([$('#latitude').val(), $('#longitude').val()])
+    {{ mapVar ~ "markersMap" }}([$('#{{__SELF__}}-latitude').val(), $('#{{__SELF__}}-longitude').val()]);
 
     $('.find-localization-button').on('click', function() {
-        let lng = $('#longitude').val()
-        let lat = $('#latitude').val()
-        markersMap([lat, lng])
+        let lng = $('#{{__SELF__}}-longitude').val();
+        let lat = $('#{{__SELF__}}-latitude').val();
+        {{ mapVar ~ "markersMap" }}([lat, lng]);
     });
 
-    map.on('click', function(e) {
-        $('#longitude').val(e.latlng.lng)
-        $('#latitude').val(e.latlng.lat)
-        markersMap([e.latlng.lat, e.latlng.lng])
-
+    {{ mapVar }}.on('click', function(e) {
+        $('#{{__SELF__}}-longitude').val(e.latlng.lng);
+        $('#{{__SELF__}}-latitude').val(e.latlng.lat);
+        {{ mapVar ~ "markersMap" }}([e.latlng.lat, e.latlng.lng]);
     });
 </script>
 {% endput %}
