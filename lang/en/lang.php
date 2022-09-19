@@ -32,6 +32,13 @@
             'name' => 'List markers',
             'description' => 'Render map and displays a list of markers divided into groups',
             'ungrouped' => 'Ungrouped'
+        ],
+        'pick_localization' => [
+            'name' => 'Pick localization',
+            'description' => 'Render map and displays latiude and longitude fields.',
+            'longitude' => 'Longitude',
+            'latitude' => 'Latitude',
+            'find_localization' => 'Find localization',
         ]
     ],
     'exceptions' => [
