@@ -5,6 +5,7 @@
     <input class="input-field"
            id="{{  __SELF__ ~ '-longitude'}}"
            name="longitude"
+           readonly
     />
 </label>
 <label class="input-group">
@@ -14,11 +15,9 @@
     <input class="input-field"
            id="{{  __SELF__ ~ '-latitude' }}"
            name="latitude"
+           readonly
     />
 </label>
-<div class="lg:col-span-2 flex justify-end">
-    <button type="button" class="btn btn-secondary find-localization-button">{{ 'initbiz.leafletpro::lang.components.pick_localization.find_localization'|trans }}</button>
-</div>
 
 {% set mapVar = __SELF__ ~ 'Map' %}
 <div id='{{ __SELF__ ~ "-container" }}' class="leaflet-map"></div>
@@ -28,7 +27,7 @@
     var leafletContainer = '{{ __SELF__ ~ "-container" }}';
 
     if ($('#{{__SELF__}}-latitude').val() == null || $('#{{__SELF__}}-latitude').val() == '') {
-        var {{ mapVar }} = L.map(leafletContainer).setView([ 50.061546997919635, 19.937192201614383], 15);
+        var {{ mapVar }} = L.map(leafletContainer).setView([{{ __SELF__.centerLatLon }}], {{ __SELF__.initialZoom }});
     } else {
         var {{ mapVar }} = L.map(leafletContainer).setView([$('#{{__SELF__}}-latitude').val(), $('#{{__SELF__}}-longitude').val()], 16);
     };
@@ -37,6 +36,8 @@
         attribution: '{% partial __SELF__ ~ "::attribution" %}',
         maxZoom: 18
     }).addTo({{ mapVar }});
+
+    {{ mapVar }}.scrollWheelZoom.{{ __SELF__.scrollProtection }}();
 
     {{ mapVar }}.once('focus', function () {
         {{ mapVar }}.scrollWheelZoom.enable();
@@ -54,12 +55,6 @@
     }
 
     {{ mapVar ~ "markersMap" }}([$('#{{__SELF__}}-latitude').val(), $('#{{__SELF__}}-longitude').val()]);
-
-    $('.find-localization-button').on('click', function() {
-        let lng = $('#{{__SELF__}}-longitude').val();
-        let lat = $('#{{__SELF__}}-latitude').val();
-        {{ mapVar ~ "markersMap" }}([lat, lng]);
-    });
 
     {{ mapVar }}.on('click', function(e) {
         $('#{{__SELF__}}-longitude').val(e.latlng.lng);

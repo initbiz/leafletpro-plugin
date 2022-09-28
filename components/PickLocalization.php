@@ -16,4 +16,23 @@ class PickLocalization extends LeafletMapBase
             'description' => 'initbiz.leafletpro::lang.components.pick_localization.description'
         ];
     }
+
+    public function defineProperties()
+    {
+        return $this->leafletProperties() + [
+            'centerLatLon' => [
+                'title'             => 'initbiz.leafletpro::lang.components.pick_localization.center_lon_lat',
+                'description'       => 'initbiz.leafletpro::lang.components.pick_localization.center_lon_lat_desc',
+                'type'              => 'string',
+                'default'           => '51.505, -0.09'
+            ],
+        ];
+    }
+
+    public function makeInitialCenterLatLon()
+    {
+        $centerLatLon = $this->property('centerLatLon');
+
+        return $centerLatLon;
+    }
 }

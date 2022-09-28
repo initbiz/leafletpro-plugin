@@ -38,7 +38,8 @@
             'description' => 'Render map and displays latiude and longitude fields.',
             'longitude' => 'Longitude',
             'latitude' => 'Latitude',
-            'find_localization' => 'Find localization',
+            'center_lon_lat' => 'Lon and lat of center',
+            'center_lon_lat_desc' => 'Longitude and latitude of center of the map',
         ]
     ],
     'exceptions' => [
