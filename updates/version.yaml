@@ -26,3 +26,5 @@
 1.4.2:
     - Add image to groups table
     - 1_4_2_add_image_to_groups_table.php
+1.5.0:
+    - Add pick localization component
