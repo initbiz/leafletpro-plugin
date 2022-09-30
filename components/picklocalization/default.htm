@@ -1,0 +1,79 @@
+<label class="input-group">
+    <span>
+        {{ 'initbiz.leafletpro::lang.components.pick_localization.longitude'|trans }}
+    </span>
+    <input class="input-field"
+           id="{{  __SELF__ ~ '-longitude'}}"
+           name="longitude"
+           readonly
+    />
+</label>
+<label class="input-group">
+    <span>
+        {{ 'initbiz.leafletpro::lang.components.pick_localization.latitude'|trans }}
+    </span>
+    <input class="input-field"
+           id="{{  __SELF__ ~ '-latitude' }}"
+           name="latitude"
+           readonly
+    />
+</label>
+
+{% set mapVar = __SELF__ ~ 'Map' %}
+<div id='{{ __SELF__ ~ "-container" }}' class="leaflet-map"></div>
+
+{% put scripts %}
+<script>
+    var leafletContainer = '{{ __SELF__ ~ "-container" }}';
+
+    if ($('#{{__SELF__}}-latitude').val() == null || $('#{{__SELF__}}-latitude').val() == '') {
+        var {{ mapVar }} = L.map(leafletContainer).setView([{{ __SELF__.centerLatLon }}], {{ __SELF__.initialZoom }});
+    } else {
+        var {{ mapVar }} = L.map(leafletContainer).setView([$('#{{__SELF__}}-latitude').val(), $('#{{__SELF__}}-longitude').val()], 16);
+    };
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '{% partial __SELF__ ~ "::attribution" %}',
+        maxZoom: 18
+    }).addTo({{ mapVar }});
+
+    {{ mapVar }}.scrollWheelZoom.{{ __SELF__.scrollProtection }}();
+
+    {{ mapVar }}.once('focus', function () {
+        {{ mapVar }}.scrollWheelZoom.enable();
+    });
+
+    let {{ mapVar ~ "LayerGroup" }} = L.layerGroup();
+    function {{ mapVar ~ "markersMap" }} (coords) {
+        if ({{mapVar}}.hasLayer({{ mapVar ~ "LayerGroup" }})) {
+            {{ mapVar ~ "LayerGroup" }}.clearLayers();
+        }
+
+        var marker = L.marker(coords);
+        {{ mapVar ~ "LayerGroup" }}.addLayer(marker);
+        {{ mapVar }}.addLayer({{ mapVar ~ "LayerGroup" }});
+    }
+
+    {{ mapVar ~ "markersMap" }}([$('#{{__SELF__}}-latitude').val(), $('#{{__SELF__}}-longitude').val()]);
+
+    {{ mapVar }}.on('click', function(e) {
+        $('#{{__SELF__}}-longitude').val(e.latlng.lng);
+        $('#{{__SELF__}}-latitude').val(e.latlng.lat);
+        {{ mapVar ~ "markersMap" }}([e.latlng.lat, e.latlng.lng]);
+    });
+</script>
+{% endput %}
+
+{% put styles %}
+<style>
+    .leaflet-map {
+        min-height: 400px;
+    }
+    .leaflet-grab {
+        cursor: crosshair;
+    }
+    .leaflet-dragging .leaflet-grab{
+        cursor: move;
+    }
+</style>
+{% endput %}
