@@ -1,6 +1,6 @@
 # LeafletPro - Embed a Leaflet map (OpenStreetMap) on your website with ease
-![LeafletPro banner](https://docs.init.biz/initbiz/knowledgebase/asset/get/public/leaflet-pro/leaflet-pro-banner.png)
+![LeafletPro banner](https://raw.githubusercontent.com/initbiz/leafletpro-plugin/master/docs/leaflet-pro.png)
 
-This is a repo of OctoberCMS plugin by [InIT.biz](https://init.biz/october-cms-developers).
+This is a repo of OctoberCMS plugin by [InIT.biz](https://init.biz).
 
 For full documentation visit [https://docs.init.biz/article/leaflet-pro](https://docs.init.biz/article/leaflet-pro) or go to [OctoberCMS's marketplace](https://octobercms.com/plugin/initbiz-leafletpro).
