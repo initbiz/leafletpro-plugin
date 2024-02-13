@@ -30,3 +30,6 @@
     - Add pick localization component
 1.6.0:
     - Add compatibility for october 3
+1.7.0:
+    - Add reset button
+    - Add translatable name and popup content fields

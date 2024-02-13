@@ -13,5 +13,9 @@
     {{ mapVar }}.once('focus', function () {
         {{ mapVar }}.scrollWheelZoom.enable();
     });
+
+    $('.leaflet-map-reset').on("click", function(){
+        {{ mapVar }}.setView(new L.LatLng({{ __SELF__.centerLatLon }}), {{ __SELF__.initialZoom }});
+    });
 </script>
 {% endput %}
