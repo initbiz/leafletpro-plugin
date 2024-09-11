@@ -33,3 +33,5 @@
 1.7.0:
     - Add reset button
     - Add translatable name and popup content fields
+1.7.1:
+    - Make the plugin installable for location plugin v2
