@@ -15,7 +15,7 @@ class NominatimResolver implements AddressResolverInterface
      * polygon type for Nominatim, either 'geojson', 'kml', 'svg' or 'text'
      * @var string
      */
-    public $polygon;
+    public $polygon = '';
 
     public function __construct()
     {
@@ -45,15 +45,26 @@ class NominatimResolver implements AddressResolverInterface
     public function resolv(AddressObjectInterface $addressObj): array
     {
         $uri = '/search?';
-        $uri .= http_build_query([
+        $searchParams =  [
             'format' => 'json',
             'country' => $addressObj->getCountry(),
             'postalcode' => $addressObj->getPostalCode(),
             'city' => $addressObj->getCity(),
             'street' => $addressObj->getStreet(),
-            'polygon_geojson' => '1',
-            'addressdetails' => '1',
-        ]);
+        ];
+
+        if ($this->polygon === 'geojson') {
+            $searchParams['polygon_geojson'] = '1';
+        } elseif ($this->polygon === 'kml') {
+            $searchParams['polygon_kml'] = '1';
+        } elseif ($this->polygon === 'text') {
+            $searchParams['polygon_text'] = '1';
+        } elseif ($this->polygon === 'svg') {
+            $searchParams['polygon_svg'] = '1';
+        }
+
+        $uri .= http_build_query($searchParams);
+
         try {
             $response = $this->client->request('GET', $uri, ['headers' => ['User-Agent' => 'leaflet_pro']]);
         } catch (\Throwable $th) {
