@@ -66,11 +66,7 @@ class NominatimResolver implements AddressResolverInterface
 
         $uri .= http_build_query($searchParams);
 
-        try {
-            $response = $this->client->request('GET', $uri, ['headers' => ['User-Agent' => 'leaflet_pro']]);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        $response = $this->client->request('GET', $uri, ['headers' => ['User-Agent' => 'leaflet_pro']]);
 
         return json_decode($response->getBody()->getContents(), true);
     }
