@@ -51,6 +51,7 @@ class NominatimResolver implements AddressResolverInterface
             'postalcode' => $addressObj->getPostalCode(),
             'city' => $addressObj->getCity(),
             'street' => $addressObj->getStreet(),
+            'addressdetails' => '1',
         ];
 
         if ($this->polygon === 'geojson') {
