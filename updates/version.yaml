@@ -35,3 +35,6 @@
     - Add translatable name and popup content fields
 1.7.1:
     - Make the plugin installable for location plugin v2
+1.7.2:
+    - Fix resolving address with nominatim
+

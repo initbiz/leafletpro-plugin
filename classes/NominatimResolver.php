@@ -2,34 +2,30 @@
 
 namespace Initbiz\LeafletPro\Classes;
 
-use maxh\Nominatim\Nominatim;
+use GuzzleHttp\Client;
 use Initbiz\LeafletPro\Models\Settings;
 use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
 use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
 class NominatimResolver implements AddressResolverInterface
 {
-    /**
-     * Nominatim object from maxh/Nominatim
-     * @var Nominatim
-     */
-    public $nominatim;
+    public $client;
 
     /**
      * polygon type for Nominatim, either 'geojson', 'kml', 'svg' or 'text'
      * @var string
      */
-    public $polygon;
+    public $polygon = '';
 
     public function __construct()
     {
         $url = Settings::get('nominatim_url');
 
         if (empty($url)) {
-            $url = "http://nominatim.openstreetmap.org/";
+            $url = "https://nominatim.openstreetmap.org/";
         }
 
-        $this->nominatim = new Nominatim($url);
+        $this->client = new Client(['base_uri' => $url]);
 
         $this->setPolygon();
     }
@@ -48,38 +44,30 @@ class NominatimResolver implements AddressResolverInterface
      */
     public function resolv(AddressObjectInterface $addressObj): array
     {
-        $search = $this->prepareSearch($addressObj);
+        $uri = '/search?';
+        $searchParams =  [
+            'format' => 'json',
+            'country' => $addressObj->getCountry(),
+            'postalcode' => $addressObj->getPostalCode(),
+            'city' => $addressObj->getCity(),
+            'street' => $addressObj->getStreet(),
+            'addressdetails' => '1',
+        ];
 
-        $result = $this->nominatim->find($search);
-
-        return $result;
-    }
-
-    /**
-     * Prepares search object for maxh/Nominatim
-     * @param  AddressObjectInterface $addressObj object storing address
-     * @return \maxh\Nominatim\Search             prepared search
-     */
-    protected function prepareSearch(AddressObjectInterface $addressObj)
-    {
-        $search = $this->nominatim->newSearch();
-
-        $country = $addressObj->getCountry();
-        if (!empty($country)) {
-            $search = $search->country($country);
+        if ($this->polygon === 'geojson') {
+            $searchParams['polygon_geojson'] = '1';
+        } elseif ($this->polygon === 'kml') {
+            $searchParams['polygon_kml'] = '1';
+        } elseif ($this->polygon === 'text') {
+            $searchParams['polygon_text'] = '1';
+        } elseif ($this->polygon === 'svg') {
+            $searchParams['polygon_svg'] = '1';
         }
 
-        $postalCode = $addressObj->getPostalCode();
-        if (!empty($postalCode)) {
-            $search = $search->postalCode($postalCode);
-        }
+        $uri .= http_build_query($searchParams);
 
-        $search = $search
-            ->city($addressObj->getCity())
-            ->street($addressObj->getStreet())
-            ->polygon($this->polygon)
-            ->addressDetails();
+        $response = $this->client->request('GET', $uri, ['headers' => ['User-Agent' => 'leaflet_pro']]);
 
-        return $search;
+        return json_decode($response->getBody()->getContents(), true);
     }
 }
