@@ -37,4 +37,6 @@
     - Make the plugin installable for location plugin v2
 1.7.2:
     - Fix resolving address with nominatim
+1.7.3:
+    - "Make plugin installable with Location v.2"
 
