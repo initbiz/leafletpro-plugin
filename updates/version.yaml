@@ -39,4 +39,5 @@
     - Fix resolving address with nominatim
 1.7.3:
     - "Make plugin installable with Location v.2"
-
+1.7.4:
+    - "HotFix for tests in other plugins to pass"
