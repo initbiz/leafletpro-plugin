@@ -41,3 +41,5 @@
     - "Make plugin installable with Location v.2"
 1.7.4:
     - "HotFix for tests in other plugins to pass"
+1.7.5:
+    - "Update documentation"
