@@ -20,6 +20,7 @@ include:
           github_repo_url: "https://initbiz-machine-user:${GITHUB_MACHINE_USER_WRITE_TOKEN}@github.com/initbiz/leafletpro-plugin.git"
     
     - component: $CI_SERVER_FQDN/operational/gitlab-ci-components/install-plugin-from-branch@1
+    
 
 Tests:
     extends:
