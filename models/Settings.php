@@ -9,6 +9,8 @@ use Media\Classes\MediaLibrary;
 
 /**
  * GeneralSettings Model
+ *
+ * @mixin \System\Behaviors\SettingsModel
  */
 class Settings extends Model
 {

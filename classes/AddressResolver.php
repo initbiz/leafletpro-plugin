@@ -20,7 +20,7 @@ class AddressResolver
      */
     public $resolver;
 
-    public function __construct(AddressResolverInterface $resolver = null)
+    public function __construct(?AddressResolverInterface $resolver = null)
     {
         if (!$resolver) {
             $resolver = new NominatimResolver();

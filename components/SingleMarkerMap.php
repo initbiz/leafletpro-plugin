@@ -43,7 +43,9 @@ class SingleMarkerMap extends LeafletMapBase
     public function getMarkerOptions()
     {
         $findBy = Request::input('findBy');
-        return Marker::published()->get()->pluck('name', $findBy)->toArray();
+        $publishedMarkers = Marker::published()->get();
+
+        return $publishedMarkers::pluck('name', $findBy)->toArray();
     }
 
     public function getMarkers()

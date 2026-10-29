@@ -14,6 +14,10 @@ use Initbiz\LeafletPro\Models\Marker;
 
 /**
  * Groups Back-end Controller
+ *
+ * @mixin \Backend\Behaviors\FormController
+ * @mixin \Backend\Behaviors\ListController
+ * @mixin \Backend\Behaviors\RelationController
  */
 class Groups extends Controller
 {

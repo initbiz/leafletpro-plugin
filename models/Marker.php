@@ -6,6 +6,7 @@ namespace Initbiz\LeafletPro\Models;
 
 use Model;
 use Cms\Classes\Theme;
+use Initbiz\Leafletpro\Models\Group;
 use RainLab\Location\Models\Country;
 use Initbiz\CumulusCore\Models\Cluster;
 use Initbiz\LeafletPro\Classes\AddressResolver;
@@ -14,6 +15,9 @@ use Initbiz\LeafletPro\Contracts\AddressResolverInterface;
 
 /**
  * Marker Model
+ *
+ * @property string|null $marker_icon_from
+ * @property string|null $marker_icon
  */
 class Marker extends Model implements AddressObjectInterface
 {
@@ -181,7 +185,7 @@ class Marker extends Model implements AddressObjectInterface
      * resolver and address specified in this object
      * @return void
      */
-    public function refreshLatLon(AddressResolverInterface $addressResolver = null)
+    public function refreshLatLon(?AddressResolverInterface $addressResolver = null)
     {
         if (is_null($addressResolver)) {
             $addressResolver = new AddressResolver();
@@ -268,7 +272,7 @@ class Marker extends Model implements AddressObjectInterface
     /**
      * {@inheritdoc}
      */
-    public function getLatLon(string $delimiter = ' '): string
+    public function getLatLon(string $delimiter = ' '): ?string
     {
         $lat = $this->getLat();
         $lon = $this->getLon();
@@ -276,5 +280,7 @@ class Marker extends Model implements AddressObjectInterface
         if (!empty($lat) && !empty($lon)) {
             return $lat . $delimiter . $lon;
         }
+
+        return null;
     }
 }

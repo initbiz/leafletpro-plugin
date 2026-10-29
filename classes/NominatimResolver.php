@@ -21,7 +21,8 @@ class NominatimResolver implements AddressResolverInterface
 
     public function __construct()
     {
-        $url = Settings::get('nominatim_url');
+        $settings = Settings::instance();
+        $url = $settings::get('nominatim_url');
 
         if (empty($url)) {
             $url = "https://nominatim.openstreetmap.org/";

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Initbiz\LeafletPro\Components;
 
+use Config;
 use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
 use Initbiz\LeafletPro\Classes\Address;
@@ -196,7 +197,7 @@ abstract class LeafletMapBase extends ComponentBase
     {
     }
 
-    protected function resolveAddress(Address $address, AddressResolverInterface $addressResolver = null): Address
+    protected function resolveAddress(Address $address, ?AddressResolverInterface $addressResolver = null): Address
     {
 
         if (is_null($addressResolver)) {
@@ -210,7 +211,7 @@ abstract class LeafletMapBase extends ComponentBase
             $address->irresolvable = true;
             return $address;
         } catch (\Throwable $e) {
-            if (env('APP_DEBUG')) {
+            if (Config::get('app.debug')) {
                 throw new $e();
             } else {
                 trace_log($e);
