@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\LeafletPro\Models;
 
 use Model;
@@ -30,12 +32,12 @@ class Marker extends Model implements AddressObjectInterface
         'lat' => 'required|numeric',
         'lon' => 'required|numeric'
     ];
-    
+
     /**
     * @var translatable marker fields
     */
     public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
-    
+
     public $translatable = [
         'name',
         'popup_content'

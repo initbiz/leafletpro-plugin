@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\LeafletPro\Components;
 
 use Request;
 use Initbiz\LeafletPro\Models\Marker;
-use Initbiz\LeafletPro\Components\LeafletMapBase;
 
 class SingleMarkerMap extends LeafletMapBase
 {

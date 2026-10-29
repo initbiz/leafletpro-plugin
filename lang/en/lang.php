@@ -1,4 +1,7 @@
-<?php return [
+<?php
+
+declare(strict_types=1);
+return [
     'plugin' => [
         'name' => 'Leaflet Pro',
         'description' => 'Use Leaflet service fully featured',

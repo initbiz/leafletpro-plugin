@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\LeafletPro\Components;
 
 use Cms\Classes\ComponentBase;
@@ -209,7 +211,7 @@ abstract class LeafletMapBase extends ComponentBase
             return $address;
         } catch (\Throwable $e) {
             if (env('APP_DEBUG')) {
-                throw new $e;
+                throw new $e();
             } else {
                 trace_log($e);
                 return $address;
