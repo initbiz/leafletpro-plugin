@@ -160,6 +160,7 @@ class Marker extends Model implements AddressObjectInterface
                 if (class_exists('System')) {
                     $markerIcon = \Media\Classes\MediaLibrary::url($this->marker_icon);
                 } else {
+                    // @phpstan-ignore class.notFound (October CMS v1 compatibility)
                     $markerIcon = \System\Classes\MediaLibrary::url($this->marker_icon);
                 }
             }
