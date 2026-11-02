@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\LeafletPro\Classes;
 
 use Initbiz\LeafletPro\Contracts\AddressObjectInterface;
@@ -125,8 +127,6 @@ class Address implements AddressObjectInterface
 
     /**
      * Set the value of street
-     *
-     * @return  self
      */
     public function setStreet($street)
     {
@@ -135,8 +135,6 @@ class Address implements AddressObjectInterface
 
     /**
      * Set the value of postalCode
-     *
-     * @return  self
      */
     public function setPostalCode($postalCode)
     {
@@ -145,8 +143,6 @@ class Address implements AddressObjectInterface
 
     /**
      * Set the value of city
-     *
-     * @return  self
      */
     public function setCity($city)
     {
@@ -155,8 +151,6 @@ class Address implements AddressObjectInterface
 
     /**
      * Set the value of country
-     *
-     * @return  self
      */
     public function setCountry($country)
     {
@@ -165,8 +159,6 @@ class Address implements AddressObjectInterface
 
     /**
      * Set the value of lon
-     *
-     * @return  self
      */
     public function setLon($lon)
     {
@@ -175,8 +167,6 @@ class Address implements AddressObjectInterface
 
     /**
      * Set the value of lat
-     *
-     * @return  self
      */
     public function setLat($lat)
     {

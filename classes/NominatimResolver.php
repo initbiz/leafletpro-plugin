@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\LeafletPro\Classes;
 
 use GuzzleHttp\Client;
@@ -19,7 +21,8 @@ class NominatimResolver implements AddressResolverInterface
 
     public function __construct()
     {
-        $url = Settings::get('nominatim_url');
+        $settings = (new Settings())->instance();
+        $url = $settings->get('nominatim_url');
 
         if (empty($url)) {
             $url = "https://nominatim.openstreetmap.org/";
