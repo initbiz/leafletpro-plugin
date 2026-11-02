@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\LeafletPro;
 
 use System\Classes\PluginBase;

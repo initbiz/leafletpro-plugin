@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\LeafletPro\Components;
 
 use Request;
 use Initbiz\LeafletPro\Models\Marker;
-use Initbiz\LeafletPro\Components\LeafletMapBase;
 
 class SingleMarkerMap extends LeafletMapBase
 {
@@ -42,7 +43,9 @@ class SingleMarkerMap extends LeafletMapBase
     public function getMarkerOptions()
     {
         $findBy = Request::input('findBy');
-        return Marker::published()->get()->pluck('name', $findBy)->toArray();
+        $publishedMarkers = Marker::published()->get();
+
+        return $publishedMarkers->pluck('name', $findBy)->toArray();
     }
 
     public function getMarkers()

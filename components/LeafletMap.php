@@ -1,8 +1,8 @@
 <?php
 
-namespace Initbiz\LeafletPro\Components;
+declare(strict_types=1);
 
-use Initbiz\LeafletPro\Components\LeafletMapBase;
+namespace Initbiz\LeafletPro\Components;
 
 class LeafletMap extends LeafletMapBase
 {
@@ -44,7 +44,6 @@ class LeafletMap extends LeafletMapBase
 
         return $plugins;
     }
-
 
     public function makeInitialCenterLatLon()
     {

@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\LeafletPro\Components;
 
+use Config;
 use Cms\Classes\ComponentBase;
 use Initbiz\LeafletPro\Models\Marker;
 use Initbiz\LeafletPro\Classes\Address;
@@ -194,7 +197,7 @@ abstract class LeafletMapBase extends ComponentBase
     {
     }
 
-    protected function resolveAddress(Address $address, AddressResolverInterface $addressResolver = null): Address
+    protected function resolveAddress(Address $address, ?AddressResolverInterface $addressResolver = null): Address
     {
 
         if (is_null($addressResolver)) {
@@ -208,8 +211,8 @@ abstract class LeafletMapBase extends ComponentBase
             $address->irresolvable = true;
             return $address;
         } catch (\Throwable $e) {
-            if (env('APP_DEBUG')) {
-                throw new $e;
+            if (Config::get('app.debug')) {
+                throw new $e();
             } else {
                 trace_log($e);
                 return $address;
@@ -266,7 +269,7 @@ abstract class LeafletMapBase extends ComponentBase
 
     public function getMarkerIconUrl()
     {
-        $settings = Settings::instance();
+        $settings = (new Settings())->instance();
         $iconUrl = $settings->getIconUrl();
         if (empty($iconUrl)) {
             $iconUrl = '/plugins/initbiz/leafletpro/assets/img/marker-icon.png';
