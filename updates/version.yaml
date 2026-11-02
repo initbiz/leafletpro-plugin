@@ -44,4 +44,5 @@
 1.7.5:
     - "Update documentation"
 1.7.6:
-    - "Add tests, linter and Danger to GitLab CI"
+    - "Update gitlab-ci"
+    - "Fix static analysis errors"

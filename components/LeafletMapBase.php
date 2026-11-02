@@ -269,7 +269,7 @@ abstract class LeafletMapBase extends ComponentBase
 
     public function getMarkerIconUrl()
     {
-        $settings = Settings::instance();
+        $settings = (new Settings())->instance();
         $iconUrl = $settings->getIconUrl();
         if (empty($iconUrl)) {
             $iconUrl = '/plugins/initbiz/leafletpro/assets/img/marker-icon.png';
