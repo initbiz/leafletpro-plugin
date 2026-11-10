@@ -46,3 +46,5 @@
 1.7.6:
     - "Update gitlab-ci"
     - "Fix static analysis errors"
+1.7.7:
+    - "Fix the single marker map without its marker"

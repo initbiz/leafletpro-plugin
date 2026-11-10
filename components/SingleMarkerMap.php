@@ -72,7 +72,7 @@ class SingleMarkerMap extends LeafletMapBase
     public function makeInitialCenterLatLon()
     {
         $centerLatLon = null;
-        if (!$this->getOverriding & !empty($this->markers)) {
+        if (!$this->getOverriding && $this->markers->isNotEmpty()) {
             $centerLatLon = $this->markers->first()->getLatLon(', ');
         }
 
